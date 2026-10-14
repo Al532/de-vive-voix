@@ -163,19 +163,20 @@ function element(id=''){
 async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true,options={}){
  const html=fs.readFileSync('dist/index.html','utf8'),els=Object.fromEntries([...html.matchAll(/id="([^"]+)"/g)].map(([,id])=>[id,element(id)]));
  const audioFetches=new Map();let mediaPlays=0,spoken=0,cancelCount=0,localTextReads=0;const utterances=[];els.audioPrimer.play=()=>{mediaPlays++;return Promise.resolve();};els.audioPrimer.pause=()=>{};
- const h=clockHarness(),registry={},handlers={},windowHandlers={},traces=[];
+ const h=clockHarness(),registry={},handlers={},windowHandlers={},traces=[],audioContexts=[];
  class AudioContext{
-  constructor(){this.state='running';this.sampleRate=48000;}
+  constructor(){this.state='running';this.sampleRate=48000;audioContexts.push(this.constructor.name);}
   get currentTime(){return h.audio.currentTime;}
   resume(){this.state='running';return Promise.resolve();}
   createBufferSource(){return h.audio.createBufferSource();}
   createBuffer(channels,length,rate){return {...audioBuffer(length,rate),primer:length===1};}
   createGain(){return {gain:{setValueAtTime(){},linearRampToValueAtTime(){},value:0},connect(){},disconnect(){}};}
   createOscillator(){const node={frequency:{},connect(){},disconnect(){},start(time){this.time=time;h.nodes.push(this);},stop(time){if(time===undefined)this.stopped=true;}};return node;}
-  decodeAudioData(bytes,resolve){const length=Math.round(bytes.duration*48000);resolve(audioBuffer(length,48000,Float32Array.from({length},(_,i)=>.1*Math.sin(i*.03))));}
+  decodeAudioData(bytes,resolve){const rate=this.sampleRate,length=Math.round(bytes.duration*rate);resolve(audioBuffer(length,rate,Float32Array.from({length},(_,i)=>.1*Math.sin(i*.03))));}
  }
  const durations=new Map(Object.values(assets).flat().map(a=>[a.url,a.duration]));
- const window={AudioContext,navigator:{userAgent:'Desktop',platform:'Desktop'},addEventListener:(k,f)=>windowHandlers[k]=f,
+ class OfflineAudioContext extends AudioContext{constructor(channels,length,rate){super();this.sampleRate=rate;}}
+ const window={AudioContext,OfflineAudioContext,navigator:{userAgent:'Desktop',platform:'Desktop'},addEventListener:(k,f)=>windowHandlers[k]=f,
   SpeechSynthesisUtterance:class{constructor(text){this.text=text;}},
   speechSynthesis:{getVoices(){return options.voices??[{lang:'it-IT',name:'Test italien'}];},addEventListener(){},
    speak(u){spoken++;utterances.push(u);if(autoSpeech)queueMicrotask(()=>{u.onstart?.();u.onend?.();});},
@@ -201,7 +202,7 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
  assert.equal(els.workspace.hidden,false,els.status.textContent);
  const get=()=>registry.get_practice_position.execute();
  async function click(id){if(els[id].hidden)return;els[id].onclick();for(let i=0;i<25;i++)await settle();}
- return {els,get,click,h,handlers,window,document,registry,store,location,spoken:()=>spoken,localTextReads:()=>localTextReads,utterances,cancelCount:()=>cancelCount,traces,audioFetches,mediaPlays:()=>mediaPlays};
+ return {els,get,click,h,handlers,window,document,registry,store,location,spoken:()=>spoken,localTextReads:()=>localTextReads,utterances,cancelCount:()=>cancelCount,traces,audioFetches,audioContexts,mediaPlays:()=>mediaPlays};
 }
 async function testPreloadSpeech(){
  for(const options of [{},{imported:true,language:'la'}]){
@@ -209,7 +210,7 @@ async function testPreloadSpeech(){
   assert(a.traces.some(t=>t.event==='speech-preloaded'));
   const expected=new Set(Object.values(assets).map(list=>list[0].url));
   assert.equal(a.audioFetches.size,expected.size);assert([...a.audioFetches.values()].every(n=>n===1));
-  assert.equal(a.mediaPlays(),0);assert.equal(a.h.nodes.length,0,'preload must stay silent');assert.equal(a.get().playback,'stopped');
+  assert.equal(a.mediaPlays(),0);assert(!a.audioContexts.includes('AudioContext'),'live audio context must wait for the click');assert(a.audioContexts.includes('OfflineAudioContext'));assert.equal(a.h.nodes.length,0,'preload must stay silent');assert.equal(a.get().playback,'stopped');
   const before=new Map(a.audioFetches);await a.click('blocPlay');assert.equal(a.get().playback,'playing');assert.deepEqual(a.audioFetches,before);
   await a.click('fullPlay');assert.equal(a.get().playback,'playing');assert.deepEqual(a.audioFetches,before);a.handlers.keydown({key:'Escape'});
  }

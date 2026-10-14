@@ -5,7 +5,7 @@ let ctx,primedContext,active=[],ticket=0,mediaPrimed=false,mediaPriming=null,med
 let speechMap,speechAssets,notes,transport,fitAsset,loading=false,storageKey,storageFailed=false;
 let memory={version:1,part:0,tempo:80,voices:{}},lastSaved='',lastMeasure=-1,lastLyricKey='',lastTransportState='stopped';
 const decodedSpeech=new Map(),decodeJobs=new Map();
-let fitJob=null;
+let fitJob=null,decodeContext;
 let brailleCells=32;
 let localTextEngine=null,pendingSpeech=null,cancelWaiters=[],speechPhase='',focusedPlaybackControl=null,playbackFocusAt=-Infinity;
 const blocs=()=>blocSets[part]||[];
@@ -298,29 +298,36 @@ function stopPlayback(){
  render();announce('Lecture arrêtée.');
 }
 function ensureAudioContext(){
- if(!ctx||ctx.state==='closed'){ctx=new(window.AudioContext||window.webkitAudioContext)();fitAsset=null;fitJob=null;}
+ if(!ctx||ctx.state==='closed')ctx=new(window.AudioContext||window.webkitAudioContext)();
  return ctx;
 }
+function speechContext(){
+ if(!decodeContext){
+  const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+  decodeContext=Offline?new Offline(1,1,22050):ensureAudioContext();
+ }
+ return decodeContext;
+}
 async function ensureFitter(){
- ensureAudioContext();
- if(!fitAsset){fitJob??=SpeechFit.create(ctx,decodedSpeech);try{fitAsset=await fitJob;}catch(error){fitJob=null;throw error;}}
+ const audio=speechContext();
+ if(!fitAsset){fitJob??=SpeechFit.create(audio,decodedSpeech);try{fitAsset=await fitJob;}catch(error){fitJob=null;throw error;}}
  return fitAsset;
 }
 async function preloadSpeech(){
  if(!window.AudioContext&&!window.webkitAudioContext)return;
- const assets=speechAssets,audio=ensureAudioContext(),sources=new Map();
+ const assets=speechAssets,audio=speechContext(),sources=new Map();
  for(const list of Object.values(assets)){const source=list.find(a=>a.speed===1)||list[0];if(source)sources.set(source.url,source);}
  let next=0;const queue=[...sources.values()];
  try{
   await Promise.all(Array.from({length:Math.min(4,queue.length)},async()=>{
-   while(next<queue.length){if(speechAssets!==assets||ctx!==audio)return;await decodeAsset(queue[next++]);}
+   while(next<queue.length){if(speechAssets!==assets||decodeContext!==audio)return;await decodeAsset(queue[next++]);}
   }));
-  if(speechAssets!==assets||ctx!==audio)return;
-  await ensureFitter();if(speechAssets!==assets||ctx!==audio)return;
+  if(speechAssets!==assets||decodeContext!==audio)return;
+  await ensureFitter();if(speechAssets!==assets||decodeContext!==audio)return;
   // Warm the selected voice, including block endings, without starting audio.
   const ranges=[BlocModel.passage(score,part,0,score.starts.length-2),...blocs().map(b=>BlocModel.withEnding(score,part,BlocModel.withLeadIn(score,part,b,leadIn)))];
   for(const range of ranges){
-   if(speechAssets!==assets||ctx!==audio)return;
+   if(speechAssets!==assets||decodeContext!==audio)return;
    for(const cue of BlocSpeech.plan(score,part,range,tempo,speechMap)){
     const source=assets[cue.ipa].find(a=>a.speed===1)||assets[cue.ipa][0];fitAsset(cue,source,decodedSpeech.get(source.url),tempo);
    }
@@ -331,7 +338,7 @@ async function preloadSpeech(){
 async function decodeAsset(asset){
  if(decodedSpeech.has(asset.url))return decodedSpeech.get(asset.url);
  if(!decodeJobs.has(asset.url)){
-  const audio=ctx;let job;
+  const audio=speechContext();let job;
   job=fetch(asset.url).then(r=>{if(!r.ok)throw Error('Chargement des syllabes impossible.');return r.arrayBuffer();})
    .then(bytes=>new Promise((resolve,reject)=>audio.decodeAudioData(bytes,resolve,reject)))
    .then(buffer=>{if(decodeJobs.get(asset.url)===job){decodedSpeech.set(asset.url,buffer);decodeJobs.delete(asset.url);}return buffer;})
