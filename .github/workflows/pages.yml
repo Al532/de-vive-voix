@@ -19,6 +19,8 @@ jobs:
           node-version: '24'
       - name: Vérifier le lecteur et ses modes
         run: node check.cjs
+      - name: Vérifier les morceaux fournis
+        run: node check-bundled.cjs
       - name: Vérifier les imports MusicXML
         run: node check-import.cjs
       - name: Vérifier la phonétique

@@ -9,6 +9,7 @@ Le lecteur propose le travail par blocs, avec lecture naturelle du texte puis sy
 ## Organisation
 
 - dist/ : site statique prêt à servir, catalogue audio et moteur vocal local compris.
+- dist/scores/ : morceaux fournis avec le site, dont Exaudi nos de Jean Gilles (16 mesures, 7 parties, 5 voix avec paroles), fichier MusicXML original et préparation audio.
 - check.cjs, check-import.cjs, check-phonetics.cjs : vérifications du lecteur et de l’import.
 - tests/ et tools/testing/ : données et dépendances de test.
 - tools/catalogue/ et scripts Python : génération du catalogue et préparation du pilote.
@@ -28,6 +29,7 @@ Ouvrir http://localhost:8766/ . Aucun service applicatif ni clé d’API n’est
 Avec Node.js 24 :
 
     node check.cjs
+    node check-bundled.cjs
     node check-import.cjs
     node check-phonetics.cjs
     node check-local-text.mjs

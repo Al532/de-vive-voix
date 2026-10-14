@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "scores": [
+    {
+      "id": "c0e33b51e9b1c843f0b03423e4291aa6972addae54ddf1bfdd983d7c0a35fad2-la",
+      "filename": "Exaudi-nos-Jean-Gilles.mxl",
+      "score": {
+        "title": "Exaudi nos",
+        "composer": "Jean Gilles"
+      },
+      "bundleUrl": "scores/exaudi-nos/bundle.json",
+      "sourceUrl": "scores/exaudi-nos/Exaudi-nos-Jean-Gilles.mxl"
+    }
+  ]
+}
