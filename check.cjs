@@ -7,7 +7,7 @@ function originalFields(b){const {adaptive,targetMeasures,attackEnd,allowAttackA
 for(let part=0;part<5;part++)for(const cells of [8,32,160]){
  assert.deepEqual(model.buildBlocs(score,part,{measures:2,cells}).map(originalFields),legacy.buildBlocs(score,part,{cells}));
 }
-let placements=0,clipped=0;
+let placements=0,overlapping=0;
 for(let size=1;size<=8;size++)for(let part=0;part<5;part++){
  const blocks=model.buildBlocs(score,part,{measures:size});
  const active=[...new Set(score.parts[part].events.filter(e=>e.pitch!==null).map(e=>e.m))].sort((a,b)=>a-b);
@@ -27,7 +27,7 @@ for(let size=1;size<=8;size++)for(let part=0;part<5;part++){
      assert(cue.beat>=range.start&&cue.beat<range.end);
      assert(cue.endBeat>cue.beat);assert(assets[cue.ipa]?.length);
      const asset=assets[cue.ipa].find(a=>a.duration<=cue.room-.012)||assets[cue.ipa].at(-1);
-     if(asset.duration>cue.room)clipped++;
+     if(asset.duration>cue.room)overlapping++;
      assert(fs.existsSync('dist/'+asset.url));placements++;
     }
    }
@@ -87,6 +87,37 @@ async function testTransport(){
  // One continuous scheduler traverses bar boundaries without retriggering the
  // sustained note or the syllable at the start of the following block.
  t.play();const before=h.nodes.length;await h.tick(2.1);assert.equal(h.nodes.length-before,2);
+}
+async function testSyllableOverlap(){
+ const h=clockHarness(),errors=[],t=new Transport({audio:h.audio,notes:[],
+  assets:{a:[{url:'a',duration:2,gain:.2}]},buffers:new Map([['a',{duration:2}]]),
+  setTimer:h.setTimer,clearTimer:h.clearTimer,onError:e=>errors.push(e)});
+ const cues=Array.from({length:5},(_,i)=>({ipa:'a',beat:i*.05,endBeat:(i+1)*.05,index:i}));
+ t.configure({start:0,end:.5},cues,0,60);t.play();await h.tick(.7);
+ assert.equal(t.syllableVoices.length,4);assert.equal(h.nodes.length,5);
+ for(const [i,n]of h.nodes.slice(0,4).entries())assert(Math.abs(n.time-(.035+i*.05))<1e-8);
+ assert.equal(h.nodes[4].time,h.nodes[0].time+2,'fifth syllable waits for a free voice');
+ assert(h.nodes.every(n=>n.offset===0&&n.duration===undefined&&!n.stopped),'all syllables play their full buffers');
+ const events=h.nodes.flatMap(n=>[{time:n.time,delta:1},{time:n.time+n.buffer.duration,delta:-1}]).sort((a,b)=>a.time-b.time||a.delta-b.delta);
+ let concurrent=0;for(const e of events){concurrent+=e.delta;assert(concurrent<=4,'four voices is a hard limit');}
+ assert.equal(t.position(),.5);assert.equal(t.state,'playing','wait for speech tails at the end of the block');
+ t.pause();assert(h.nodes.every(n=>n.stopped));assert.equal(h.timers.size,0);
+ let before=h.nodes.length;t.play();assert.equal(h.nodes.length-before,5);
+ assert(h.nodes.slice(before,before+4).every(n=>n.offset>0));
+ assert.equal(h.nodes.at(-1).offset,0,'queued syllable must not lose its beginning on resume');
+ await h.tick(1.6);t.pause();before=h.nodes.length;t.play();
+ assert.equal(h.nodes.length-before,1,'completed syllables must not restart');assert(h.nodes.at(-1).offset>0);
+ const offset=h.nodes.at(-1).offset;t.setTempo(120);assert.equal(h.nodes.at(-1).offset,offset,'tempo change preserves delayed sample progress');
+ await h.tick(2);assert.equal(t.state,'ended');assert.equal(h.timers.size,0);assert.equal(errors.length,0);
+ t.configure({start:0,end:5},[{ipa:'a',beat:0,endBeat:3,index:0},{ipa:'a',beat:3,endBeat:5,index:1}],0,60);t.play();
+ const slot=t.syllableVoices[0],first=slot.source;await h.tick(2.1);first.onended();
+ assert.equal(slot.source,null);assert(!t.nodes.has(first));await h.tick(1);
+ assert(slot.source&&slot.source!==first);assert.equal(t.syllableVoices.length,4);
+ t.stop();assert.equal(h.timers.size,0);assert(t.syllableVoices.every(v=>v.source===null));
+ // A future onset already scheduled in the lookahead must retain its beat.
+ t.configure({start:0,end:3},[{ipa:'a',beat:.2,endBeat:3,index:0}],0,60);t.play();t.pause();t.play();
+ assert(Math.abs(h.nodes.at(-1).time-(h.audio.currentTime+.235))<1e-8);t.stop();
+ console.log('Syllabes : quatre voix fixes, superposition sans coupure, attente en cas de saturation, fin naturelle, pause/reprise, tempo et réutilisation vérifiés.');
 }
 function element(id=''){
  return {id,value:'',textContent:'',hidden:false,disabled:false,checked:false,attrs:{},children:[],
@@ -364,4 +395,4 @@ async function testPlaybackModes(){
  console.log('Modes : repos, blocs, lecture complète, pause/reprise, déplacements, arrêt, fin naturelle et annulation pendant le texte vérifiés.');
 }
 
-(async()=>{await testPlaybackModes();await testPieceSettings();await testTransport();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+clipped+' syllabes bornées à une limite de mesure).');})().catch(e=>{console.error(e);process.exitCode=1;});
+(async()=>{await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});
