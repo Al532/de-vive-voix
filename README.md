@@ -2,6 +2,8 @@
 
 Atelier accessible pour travailler une voix et ses paroles à partir de partitions MusicXML.
 
+Le texte du bloc apparaît après « Recommencer au début », avant les boutons de bloc. Il est visuel et exclu du parcours du lecteur d’écran ; sa lecture audio reste déclenchée par « Jouer le bloc ». Le repère indique la plage de mesures et le nombre total de mesures du morceau.
+
 Le lecteur propose le travail par blocs, avec lecture naturelle du texte puis syllabes synchronisées à la musique, et la lecture du morceau entier. Au repos, deux boutons permettent de choisir le mode. Les déplacements par bloc ou par mesure apparaissent dans le mode correspondant. Le bouton du morceau entier devient Pause puis Reprendre ; Arrêter et la fin du morceau ramènent au repos.
 
 ## Organisation

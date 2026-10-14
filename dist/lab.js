@@ -218,7 +218,7 @@ function currentPassage(){return BlocModel.withLeadIn(score,part,bloc(),leadIn);
 function selectedDescription(){
  const c=bloc(),first=c.core[0]+1,b=c.core.at(-1)+1;
  const a=mode!=='complete'?Math.min(first,BlocModel.measureAt(score,currentPassage().start)+1):first;
- return 'Bloc '+(blocId+1)+' sur '+blocs().length+' — '+(a===b?'mesure '+a:'mesures '+a+' à '+b);
+ return 'Bloc '+(blocId+1)+' sur '+blocs().length+' — '+(a===b?'mesure '+a:'mesures '+a+' à '+b)+' sur '+(score.starts.length-1);
 }
 function renderLyrics(highlight=false){
  const c=mode==='complete'?bloc():currentPassage(),events=evs(),current=events[index],words=[],seen=new Set();
@@ -240,7 +240,6 @@ function renderLyrics(highlight=false){
   const mark=document.createElement('mark');mark.textContent=word.text.slice(...range);
   visual.append(word.text.slice(0,range[0]),mark,word.text.slice(range[1]));
  }
- setText('accessibleLyrics',words.map(w=>w.text).join(' ')||'Silence dans la voix sélectionnée.');
 }
 function renderState(){
  const state=loading?'loading':transport?.state||'stopped',complete=mode==='complete',blocks=mode==='blocs';

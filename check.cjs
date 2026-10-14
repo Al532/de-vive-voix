@@ -248,14 +248,14 @@ async function testApp(){
 
  const a=await mount();assert.equal(a.get().measures,2);assert.equal(a.get().totalBlocs,44);assert.equal(a.get().playback,'stopped');assert(!a.get().leadIn);
  assert.equal(a.els.measure.value,'1');
- assert.equal(a.els.blocInfo.textContent,'Bloc 1 sur 44 — mesures 1 à 2');
+ assert.equal(a.els.blocInfo.textContent,'Bloc 1 sur 44 — mesures 1 à 2 sur 108');
  assert.equal(a.els.previous.getAttribute('aria-disabled'),'true');
  assert.equal(a.els.previous.disabled,false);
  await a.click('previous');assert.equal(a.get().bloc,0);assert.equal(a.get().playback,'stopped');assert.equal(a.spoken(),0);
  await a.click('stop');assert.equal(a.get().playback,'stopped');
  a.els.measures.value='4';a.els.measures.onchange();
  a.els.measure.value='7';a.els.goMeasure.onsubmit({preventDefault(){}});assert.equal(a.get().measure,5);assert.equal(a.get().endMeasure,8);
- a.els.leadIn.checked=true;a.els.leadIn.onchange();assert.equal(a.els.blocInfo.textContent,'Bloc 2 sur 25 — mesures 4 à 8');
+ a.els.leadIn.checked=true;a.els.leadIn.onchange();assert.equal(a.els.blocInfo.textContent,'Bloc 2 sur 25 — mesures 4 à 8 sur 108');
  await a.click('blocPlay');assert.equal(a.get().playback,'playing',a.els.announcement.textContent);assert.equal(a.spoken(),1);
  assert(a.h.nodes.some(n=>n.buffer&&!n.buffer.primer));
  a.handlers.keydown({key:'Escape'});assert.equal(a.get().measure,5);assert.equal(a.get().playback,'stopped');assert(a.h.nodes.every(n=>n.stopped));
@@ -317,6 +317,11 @@ async function testPieceSettings(){
 }
 
 async function testPlaybackModes(){
+ const html=fs.readFileSync('dist/index.html','utf8');
+ assert(html.indexOf('id="restart"')<html.indexOf('id="visual"'));
+ assert(html.indexOf('id="visual"')<html.indexOf('id="navigation"'));
+ assert(/<p id="visual"[^>]*aria-hidden="true"/.test(html));
+ assert(!html.includes('id="accessibleLyrics"'),'block text must not have an exposed screen-reader duplicate');
  const a=await mount();
  const visible=id=>!a.els[id].hidden;
  const idle=()=>{

@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#112f36">
 <title>De vive voix — Gloria Patri et Filio</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23112f36'/%3E%3Cpath d='M10 22V10l13-3v12M10 10l13-3' fill='none' stroke='%2399ebc8' stroke-width='3'/%3E%3Cellipse cx='7' cy='23' rx='4' ry='3' fill='%2399ebc8'/%3E%3Cellipse cx='20' cy='20' rx='4' ry='3' fill='%2399ebc8'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="lab.css?v=playback-modes-1">
+<link rel="stylesheet" href="lab.css?v=playback-modes-2">
 <script src="blocs.js?v=import-1" defer></script>
 <script src="note-synth.js?v=1" defer></script>
 <script src="phonetics-engine.js" defer></script>
@@ -17,7 +17,7 @@
 <script src="practice-library.js?v=1" defer></script>
 <script src="import-speech.js?v=1" defer></script>
 <script src="score-navigation.js?v=1" defer></script>
-<script src="lab.js?v=playback-modes-1" defer></script>
+<script src="lab.js?v=playback-modes-2" defer></script>
 </head>
 <body>
 <main>
@@ -34,13 +34,12 @@
 <button id="restart" type="button" class="wide">Recommencer au début</button>
 </section>
 <section id="practice">
+<p id="visual" lang="la" aria-hidden="true"></p>
 <div id="navigation" class="playback-single">
 <button id="previous" type="button" aria-disabled="true" hidden>Bloc précédent</button>
 <button id="blocPlay" type="button" class="primary">Jouer le bloc</button>
 <button id="next" type="button" aria-disabled="false" hidden>Bloc suivant</button>
 </div>
-<p id="visual" lang="la" aria-hidden="true"></p>
-<p id="accessibleLyrics" class="sr" lang="la"></p>
 </section>
 <section aria-label="Lecture et transport">
 <div id="completeNavigation" class="playback-single">
