@@ -7,7 +7,7 @@ function noteText(notes){return notes.map(n=>n.includes('/ɥ/')?'Prononciation a
 async function loadProfile(){
  const token=++generation;stopAudio();shown=40;results.replaceChildren();more.hidden=true;query.disabled=true;status.textContent='Chargement des sons de cette langue…';
  try{
-  const selected=master.languages.find(p=>p.language===language.value),response=await fetch('catalogue-audio/'+selected.indexUrl);
+  const selected=master.languages.find(p=>p.language===language.value),response=await fetch('catalogue-audio/'+selected.indexUrl,{cache:'no-cache'});
   if(!response.ok)throw new Error('Impossible de lire cette langue.');
   const data=await response.json();if(token!==generation)return;
   profile={...data,base:new URL('catalogue-audio/'+selected.indexUrl,location.href)};
@@ -44,5 +44,5 @@ function render(){
  more.hidden=filtered.length<=shown;
 }
 language.addEventListener('change',loadProfile);query.addEventListener('input',filter);more.addEventListener('click',()=>{shown+=40;render();});window.addEventListener('pagehide',stopAudio);
-(async()=>{try{const response=await fetch('catalogue-audio/index.json');if(!response.ok)throw new Error('Impossible de lire le catalogue.');master=await response.json();master.languages.forEach(p=>{const option=document.createElement('option');option.value=p.language;option.textContent=p.title+' — '+fmt(p.entries)+' sons';language.append(option);});language.value='la';language.disabled=false;await loadProfile();}catch(e){status.textContent=e.message;}})();
+(async()=>{try{const response=await fetch('catalogue-audio/index.json',{cache:'no-cache'});if(!response.ok)throw new Error('Impossible de lire le catalogue.');master=await response.json();master.languages.forEach(p=>{const option=document.createElement('option');option.value=p.language;option.textContent=p.title+' — '+fmt(p.entries)+' sons';language.append(option);});language.value='la';language.disabled=false;await loadProfile();}catch(e){status.textContent=e.message;}})();
 

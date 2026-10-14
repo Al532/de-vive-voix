@@ -1,6 +1,6 @@
-# Catalogue audio De vive voix — version 1.0.0
+# Catalogue audio De vive voix — version 1.1.0
 
-11 625 WAV parlés mono, 22 050 Hz / PCM 16 bits : français 1 569 ; italien 1 218 ; allemand 3 534 ; anglais américain 4 563 ; latin italien et grec liturgique 741. Taille audio exacte : 221 726 646 octets.
+11 625 WAV parlés mono, 22 050 Hz / PCM 16 bits : français 1 569 ; italien 1 218 ; allemand 3 534 ; anglais américain 4 563 ; latin italien et grec liturgique 741. Débit unique : 175 mots/minute. Taille audio exacte : 185 124 680 octets.
 
 ## Accès
 - Page d'écoute : /catalogue.html
@@ -36,7 +36,7 @@ Approximation eSpeak explicitée pour le /ɥ/ français ; fusion possible de /œ
 Les 11 625 WAV ont été rouverts indépendamment ; paramètres, nombre d'échantillons, présence de signal et empreintes ont été contrôlés. Les phonèmes réellement rapportés par eSpeak figurent pour chaque son. Ce contrôle ne remplace pas une validation humaine de toutes les prononciations.
 
 ## Intégration
-Cette version ajoute la bibliothèque et sa page de consultation. L'import MIDI/MusicXML automatisé et le générateur dans le navigateur restent un chantier séparé. Aucun fichier ou réglage du lecteur du pilote n'est remplacé.
+Le lecteur MusicXML réutilise ce catalogue à 175. Les sons manquants sont générés localement au même débit. L’adaptation au tempo conserve la hauteur, utilise une fenêtre de 40 ms sans plafond, et garde quatre voix pour les fins qui débordent. Les sons utiles sont préchargés et décodés dès l’ouverture du morceau.
 
 Sources :
 - Lexique 3.83 — https://www.lexique.org/databases/Lexique383/README-Lexique.txt
@@ -45,3 +45,5 @@ Sources :
 - SUBTLEXus + CMU syllabifié — https://blairarmstrong.net/tools/Union_Subtl_CMUPron/index.html
 - GregoBaseCorpus 0.4 — https://github.com/bacor/gregobasecorpus
 
+
+Le r italien et latin utilise le phonème roulé `R`. Pour remplacer un ancien catalogue sans télécharger les corpus : `python tools/catalogue/replace-rate.py --source dist/catalogue-audio --output dist/catalogue-audio`. Les nouveaux fichiers sont tous vérifiés avant le remplacement.

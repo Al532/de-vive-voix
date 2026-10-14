@@ -9,7 +9,7 @@ lib.espeak_SetVoiceByName.argtypes=[C.c_char_p]
 lib.espeak_Synth.argtypes=[C.c_char_p,C.c_size_t,C.c_uint,C.c_int,C.c_uint,C.c_uint,C.c_void_p,C.c_void_p]
 RATE=lib.espeak_Initialize(2,0,espeakng_loader.get_data_path().encode(),0)
 assert RATE>0 and lib.espeak_SetVoiceByName(b'it')==0
-lib.espeak_SetParameter(1,145,0)
+lib.espeak_SetParameter(1,175,0)
 chunks=[]
 @C.CFUNCTYPE(C.c_int,C.POINTER(C.c_short),C.c_int,C.c_void_p)
 def callback(samples,count,events):
@@ -17,7 +17,7 @@ def callback(samples,count,events):
     return 0
 lib.espeak_SetSynthCallback(callback)
 MAP={'tʃ':'tS','dʒ':'dZ','ts':'ts','dz':'dz','ɡ':'g','ʃ':'S','ɲ':'n^','ɛ':'E','ɔ':'O',**{x:x for x in 'aeioubptdkfvszmnlrjw'}}
-MAP['r']='r/'  # explicit alveolar trill; bare r is English approximant in raw phoneme mode
+MAP['r']='R'  # eSpeak rolled alveolar r
 lib.espeak_SetPhonemeTrace.argtypes=[C.c_int,C.c_void_p]
 libc=C.CDLL(None);libc.fopen.argtypes=[C.c_char_p,C.c_char_p];libc.fopen.restype=C.c_void_p
 libc.fflush.argtypes=[C.c_void_p];libc.fclose.argtypes=[C.c_void_p]
@@ -34,7 +34,7 @@ def save(name,pcm):
     with wave.open(str(dest),'wb') as w:
         w.setparams((1,2,RATE,0,'NONE','not compressed'));w.writeframes(pcm)
     return 'phonetics-audio/'+dest.name
-pcm_cache={}; manifest={'engine':'eSpeak NG (espeakng-loader 0.2.4)','mode':'explicit phoneme input; Italian sound inventory','rate':RATE,'syllables':{},'sequences':{}}
+pcm_cache={}; manifest={'engine':'eSpeak NG (espeakng-loader 0.2.4)','mode':'explicit phoneme input; Italian sound inventory','rate':RATE,'rateWpm':175,'syllables':{},'sequences':{}}
 raw=subprocess.check_output(['node','-e',"const e=require('./dist/phonetics-engine.js'),s=require('./dist/phonetics-score.json');console.log(JSON.stringify(s.parts.flatMap(p=>p.words.map(w=>e.convert(w.syllables.map(s=>s.text)).syllables.map(s=>s.ipa)))))"],cwd=BASE)
 sequences=json.loads(raw)
 for ipa in sorted({p for seq in sequences for p in seq}|set('aeiou')|{re.sub(r'^[^aeiou]+','',p) for seq in sequences for p in seq}):

@@ -3,10 +3,11 @@ import argparse,hashlib,json,sys,wave
 from pathlib import Path
 import numpy as np
 P=argparse.ArgumentParser();P.add_argument('path',type=Path);A=P.parse_args();root=A.path.resolve()
-master=json.loads((root/'index.json').read_text(encoding='utf8'));total=0;summary=[]
+master=json.loads((root/'index.json').read_text(encoding='utf8'));assert master['engine']['rateWpm']==175;total=0;summary=[]
 for lang in master['languages']:
  idxpath=root/lang['indexUrl'];idx=json.loads(idxpath.read_text(encoding='utf8'));entries=idx['entries'];seen=set();native=set();notes=0;count=0
- assert len(entries)==lang['entries']
+ assert len(entries)==lang['entries'];assert idx['rateWpm']==175;assert idx['engine']['rateWpm']==175
+ if lang['language'] in ('it','la'):assert all('r/' not in e['mnemonic'] for e in entries)
  assert idx['selection']['coverage']>=.99
  for e in entries:
   assert e['id'] not in seen;seen.add(e['id']);native.add(e['mnemonic'])

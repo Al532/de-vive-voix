@@ -53,7 +53,7 @@ function refresh(){
   status(failed?'Les fichiers audio n’ont pas pu être chargés. Rechargez la page.':!manifest?'Chargement des sons…':sequence?'Prêt : écoutez le mot syllabe par syllabe ou chaque syllabe séparément.':'Ce découpage n’a pas de séquence audio préparée. Les syllabes disponibles restent écoutables ; une transcription modifiée peut nécessiter de nouveaux sons.');
 }
 window.PhoneticAudio={stop,mount(syllables){stop();view=syllables;refresh();}};
-fetch('phonetics-audio.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(m=>{manifest=m;refresh();}).catch(()=>{failed=true;refresh();});
+fetch('phonetics-audio.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(m=>{manifest=m;refresh();}).catch(()=>{failed=true;refresh();});
 window.addEventListener('voice-playback-start',e=>{if(e.detail!=='phonetics')stop();});
 window.addEventListener('pagehide',()=>stop());
 })();

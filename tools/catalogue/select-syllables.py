@@ -10,7 +10,7 @@ def read_tsv(name):
 def normalize(s):
  return ''.join(c for c in unicodedata.normalize('NFD',s.lower().replace('æ','ae').replace('œ','oe')) if not unicodedata.combining(c))
 FR={'a':'a','i':'i','y':'y','u':'u','o':'o','O':'O','e':'e','E':'E','°':'@','2':'Y','9':'W','5':'E~','1':'W~','@':'A~','§':'O~','S':'S','Z':'Z','N':'n^','G':'N','R':'r/','8':'y','x':'x'}
-IT={'E':'E','O':'O','c':'tS','g':'dZ','z':'ts','Z':'dz','G':'g','L':'l^','S':'S','N':'n^','r':'r/'}
+IT={'E':'E','O':'O','c':'tS','g':'dZ','z':'ts','Z':'dz','G':'g','L':'l^','S':'S','N':'n^','r':'R'}
 for ch in 'bpdtkgfvszmnljw':FR.setdefault(ch,ch)
 for ch in 'aeioubpdtkfvsmnljw':IT.setdefault(ch,ch)
 DE={'2:':'Y:','9':'W','Y':'y','6':'3','R':'Q"','a:':'A:','a^':'A~','E^':'E~','o^':'O~'}
@@ -38,7 +38,7 @@ def latin(sylls):
  while i<len(word):
   c=word[i];pair=word[i:i+2];n=1;tokens=[c];last=False
   if pair in ['ae','oe'] and owners[i]==owners[i+1] and not re.search('[ëË]',sylls[owners[i]]):n=2;tokens=['e']
-  elif pair in ['ch','ph','th','rh']:n=2;tokens=[{'ch':'k','ph':'f','th':'t','rh':'r/'}[pair]]
+  elif pair in ['ch','ph','th','rh']:n=2;tokens=[{'ch':'k','ph':'f','th':'t','rh':'R'}[pair]]
   elif pair=='gn':n=2;tokens=['n^'];last=True
   elif pair=='sc' and front(i+2):n=2;tokens=['S'];last=True
   elif pair=='xc' and front(i+2):
@@ -52,7 +52,7 @@ def latin(sylls):
   elif c=='h':tokens=['k'] if word in ['mihi','nihil','nihilo','nihilum'] or 'annihil' in word else []
   elif c=='x':tokens=['k','s']
   elif c=='y':tokens=['i']
-  elif c=='r':tokens=['r/']
+  elif c=='r':tokens=['R']
   elif c=='z':tokens=['dz']
   elif c=='i' and i+1<len(word) and vow(word[i+1]) and owners[i]==owners[i+1]:tokens=['j']
   elif c=='n' and word[i:i+3]=='ngu' and i+3<len(word) and vow(word[i+3]) and owners[i+2]==owners[i+3]:
@@ -88,7 +88,7 @@ def output_profile(lang,title,voice,counter,mapper,examples,source,extra=None):
   try:code,tokens,notes=mapper(key)
   except KeyError as e:unknown.append([key,str(e)]);continue
   if not code:unknown.append([key,'empty phoneme sequence']);continue
-  identity=voice+'|'+code+'|145|espeakng-loader-0.2.4'
+  identity=voice+'|'+code+'|175|espeakng-loader-0.2.4'
   uid=hashlib.sha256(identity.encode()).hexdigest()[:20]
   e=entries.setdefault(uid,{'id':uid,'mnemonic':code,'tokens':tokens,'rank':rank,'sourceForms':[],'examples':[],'sourceWeight':0,'notes':notes})
   e['sourceForms'].append(key);e['sourceWeight']+=counter[key]
@@ -97,13 +97,13 @@ def output_profile(lang,title,voice,counter,mapper,examples,source,extra=None):
  if unknown:raise ValueError((lang,'unmapped selected syllables',unknown[:30]))
  if extra:
   for key,tokens,ex in extra:
-   code=stress(tokens);identity=voice+'|'+code+'|145|espeakng-loader-0.2.4';uid=hashlib.sha256(identity.encode()).hexdigest()[:20]
+   code=stress(tokens);identity=voice+'|'+code+'|175|espeakng-loader-0.2.4';uid=hashlib.sha256(identity.encode()).hexdigest()[:20]
    e=entries.setdefault(uid,{'id':uid,'mnemonic':code,'tokens':tokens,'rank':None,'sourceForms':[],'examples':[],'sourceWeight':0,'notes':['mandatory liturgical supplement']})
    if key not in e['sourceForms']:e['sourceForms'].append(key)
    e.setdefault('liturgicalWords',[])
    if ex not in e['liturgicalWords']:e['liturgicalWords'].append(ex)
    e['examples']=list(dict.fromkeys([ex]+e['examples']))[:3]
- p={'language':lang,'title':title,'voice':voice,'rateWpm':145,'source':source,'selection':stats,'entries':list(entries.values())}
+ p={'language':lang,'title':title,'voice':voice,'rateWpm':175,'source':source,'selection':stats,'entries':list(entries.values())}
  p['selection']['audioCandidates']=len(entries)
  (OUT/(lang+'.json')).write_text(json.dumps(p,ensure_ascii=False,indent=2),encoding='utf8');PROFILES.append({k:v for k,v in p.items() if k!='entries'})
  print('SELECTED',lang,json.dumps(stats,ensure_ascii=False),flush=True)

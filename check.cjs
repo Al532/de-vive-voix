@@ -162,7 +162,7 @@ function element(id=''){
 }
 async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true,options={}){
  const html=fs.readFileSync('dist/index.html','utf8'),els=Object.fromEntries([...html.matchAll(/id="([^"]+)"/g)].map(([,id])=>[id,element(id)]));
- let mediaPlays=0,spoken=0,cancelCount=0,localTextReads=0;const utterances=[];els.audioPrimer.play=()=>{mediaPlays++;return Promise.resolve();};els.audioPrimer.pause=()=>{};
+ const audioFetches=new Map();let mediaPlays=0,spoken=0,cancelCount=0,localTextReads=0;const utterances=[];els.audioPrimer.play=()=>{mediaPlays++;return Promise.resolve();};els.audioPrimer.pause=()=>{};
  const h=clockHarness(),registry={},handlers={},windowHandlers={},traces=[];
  class AudioContext{
   constructor(){this.state='running';this.sampleRate=48000;}
@@ -185,7 +185,7 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
  const location={get href(){return href;},get search(){return new URL(href).search;},assign(url){href=new URL(url,href).href;}};
  const sandbox=vm.createContext({window,document,console,URL,URLSearchParams,location,performance:{now:()=>h.audio.currentTime*1000},
   history:{replaceState(a,b,url){href=url.href;}},localStorage:{getItem(k){if(unavailable)throw Error('denied');return store.get(k)||null;},setItem(k,v){if(unavailable)throw Error('denied');store.set(k,v);}},
-  fetch:async url=>({ok:true,json:async()=>url==='score.json'?score:assets,arrayBuffer:async()=>({duration:durations.get(url)})}),
+  fetch:async url=>({ok:true,json:async()=>url==='score.json'?score:assets,arrayBuffer:async()=>{audioFetches.set(url,(audioFetches.get(url)||0)+1);return {duration:durations.get(url)};}}),
   setTimeout:h.setTimer,clearTimeout:h.clearTimer});
  sandbox.SpeechFit={create:async(context,buffers)=>createFitter(context,buffers)};
  sandbox.PracticeLibrary={list:async()=>{if(options.libraryDenied)throw Error('Stockage refusé');return options.records||[];}};
@@ -201,7 +201,19 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
  assert.equal(els.workspace.hidden,false,els.status.textContent);
  const get=()=>registry.get_practice_position.execute();
  async function click(id){if(els[id].hidden)return;els[id].onclick();for(let i=0;i<25;i++)await settle();}
- return {els,get,click,h,handlers,window,document,registry,store,location,spoken:()=>spoken,localTextReads:()=>localTextReads,utterances,cancelCount:()=>cancelCount,traces,mediaPlays:()=>mediaPlays};
+ return {els,get,click,h,handlers,window,document,registry,store,location,spoken:()=>spoken,localTextReads:()=>localTextReads,utterances,cancelCount:()=>cancelCount,traces,audioFetches,mediaPlays:()=>mediaPlays};
+}
+async function testPreloadSpeech(){
+ for(const options of [{},{imported:true,language:'la'}]){
+  const a=await mount(new Map(),options.imported?'?score=preloaded':'',false,true,options);
+  assert(a.traces.some(t=>t.event==='speech-preloaded'));
+  const expected=new Set(Object.values(assets).map(list=>list[0].url));
+  assert.equal(a.audioFetches.size,expected.size);assert([...a.audioFetches.values()].every(n=>n===1));
+  assert.equal(a.mediaPlays(),0);assert.equal(a.h.nodes.length,0,'preload must stay silent');assert.equal(a.get().playback,'stopped');
+  const before=new Map(a.audioFetches);await a.click('blocPlay');assert.equal(a.get().playback,'playing');assert.deepEqual(a.audioFetches,before);
+  await a.click('fullPlay');assert.equal(a.get().playback,'playing');assert.deepEqual(a.audioFetches,before);a.handlers.keydown({key:'Escape'});
+ }
+ console.log('Préchargement : sons utiles décodés une seule fois dès l’ouverture du pilote et d’un import, préparation silencieuse et aucun chargement supplémentaire au premier bloc/morceau entier vérifiés.');
 }
 async function testEnding(){
  const e=(m,t,d,pitch,sy,wi,ties=[],grace=false)=>({m,t,d,pitch,sy,word:sy,wi,ties,grace,continued:ties.includes('stop')});
@@ -291,12 +303,12 @@ async function testImportedNaturalSpeech(){
  const voice={lang:'fr-FR',name:'Voix française locale',localService:true};
  const a=await mount(new Map(),'?score=test',false,false,{imported:true,voices:[{lang:'fr-FR',name:'Voix distante',localService:false},voice]});
  await a.click('blocPlay');assert.equal(a.spoken(),1);assert.equal(a.localTextReads(),0);
- assert.equal(a.utterances[0].voice,voice);assert.equal(a.utterances[0].rate,.85);assert.equal(a.get().playback,'loading');
+ assert.equal(a.utterances[0].voice.name,'Voix distante');assert.equal(a.utterances[0].rate,.85);assert.equal(a.get().playback,'loading');
  a.utterances[0].onend();for(let i=0;i<25;i++)await settle();assert.equal(a.get().playback,'playing');
  await a.click('next');const staleEnd=a.utterances.at(-1).onend;await a.click('previous');
  staleEnd();for(let i=0;i<25;i++)await settle();assert.equal(a.localTextReads(),0);assert.equal(a.get().bloc,0);assert.equal(a.get().playback,'loading');
  a.handlers.keydown({key:'Escape'});a.utterances.at(-1).onend?.();await settle();assert.equal(a.get().playback,'stopped');assert.equal(a.localTextReads(),0);
- const b=await mount(new Map(),'?score=test',false,false,{imported:true,language:'de',voices:[voice,{lang:'de-DE',localService:false}]});
+ const b=await mount(new Map(),'?score=test',false,false,{imported:true,language:'de',voices:[voice]});
  await b.click('blocPlay');assert.equal(b.spoken(),0);assert.equal(b.localTextReads(),1);
  const localNode=b.h.nodes.find(n=>n.buffer?.duration===1);assert(localNode);assert(!b.traces.some(t=>t.event==='music-start'));
  localNode.onended();for(let i=0;i<25;i++)await settle();assert.equal(b.get().playback,'playing');
@@ -307,9 +319,12 @@ async function testImportedNaturalSpeech(){
  const none=await mount(new Map(),'?score=test',false,false,{imported:true,noNative:true});
  await none.click('blocPlay');assert.equal(none.localTextReads(),1);none.handlers.keydown({key:'Escape'});
  await none.click('fullPlay');assert.equal(none.localTextReads(),1);assert.equal(none.get().playback,'playing');
+ const remoteItalian={lang:'it-IT',name:'Google italien',localService:false};
+ const remote=await mount(new Map(),'?score=exaudi',false,false,{imported:true,language:'la',voices:[remoteItalian]});await remote.click('blocPlay');assert.equal(remote.utterances[0].voice,remoteItalian);assert.equal(remote.utterances[0].lang,'it-IT');assert.equal(remote.localTextReads(),0);remote.handlers.keydown({key:'Escape'});
+ const unclassified=await mount(new Map(),'?score=exaudi',false,false,{imported:true,language:'la',voices:[{lang:'it-IT',name:'Voix italienne sans drapeau local'}]});await unclassified.click('blocPlay');assert.equal(unclassified.spoken(),1);assert.equal(unclassified.localTextReads(),0);unclassified.handlers.keydown({key:'Escape'});
  const latin=await mount(new Map(),'?score=test',false,false,{imported:true,language:'la',voices:[{lang:'it-IT',localService:true}]});
  await latin.click('blocPlay');assert.equal(latin.utterances[0].lang,'it-IT');assert.equal(latin.localTextReads(),0);
- console.log('Import : voix locale prioritaire, langue du couplet, latin italien, secours sans voix ou après échec, annulation et navigation vérifiés.');
+ console.log('Import : mêmes voix navigateur que le pilote, voix distantes et sans indicateur local acceptées, latin italien, secours sans voix ou après échec, annulation et navigation vérifiés.');
 }
 async function testApp(){
  const html=fs.readFileSync('dist/index.html','utf8');
@@ -433,4 +448,4 @@ async function testPlaybackModes(){
  console.log('Modes : repos, blocs, lecture complète, pause/reprise, déplacements, arrêt, fin naturelle et annulation pendant le texte vérifiés.');
 }
 
-(async()=>{({createFitter}=await import('./dist/tempo-stretch.mjs'));await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testExaudiNaturalSyllables();await testFittedTempoChange();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});
+(async()=>{({createFitter}=await import('./dist/tempo-stretch.mjs'));await testPreloadSpeech();await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testExaudiNaturalSyllables();await testFittedTempoChange();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});

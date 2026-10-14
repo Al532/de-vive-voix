@@ -5,6 +5,7 @@ let ctx,primedContext,active=[],ticket=0,mediaPrimed=false,mediaPriming=null,med
 let speechMap,speechAssets,notes,transport,fitAsset,loading=false,storageKey,storageFailed=false;
 let memory={version:1,part:0,tempo:80,voices:{}},lastSaved='',lastMeasure=-1,lastLyricKey='',lastTransportState='stopped';
 const decodedSpeech=new Map(),decodeJobs=new Map();
+let fitJob=null;
 let brailleCells=32;
 let localTextEngine=null,pendingSpeech=null,cancelWaiters=[],speechPhase='',focusedPlaybackControl=null,playbackFocusAt=-Infinity;
 const blocs=()=>blocSets[part]||[];
@@ -53,9 +54,9 @@ function speechHandoffDelay(event){
 function lyricUtterance(text){const u=new window.SpeechSynthesisUtterance(text),voices=window.speechSynthesis.getVoices?.()||[];
  const matches=(voice,lang)=>voice.lang.toLowerCase().split(/[-_]/)[0]===lang;
  const language=score?.language||'la',base=language.split('-')[0];
- const available=importedId?voices.filter(v=>v.localService===true):voices;
- const voice=available.find(v=>v.lang.toLowerCase()===language.toLowerCase())||available.find(v=>matches(v,base))||(base==='la'?available.find(v=>matches(v,'it')):null);
- if(importedId&&!voice)throw Error('Voix locale indisponible.');
+ const choose=matches=>voices.find(matches);
+ const voice=choose(v=>v.lang.toLowerCase()===language.toLowerCase())||choose(v=>matches(v,base))||(base==='la'?choose(v=>matches(v,'it')):null);
+ if(importedId&&!voice)throw Error('Voix de la langue indisponible.');
  u.lang=voice?voice.lang:(base==='la'?'it-IT':language);if(voice)u.voice=voice;u.rate=.85;return u;}
 
 function waitLocalText(text,mine,delay){return new Promise((resolve,reject)=>{
@@ -170,7 +171,7 @@ function prepareAudio(){
  // The reported iOS 16 device only enables Web Audio after native file playback.
  // Start that file in the same click, before constructing or resuming the context.
  const mediaReady=legacyIOS?primeMediaOutput():null;
- if(!ctx||ctx.state==='closed'){ctx=new(window.AudioContext||window.webkitAudioContext)();fitAsset=null;}
+ ensureAudioContext();
  // Start a silent source within the click itself, not after the speech callback.
  // Older mobile Safari may report a running context before its output is unlocked.
  // Confirm the primer actually finished; a stopped/suspended attempt may retry.
@@ -296,13 +297,46 @@ function stopPlayback(){
  else{index=currentPassage().indices[0]??-1;savePosition();}
  render();announce('Lecture arrêtée.');
 }
+function ensureAudioContext(){
+ if(!ctx||ctx.state==='closed'){ctx=new(window.AudioContext||window.webkitAudioContext)();fitAsset=null;fitJob=null;}
+ return ctx;
+}
+async function ensureFitter(){
+ ensureAudioContext();
+ if(!fitAsset){fitJob??=SpeechFit.create(ctx,decodedSpeech);try{fitAsset=await fitJob;}catch(error){fitJob=null;throw error;}}
+ return fitAsset;
+}
+async function preloadSpeech(){
+ if(!window.AudioContext&&!window.webkitAudioContext)return;
+ const assets=speechAssets,audio=ensureAudioContext(),sources=new Map();
+ for(const list of Object.values(assets)){const source=list.find(a=>a.speed===1)||list[0];if(source)sources.set(source.url,source);}
+ let next=0;const queue=[...sources.values()];
+ try{
+  await Promise.all(Array.from({length:Math.min(4,queue.length)},async()=>{
+   while(next<queue.length){if(speechAssets!==assets||ctx!==audio)return;await decodeAsset(queue[next++]);}
+  }));
+  if(speechAssets!==assets||ctx!==audio)return;
+  await ensureFitter();if(speechAssets!==assets||ctx!==audio)return;
+  // Warm the selected voice, including block endings, without starting audio.
+  const ranges=[BlocModel.passage(score,part,0,score.starts.length-2),...blocs().map(b=>BlocModel.withEnding(score,part,BlocModel.withLeadIn(score,part,b,leadIn)))];
+  for(const range of ranges){
+   if(speechAssets!==assets||ctx!==audio)return;
+   for(const cue of BlocSpeech.plan(score,part,range,tempo,speechMap)){
+    const source=assets[cue.ipa].find(a=>a.speed===1)||assets[cue.ipa][0];fitAsset(cue,source,decodedSpeech.get(source.url),tempo);
+   }
+  }
+  tracePlayback('speech-preloaded',{sources:sources.size});
+ }catch(error){tracePlayback('speech-preload-error',{message:error.message});}
+}
 async function decodeAsset(asset){
  if(decodedSpeech.has(asset.url))return decodedSpeech.get(asset.url);
  if(!decodeJobs.has(asset.url)){
-  decodeJobs.set(asset.url,fetch(asset.url).then(r=>{if(!r.ok)throw Error('Chargement des syllabes impossible.');return r.arrayBuffer();})
-   .then(bytes=>new Promise((resolve,reject)=>ctx.decodeAudioData(bytes,resolve,reject)))
-   .then(buffer=>{decodedSpeech.set(asset.url,buffer);decodeJobs.delete(asset.url);return buffer;})
-   .catch(error=>{decodeJobs.delete(asset.url);throw error;}));
+  const audio=ctx;let job;
+  job=fetch(asset.url).then(r=>{if(!r.ok)throw Error('Chargement des syllabes impossible.');return r.arrayBuffer();})
+   .then(bytes=>new Promise((resolve,reject)=>audio.decodeAudioData(bytes,resolve,reject)))
+   .then(buffer=>{if(decodeJobs.get(asset.url)===job){decodedSpeech.set(asset.url,buffer);decodeJobs.delete(asset.url);}return buffer;})
+   .catch(error=>{if(decodeJobs.get(asset.url)===job)decodeJobs.delete(asset.url);throw error;});
+  decodeJobs.set(asset.url,job);
  }
  return decodeJobs.get(asset.url);
 }
@@ -315,7 +349,7 @@ async function loadCues(range,mine){
   while(next<queue.length){if(mine!==ticket)return;await decodeAsset(queue[next++]);}
  }));
  if(mine!==ticket)return cues;
- fitAsset??=await SpeechFit.create(ctx,decodedSpeech);
+ await ensureFitter();
  for(const cue of cues){if(mine!==ticket)return cues;const asset=speechAssets[cue.ipa].find(a=>a.speed===1)||speechAssets[cue.ipa][0];fitAsset(cue,asset,decodedSpeech.get(asset.url),tempo);}
  return cues;
 }
@@ -394,7 +428,7 @@ function changeSize(){
 function changeVoice(){
  cancelPlayback();part=Number($('voice').value);mode='idle';
  const saved=voiceMemory();measureSize=Number.isInteger(saved.measures)&&saved.measures>=1&&saved.measures<=8?saved.measures:2;leadIn=saved.leadIn===true;
- rebuild();selectMeasure(validMeasure(saved.measure)?saved.measure:0);prefillMeasure();savePosition();render();announce(score.parts[part].name+'. '+selectedDescription());
+ rebuild();selectMeasure(validMeasure(saved.measure)?saved.measure:0);prefillMeasure();savePosition();render();announce(score.parts[part].name+'. '+selectedDescription());void preloadSpeech();
 }
 function state(){
  return {part,index,tempo,cells:brailleCells,bloc:blocId,offset:0,mode,measures:measureSize,leadIn,
@@ -407,8 +441,8 @@ async function changeVerse(){
  try{const bundle=await PracticeLibrary.loadBundle(importedId,verse);
   if(mine!==ticket){for(const list of Object.values(bundle.assets))for(const a of list)if(a.url.startsWith('blob:'))URL.revokeObjectURL(a.url);return;}
   for(const list of Object.values(speechAssets))for(const asset of list)if(asset.url.startsWith('blob:'))URL.revokeObjectURL(asset.url);
-  decodedSpeech.clear();decodeJobs.clear();MusicXMLImport.applyVerse(score,verse);speechAssets=bundle.assets;speechMap=bundle.map;score.continuationMap=bundle.continuations;score.language=bundle.language;
-  if(transport){transport.cancelSources();transport=null;}mode='idle';rebuild();selectMeasure(at);lastLyricKey='';loading=false;savePosition();render();announce('Couplet '+verse+'. '+selectedDescription());
+  decodedSpeech.clear();decodeJobs.clear();fitAsset=null;fitJob=null;MusicXMLImport.applyVerse(score,verse);speechAssets=bundle.assets;speechMap=bundle.map;score.continuationMap=bundle.continuations;score.language=bundle.language;
+  if(transport){transport.cancelSources();transport=null;}mode='idle';rebuild();selectMeasure(at);lastLyricKey='';loading=false;savePosition();render();announce('Couplet '+verse+'. '+selectedDescription());void preloadSpeech();
  }catch(error){if(mine===ticket){$('verse').value=previousVerse;loading=false;render();announce(error.message);}}finally{$('verseSettings').removeAttribute('aria-busy');}
 }
 async function setupScoreChoice(requestedId){
@@ -501,7 +535,7 @@ async function init(){
     }});
    }catch{}
   }
-  $('workspace').hidden=false;setText('status','');prefillMeasure();render();savePosition();
+  $('workspace').hidden=false;setText('status','');prefillMeasure();render();savePosition();void preloadSpeech();
  }catch(error){setText('status','Impossible de charger le morceau. ' + error.message + '');tracePlayback('initialization-error',{message:error.message});}
 }
 prepareVoices();init();

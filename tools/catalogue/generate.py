@@ -46,14 +46,14 @@ def synth(code):
  return samples.tobytes(),''.join(events_ipa),float(np.sqrt(np.mean(samples.astype(np.float64)**2))),int(np.abs(samples.astype(np.int32)).max())
 OUT=A.output;OUT.mkdir(parents=True,exist_ok=True)
 summary=json.loads((A.selection/'summary.json').read_text(encoding='utf8'))
-global_index={'schemaVersion':1,'catalogVersion':'1.0.0','engine':{'name':'eSpeak NG','version':ENGINE,'loader':'espeakng-loader 0.2.4','sampleRate':RATE,'channels':1,'sampleWidth':2,'rateWpm':145,'inputMode':'explicit phoneme mnemonics','pitchMode':'natural spoken intonation'},'languages':[],'sourceFiles':summary['sourceFiles'],'scopeNotes':['Coverage is measured on source corpus syllable occurrences, not whole scores.','French, Italian, German and Latin samples carry an isolated-syllable demonstration accent; English retains source lexical stress.','The Latin profile also includes Greek liturgical formulas pronounced in the Roman Latin tradition.','English data and voice are American English.','Pronunciation variants remain subject to refinement.'],'liturgicalWordsUrl':'v1/liturgical-words.json'}
+global_index={'schemaVersion':1,'catalogVersion':'1.1.0','engine':{'name':'eSpeak NG','version':ENGINE,'loader':'espeakng-loader 0.2.4','sampleRate':RATE,'channels':1,'sampleWidth':2,'rateWpm':175,'inputMode':'explicit phoneme mnemonics','pitchMode':'natural spoken intonation'},'languages':[],'sourceFiles':summary['sourceFiles'],'scopeNotes':['Coverage is measured on source corpus syllable occurrences, not whole scores.','French, Italian, German and Latin samples carry an isolated-syllable demonstration accent; English retains source lexical stress.','The Latin profile also includes Greek liturgical formulas pronounced in the Roman Latin tradition.','English data and voice are American English.','Pronunciation variants remain subject to refinement.'],'liturgicalWordsUrl':'v1/liturgical-words.json'}
 audit={'engine':global_index['engine'],'files':0,'bytes':0,'seconds':0,'notes':{},'profiles':[]}
 started=time.time()
 for profile in summary['profiles']:
  lang=profile['language'];source=json.loads((A.selection/(lang+'.json')).read_text(encoding='utf8'));entries=source['entries']
  if A.limit:entries=entries[:A.limit]
  assert L.espeak_SetVoiceByName(source['voice'].encode())==0,lang
- assert L.espeak_SetParameter(1,145,0)==0
+ assert L.espeak_SetParameter(1,175,0)==0
  folder=OUT/'v1'/lang;audio_dir=folder/'sons';audio_dir.mkdir(parents=True,exist_ok=True)
  result=[];note_count=0;bytes_count=0;durations=[];seen=set()
  for i,e in enumerate(entries,1):

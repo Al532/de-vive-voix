@@ -4,516 +4,732 @@
   "rate": 22050,
   "syllables": {
     "a": {
-      "url": "phonetics-audio/s-ca978112ca1b.wav",
-      "duration": 0.2344671201814059,
-      "mnemonic": "'a",
-      "engineIPA": "ˈa"
+      "url": "speech-audio-175/b439b91e50ebcd531b3174b5.wav",
+      "duration": 0.2003628117913832,
+      "gain": 0.3617679371765432,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "a",
+      "voice": "it",
+      "mnemonic": "a",
+      "engineIPA": "a"
     },
     "an": {
-      "url": "phonetics-audio/s-ea325d761f98.wav",
-      "duration": 0.3707936507936508,
-      "mnemonic": "'an",
-      "engineIPA": "ˈan"
+      "url": "speech-audio-175/12c51a40b0dff1c25fe90eaa.wav",
+      "duration": 0.3037641723356009,
+      "gain": 0.31768710235217884,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "an",
+      "voice": "it",
+      "mnemonic": "an",
+      "engineIPA": "an"
     },
     "at": {
-      "url": "phonetics-audio/s-b1d6b91b67c2.wav",
-      "duration": 0.30253968253968255,
-      "mnemonic": "'at",
-      "engineIPA": "ˈat"
+      "url": "speech-audio-175/100db69ce3c575682e7ccca7.wav",
+      "duration": 0.2573242630385488,
+      "gain": 0.330857146739217,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "at",
+      "voice": "it",
+      "mnemonic": "at",
+      "engineIPA": "at"
     },
     "e": {
-      "url": "phonetics-audio/s-3f79bb7b435b.wav",
-      "duration": 0.23514739229024945,
-      "mnemonic": "'e",
-      "engineIPA": "ˈe"
+      "url": "tempo-bench-audio/0a2e59b12f48f02d5c39c063.wav",
+      "duration": 0.18970521541950114,
+      "gain": 0.44491265473827096,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "e",
+      "voice": "it",
+      "mnemonic": "e",
+      "engineIPA": "e"
     },
     "em": {
-      "url": "phonetics-audio/s-84a47f61dd34.wav",
-      "duration": 0.3942857142857143,
-      "mnemonic": "'em",
-      "engineIPA": "ˈem"
+      "url": "speech-audio-175/c881f4a951f9a3ebda2a01bc.wav",
+      "duration": 0.3142403628117914,
+      "gain": 0.335673499623061,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "em",
+      "voice": "it",
+      "mnemonic": "em",
+      "engineIPA": "em"
     },
     "en": {
-      "url": "phonetics-audio/s-dbd3a49d0d90.wav",
-      "duration": 0.370249433106576,
-      "mnemonic": "'en",
-      "engineIPA": "ˈen"
+      "url": "speech-audio-175/4559cec89f030e8c7558302e.wav",
+      "duration": 0.3035827664399093,
+      "gain": 0.32345936252870006,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "en",
+      "voice": "it",
+      "mnemonic": "en",
+      "engineIPA": "en"
     },
     "er": {
-      "url": "phonetics-audio/s-cc7e4412564b.wav",
-      "duration": 0.2544671201814059,
-      "mnemonic": "'er/",
-      "engineIPA": "ˈer"
+      "url": "tempo-bench-audio/595595f19982f9854b9d189d.wav",
+      "duration": 0.2620408163265306,
+      "gain": 0.3120305649919803,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "eR",
+      "voice": "it",
+      "mnemonic": "eR",
+      "engineIPA": "er"
     },
     "et": {
-      "url": "phonetics-audio/s-f056b8cae37d.wav",
-      "duration": 0.3019047619047619,
-      "mnemonic": "'et",
-      "engineIPA": "ˈet"
+      "url": "tempo-bench-audio/2cb8c65450ebca323013c6a1.wav",
+      "duration": 0.25718820861678005,
+      "gain": 0.3256746852367364,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "et",
+      "voice": "it",
+      "mnemonic": "et",
+      "engineIPA": "et"
     },
     "fi": {
-      "url": "phonetics-audio/s-b4bdc8481097.wav",
-      "duration": 0.32476190476190475,
-      "mnemonic": "f'i",
-      "engineIPA": "fˈi"
+      "url": "tempo-bench-audio/2d8805afbb2a07c26caf9530.wav",
+      "duration": 0.27764172335600906,
+      "gain": 0.4340242369976673,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "fi",
+      "voice": "it",
+      "mnemonic": "fi",
+      "engineIPA": "fi"
     },
     "i": {
-      "url": "phonetics-audio/s-de7d1b721a1e.wav",
-      "duration": 0.22308390022675736,
-      "mnemonic": "'i",
-      "engineIPA": "ˈi"
+      "url": "tempo-bench-audio/85205c33418e23339631c36f.wav",
+      "duration": 0.2003174603174603,
+      "gain": 0.3568542635138111,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "i",
+      "voice": "it",
+      "mnemonic": "i",
+      "engineIPA": "i"
     },
     "ik": {
-      "url": "phonetics-audio/s-72a7ab318788.wav",
-      "duration": 0.3106122448979592,
-      "mnemonic": "'ik",
-      "engineIPA": "ˈik"
+      "url": "speech-audio-175/da30527c1ba9077c536ae5af.wav",
+      "duration": 0.2638548752834467,
+      "gain": 0.39772703184280006,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ik",
+      "voice": "it",
+      "mnemonic": "ik",
+      "engineIPA": "ik"
     },
     "in": {
-      "url": "phonetics-audio/s-582967534d0f.wav",
-      "duration": 0.35827664399092973,
-      "mnemonic": "'in",
-      "engineIPA": "ˈin"
+      "url": "tempo-bench-audio/2e0f463a10bd61721c7c1164.wav",
+      "duration": 0.3039002267573696,
+      "gain": 0.37233227952159687,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "in",
+      "voice": "it",
+      "mnemonic": "in",
+      "engineIPA": "in"
     },
     "ku": {
-      "url": "phonetics-audio/s-88d178d728e8.wav",
-      "duration": 0.3252607709750567,
-      "mnemonic": "k'u",
-      "engineIPA": "kˈu"
+      "url": "speech-audio-175/0b84533b47de194cc348d7c8.wav",
+      "duration": 0.25002267573696146,
+      "gain": 0.4841164884483749,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ku",
+      "voice": "it",
+      "mnemonic": "ku",
+      "engineIPA": "ku"
     },
     "la": {
-      "url": "phonetics-audio/s-b737ca7ee563.wav",
-      "duration": 0.29020408163265304,
-      "mnemonic": "l'a",
-      "engineIPA": "lˈa"
+      "url": "speech-audio-175/3810bf711990d63fb5f3eb04.wav",
+      "duration": 0.2490249433106576,
+      "gain": 0.36746432548969565,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "la",
+      "voice": "it",
+      "mnemonic": "la",
+      "engineIPA": "la"
     },
     "li": {
-      "url": "phonetics-audio/s-00a9e4255a5b.wav",
-      "duration": 0.310702947845805,
-      "mnemonic": "l'i",
-      "engineIPA": "lˈi"
+      "url": "speech-audio-175/b93a0fcf54cf48c7066d88b6.wav",
+      "duration": 0.250249433106576,
+      "gain": 0.40736382705522534,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "li",
+      "voice": "it",
+      "mnemonic": "li",
+      "engineIPA": "li"
     },
     "lo": {
-      "url": "phonetics-audio/s-9294ab38039f.wav",
-      "duration": 0.3,
-      "mnemonic": "l'o",
-      "engineIPA": "lˈo"
+      "url": "speech-audio-175/a8f8a944b3406d4369374efc.wav",
+      "duration": 0.2397278911564626,
+      "gain": 0.3849773385321274,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "lo",
+      "voice": "it",
+      "mnemonic": "lo",
+      "engineIPA": "lo"
     },
     "men": {
-      "url": "phonetics-audio/s-08e3c4c91ca5.wav",
-      "duration": 0.4763718820861678,
-      "mnemonic": "m'en",
-      "engineIPA": "mˈen"
+      "url": "speech-audio-175/25306ab1792a51647dcf3680.wav",
+      "duration": 0.3856689342403628,
+      "gain": 0.3668207642949903,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "men",
+      "voice": "it",
+      "mnemonic": "men",
+      "engineIPA": "men"
     },
     "nunk": {
-      "url": "phonetics-audio/s-9a89027bb055.wav",
-      "duration": 0.4560544217687075,
-      "mnemonic": "n'unk",
-      "engineIPA": "nˈunk"
+      "url": "speech-audio-175/ae42cc9afd061f8044b5fefd.wav",
+      "duration": 0.3742403628117914,
+      "gain": 0.5601024420888748,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "nunk",
+      "voice": "it",
+      "mnemonic": "nunk",
+      "engineIPA": "nunk"
     },
     "o": {
-      "url": "phonetics-audio/s-65c74c15a686.wav",
-      "duration": 0.24698412698412697,
-      "mnemonic": "'o",
-      "engineIPA": "ˈo"
+      "url": "speech-audio-175/c25ad44e20ef2631b1a7e9ac.wav",
+      "duration": 0.2003174603174603,
+      "gain": 0.3306366088538691,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "o",
+      "voice": "it",
+      "mnemonic": "o",
+      "engineIPA": "o"
     },
     "pa": {
-      "url": "phonetics-audio/s-9513229d4359.wav",
-      "duration": 0.28321995464852606,
-      "mnemonic": "p'a",
-      "engineIPA": "pˈa"
+      "url": "speech-audio-175/7a6914d6f57ae13c44e3957d.wav",
+      "duration": 0.2451700680272109,
+      "gain": 0.40616935158273154,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pa",
+      "voice": "it",
+      "mnemonic": "pa",
+      "engineIPA": "pa"
     },
     "per": {
-      "url": "phonetics-audio/s-b427c3dec904.wav",
-      "duration": 0.3021768707482993,
-      "mnemonic": "p'er/",
-      "engineIPA": "pˈer"
+      "url": "speech-audio-175/efc447820c705b9be55bcb3d.wav",
+      "duration": 0.30680272108843537,
+      "gain": 0.3465550646104353,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "peR",
+      "voice": "it",
+      "mnemonic": "peR",
+      "engineIPA": "per"
     },
     "pi": {
-      "url": "phonetics-audio/s-85b42e170287.wav",
-      "duration": 0.28480725623582764,
-      "mnemonic": "p'i",
-      "engineIPA": "pˈi"
+      "url": "speech-audio-175/fb9b1dbad3a9b1d8660b5995.wav",
+      "duration": 0.23473922902494332,
+      "gain": 0.409374183077549,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pi",
+      "voice": "it",
+      "mnemonic": "pi",
+      "engineIPA": "pi"
     },
     "prin": {
-      "url": "phonetics-audio/s-44afc1ffd858.wav",
-      "duration": 0.539047619047619,
-      "mnemonic": "pr/'in",
-      "engineIPA": "prˈin"
+      "url": "speech-audio-175/dbbfa5e472251f5a55b7427d.wav",
+      "duration": 0.4414965986394558,
+      "gain": 0.5363751256852206,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pRin",
+      "voice": "it",
+      "mnemonic": "pRin",
+      "engineIPA": "prin"
     },
     "rat": {
-      "url": "phonetics-audio/s-9950cec246ec.wav",
-      "duration": 0.36775510204081635,
-      "mnemonic": "r/'at",
-      "engineIPA": "rˈat"
+      "url": "speech-audio-175/8d68746673e2d8f0d6b462c2.wav",
+      "duration": 0.3493424036281179,
+      "gain": 0.4421248693482907,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Rat",
+      "voice": "it",
+      "mnemonic": "Rat",
+      "engineIPA": "rat"
     },
     "ri": {
-      "url": "phonetics-audio/s-396a14ab206e.wav",
-      "duration": 0.29950113378684806,
-      "mnemonic": "r/'i",
-      "engineIPA": "rˈi"
+      "url": "tempo-bench-audio/c0c8055133d54fb706d65438.wav",
+      "duration": 0.282312925170068,
+      "gain": 0.4451880478565747,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ri",
+      "voice": "it",
+      "mnemonic": "Ri",
+      "engineIPA": "ri"
     },
     "rum": {
-      "url": "phonetics-audio/s-57f64f1b4557.wav",
-      "duration": 0.4800453514739229,
-      "mnemonic": "r/'um",
-      "engineIPA": "rˈum"
+      "url": "speech-audio-175/834c968bec60d887f4d04bdf.wav",
+      "duration": 0.4174603174603175,
+      "gain": 0.5299157556639601,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Rum",
+      "voice": "it",
+      "mnemonic": "Rum",
+      "engineIPA": "rum"
     },
     "san": {
-      "url": "phonetics-audio/s-6b9cd7872ae6.wav",
-      "duration": 0.468390022675737,
-      "mnemonic": "s'an",
-      "engineIPA": "sˈan"
+      "url": "speech-audio-175/79670d97481921667ad8728a.wav",
+      "duration": 0.38843537414965984,
+      "gain": 0.3833528350439466,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "san",
+      "voice": "it",
+      "mnemonic": "san",
+      "engineIPA": "san"
     },
     "se": {
-      "url": "phonetics-audio/s-ad9a67fefa84.wav",
-      "duration": 0.3331519274376417,
-      "mnemonic": "s'e",
-      "engineIPA": "sˈe"
+      "url": "speech-audio-175/c7d9d02827e110a81949bab6.wav",
+      "duration": 0.2743764172335601,
+      "gain": 0.5055273702436498,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "se",
+      "voice": "it",
+      "mnemonic": "se",
+      "engineIPA": "se"
     },
     "sem": {
-      "url": "phonetics-audio/s-e604f8c97caa.wav",
-      "duration": 0.4925170068027211,
-      "mnemonic": "s'em",
-      "engineIPA": "sˈem"
+      "url": "speech-audio-175/182417f9745ab9bed9e3760f.wav",
+      "duration": 0.39891156462585037,
+      "gain": 0.3755716384555,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sem",
+      "voice": "it",
+      "mnemonic": "sem",
+      "engineIPA": "sem"
     },
     "sik": {
-      "url": "phonetics-audio/s-6a13db8eab2e.wav",
-      "duration": 0.408390022675737,
-      "mnemonic": "s'ik",
-      "engineIPA": "sˈik"
+      "url": "speech-audio-175/4ab81b566cafa81e4fc431c3.wav",
+      "duration": 0.3278458049886621,
+      "gain": 0.5120386172049066,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sik",
+      "voice": "it",
+      "mnemonic": "sik",
+      "engineIPA": "sik"
     },
     "spi": {
-      "url": "phonetics-audio/s-8f3c56908f47.wav",
-      "duration": 0.35360544217687073,
-      "mnemonic": "sp'i",
-      "engineIPA": "spˈi"
+      "url": "speech-audio-175/80a4dc9b23d012c4f469d5f7.wav",
+      "duration": 0.29029478458049884,
+      "gain": 0.4498217867961688,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "spi",
+      "voice": "it",
+      "mnemonic": "spi",
+      "engineIPA": "spi"
     },
     "to": {
-      "url": "phonetics-audio/s-663ea1bfffe5.wav",
-      "duration": 0.2854875283446712,
-      "mnemonic": "t'o",
-      "engineIPA": "tˈo"
+      "url": "speech-audio-175/5da084cb4506783bc662514c.wav",
+      "duration": 0.23714285714285716,
+      "gain": 0.372674582451942,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "to",
+      "voice": "it",
+      "mnemonic": "to",
+      "engineIPA": "to"
     },
     "tri": {
-      "url": "phonetics-audio/s-cddd67830982.wav",
-      "duration": 0.37160997732426304,
-      "mnemonic": "tr/'i",
-      "engineIPA": "trˈi"
+      "url": "speech-audio-175/77ef2d9601676db1e6728ada.wav",
+      "duration": 0.3294331065759637,
+      "gain": 0.479356207561625,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tRi",
+      "voice": "it",
+      "mnemonic": "tRi",
+      "engineIPA": "tri"
     },
     "tu": {
-      "url": "phonetics-audio/s-764c4c7b78d6.wav",
-      "duration": 0.2982766439909297,
-      "mnemonic": "t'u",
-      "engineIPA": "tˈu"
+      "url": "speech-audio-175/401918372a5f24e31fe7c014.wav",
+      "duration": 0.22612244897959183,
+      "gain": 0.4608332025296877,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tu",
+      "voice": "it",
+      "mnemonic": "tu",
+      "engineIPA": "tu"
     },
     "tʃi": {
-      "url": "phonetics-audio/s-0ee5ece17815.wav",
-      "duration": 0.3182766439909297,
-      "mnemonic": "tS'i",
-      "engineIPA": "tʃˈi"
+      "url": "speech-audio-175/e71f7e24f92210dccb445bc0.wav",
+      "duration": 0.2640816326530612,
+      "gain": 0.41421388086546285,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tSi",
+      "voice": "it",
+      "mnemonic": "tSi",
+      "engineIPA": "tʃi"
     },
     "u": {
-      "url": "phonetics-audio/s-0bfe935e70c3.wav",
-      "duration": 0.25900226757369615,
-      "mnemonic": "'u",
-      "engineIPA": "ˈu"
+      "url": "speech-audio-175/39d71a36c042bb0b27db5622.wav",
+      "duration": 0.1893424036281179,
+      "gain": 0.4119468535831173,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "u",
+      "voice": "it",
+      "mnemonic": "u",
+      "engineIPA": "u"
     },
     "um": {
-      "url": "phonetics-audio/s-289c90decf40.wav",
-      "duration": 0.4040362811791383,
-      "mnemonic": "'um",
-      "engineIPA": "ˈum"
+      "url": "tempo-bench-audio/b35c5d28eca20872017f0b52.wav",
+      "duration": 0.31414965986394555,
+      "gain": 0.43786512781338865,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "um",
+      "voice": "it",
+      "mnemonic": "um",
+      "engineIPA": "um"
     },
     "unk": {
-      "url": "phonetics-audio/s-065253965353.wav",
-      "duration": 0.37746031746031744,
-      "mnemonic": "'unk",
-      "engineIPA": "ˈunk"
+      "url": "speech-audio-175/87cfe4cc5f3ad38044c5615a.wav",
+      "duration": 0.31528344671201813,
+      "gain": 0.4938210768394814,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "unk",
+      "voice": "it",
+      "mnemonic": "unk",
+      "engineIPA": "unk"
     },
     "ut": {
-      "url": "phonetics-audio/s-469cc643a19f.wav",
-      "duration": 0.3129251700680272,
-      "mnemonic": "'ut",
-      "engineIPA": "ˈut"
+      "url": "speech-audio-175/2394c79f30010931d1b9626a.wav",
+      "duration": 0.24698412698412697,
+      "gain": 0.45638049240138423,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ut",
+      "voice": "it",
+      "mnemonic": "ut",
+      "engineIPA": "ut"
     },
     "ɡlo": {
-      "url": "phonetics-audio/s-f4e977d5c42e.wav",
-      "duration": 0.30426303854875286,
-      "mnemonic": "gl'o",
-      "engineIPA": "ɡlˈo"
+      "url": "speech-audio-175/f522fa0874293929850b7048.wav",
+      "duration": 0.25215419501133784,
+      "gain": 0.39652104233183766,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "glo",
+      "voice": "it",
+      "mnemonic": "glo",
+      "engineIPA": "ɡlo"
     }
   },
   "sequences": {
     "ɡlo|ri|a": {
-      "url": "phonetics-audio/w-a5de3e70c61d.wav",
+      "url": "phonetics-audio/w-a5de3e70c61d-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.30426303854875286
+          "end": 0.25215419501133784
         },
         {
           "index": 1,
-          "start": 0.48426303854875286,
-          "end": 0.7837641723356009
+          "start": 0.4321541950113379,
+          "end": 0.7144671201814059
         },
         {
           "index": 2,
-          "start": 0.9637641723356009,
-          "end": 1.1982312925170069
+          "start": 0.894467120181406,
+          "end": 1.0948299319727892
         }
       ],
-      "duration": 1.1982312925170069
+      "duration": 1.0948299319727892,
+      "rateWpm": 175
     },
     "pa|tri": {
-      "url": "phonetics-audio/w-926763fc895b.wav",
+      "url": "phonetics-audio/w-926763fc895b-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.28321995464852606
+          "end": 0.2451700680272109
         },
         {
           "index": 1,
-          "start": 0.46321995464852606,
-          "end": 0.8348299319727891
+          "start": 0.42517006802721086,
+          "end": 0.7546031746031746
         }
       ],
-      "duration": 0.8348299319727891
+      "duration": 0.7546031746031746,
+      "rateWpm": 175
     },
     "et": {
-      "url": "phonetics-audio/w-f056b8cae37d.wav",
+      "url": "phonetics-audio/w-f056b8cae37d-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.3019047619047619
+          "end": 0.25718820861678005
         }
       ],
-      "duration": 0.3019047619047619
+      "duration": 0.25718820861678005,
+      "rateWpm": 175
     },
     "fi|li|o": {
-      "url": "phonetics-audio/w-eac9a1364c4c.wav",
+      "url": "phonetics-audio/w-eac9a1364c4c-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.32476190476190475
+          "end": 0.27764172335600906
         },
         {
           "index": 1,
-          "start": 0.5047619047619047,
-          "end": 0.8154648526077097
+          "start": 0.45764172335600906,
+          "end": 0.707891156462585
         },
         {
           "index": 2,
-          "start": 0.9954648526077098,
-          "end": 1.2424489795918368
+          "start": 0.887891156462585,
+          "end": 1.0882086167800453
         }
       ],
-      "duration": 1.2424489795918368
+      "duration": 1.0882086167800453,
+      "rateWpm": 175
     },
     "spi|ri|tu|i": {
-      "url": "phonetics-audio/w-b80382cf0604.wav",
+      "url": "phonetics-audio/w-b80382cf0604-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.35360544217687073
+          "end": 0.29029478458049884
         },
         {
           "index": 1,
-          "start": 0.5336054421768708,
-          "end": 0.8331065759637188
+          "start": 0.4702947845804989,
+          "end": 0.7526077097505669
         },
         {
           "index": 2,
-          "start": 1.0131065759637188,
-          "end": 1.3113832199546485
+          "start": 0.932607709750567,
+          "end": 1.1587301587301588
         },
         {
           "index": 3,
-          "start": 1.4913832199546486,
-          "end": 1.714467120181406
+          "start": 1.3387301587301588,
+          "end": 1.539047619047619
         }
       ],
-      "duration": 1.714467120181406
+      "duration": 1.539047619047619,
+      "rateWpm": 175
     },
     "san|to": {
-      "url": "phonetics-audio/w-f6ec7c65e52b.wav",
+      "url": "phonetics-audio/w-f6ec7c65e52b-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.468390022675737
+          "end": 0.38843537414965984
         },
         {
           "index": 1,
-          "start": 0.648390022675737,
-          "end": 0.9338775510204081
+          "start": 0.5684353741496598,
+          "end": 0.805578231292517
         }
       ],
-      "duration": 0.9338775510204081
+      "duration": 0.805578231292517,
+      "rateWpm": 175
     },
     "sik|ut": {
-      "url": "phonetics-audio/w-cc4f4d4067c7.wav",
+      "url": "phonetics-audio/w-cc4f4d4067c7-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.408390022675737
+          "end": 0.3278458049886621
         },
         {
           "index": 1,
-          "start": 0.5883900226757369,
-          "end": 0.9013151927437641
+          "start": 0.5078458049886622,
+          "end": 0.7548299319727891
         }
       ],
-      "duration": 0.9013151927437641
+      "duration": 0.7548299319727891,
+      "rateWpm": 175
     },
     "e|rat": {
-      "url": "phonetics-audio/w-e51115813c8d.wav",
+      "url": "phonetics-audio/w-e51115813c8d-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.23514739229024945
+          "end": 0.18970521541950114
         },
         {
           "index": 1,
-          "start": 0.41514739229024944,
-          "end": 0.7829024943310657
+          "start": 0.36970521541950113,
+          "end": 0.719047619047619
         }
       ],
-      "duration": 0.7829024943310657
+      "duration": 0.719047619047619,
+      "rateWpm": 175
     },
     "in": {
-      "url": "phonetics-audio/w-582967534d0f.wav",
+      "url": "phonetics-audio/w-582967534d0f-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.35827664399092973
+          "end": 0.3039002267573696
         }
       ],
-      "duration": 0.35827664399092973
+      "duration": 0.3039002267573696,
+      "rateWpm": 175
     },
     "prin|tʃi|pi|o": {
-      "url": "phonetics-audio/w-64462bb19230.wav",
+      "url": "phonetics-audio/w-64462bb19230-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.539047619047619
+          "end": 0.4414965986394558
         },
         {
           "index": 1,
-          "start": 0.719047619047619,
-          "end": 1.0373242630385489
+          "start": 0.6214965986394558,
+          "end": 0.885578231292517
         },
         {
           "index": 2,
-          "start": 1.2173242630385488,
-          "end": 1.5021315192743765
+          "start": 1.065578231292517,
+          "end": 1.3003174603174603
         },
         {
           "index": 3,
-          "start": 1.6821315192743764,
-          "end": 1.9291156462585033
+          "start": 1.4803174603174603,
+          "end": 1.6806349206349207
         }
       ],
-      "duration": 1.9291156462585033
+      "duration": 1.6806349206349207,
+      "rateWpm": 175
     },
     "nunk": {
-      "url": "phonetics-audio/w-9a89027bb055.wav",
+      "url": "phonetics-audio/w-9a89027bb055-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.4560544217687075
+          "end": 0.3742403628117914
         }
       ],
-      "duration": 0.4560544217687075
+      "duration": 0.3742403628117914,
+      "rateWpm": 175
     },
     "sem|per": {
-      "url": "phonetics-audio/w-409687e504b1.wav",
+      "url": "phonetics-audio/w-409687e504b1-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.4925170068027211
+          "end": 0.39891156462585037
         },
         {
           "index": 1,
-          "start": 0.6725170068027211,
-          "end": 0.9746938775510204
+          "start": 0.5789115646258504,
+          "end": 0.8857142857142857
         }
       ],
-      "duration": 0.9746938775510204
+      "duration": 0.8857142857142857,
+      "rateWpm": 175
     },
     "se|ku|la": {
-      "url": "phonetics-audio/w-b21b251d4785.wav",
+      "url": "phonetics-audio/w-b21b251d4785-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.3331519274376417
+          "end": 0.2743764172335601
         },
         {
           "index": 1,
-          "start": 0.5131519274376417,
-          "end": 0.8384126984126984
+          "start": 0.4543764172335601,
+          "end": 0.7043990929705215
         },
         {
           "index": 2,
-          "start": 1.0184126984126984,
-          "end": 1.3086167800453514
+          "start": 0.8843990929705215,
+          "end": 1.1334240362811792
         }
       ],
-      "duration": 1.3086167800453514
+      "duration": 1.1334240362811792,
+      "rateWpm": 175
     },
     "se|ku|lo|rum": {
-      "url": "phonetics-audio/w-aef6e4a53917.wav",
+      "url": "phonetics-audio/w-aef6e4a53917-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.3331519274376417
+          "end": 0.2743764172335601
         },
         {
           "index": 1,
-          "start": 0.5131519274376417,
-          "end": 0.8384126984126984
+          "start": 0.4543764172335601,
+          "end": 0.7043990929705215
         },
         {
           "index": 2,
-          "start": 1.0184126984126984,
-          "end": 1.3184126984126985
+          "start": 0.8843990929705215,
+          "end": 1.124126984126984
         },
         {
           "index": 3,
-          "start": 1.4984126984126984,
-          "end": 1.9784580498866213
+          "start": 1.304126984126984,
+          "end": 1.7215873015873016
         }
       ],
-      "duration": 1.9784580498866213
+      "duration": 1.7215873015873016,
+      "rateWpm": 175
     },
     "a|men": {
-      "url": "phonetics-audio/w-07470e676fd2.wav",
+      "url": "phonetics-audio/w-07470e676fd2-175.wav",
       "cues": [
         {
           "index": 0,
           "start": 0.0,
-          "end": 0.2344671201814059
+          "end": 0.2003628117913832
         },
         {
           "index": 1,
-          "start": 0.4144671201814059,
-          "end": 0.8908390022675737
+          "start": 0.3803628117913832,
+          "end": 0.7660317460317461
         }
       ],
-      "duration": 0.8908390022675737
+      "duration": 0.7660317460317461,
+      "rateWpm": 175
     }
-  }
+  },
+  "rateWpm": 175
 }
