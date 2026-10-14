@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "1.0.0",
+  "catalogVersion": "1.1.0",
   "engine": {
     "name": "eSpeak NG",
     "version": "1.52.0",
@@ -8,7 +8,7 @@
     "sampleRate": 22050,
     "channels": 1,
     "sampleWidth": 2,
-    "rateWpm": 145,
+    "rateWpm": 175,
     "inputMode": "explicit phoneme mnemonics",
     "pitchMode": "natural spoken intonation"
   },
@@ -18,7 +18,7 @@
       "title": "Français",
       "voice": "fr",
       "entries": 1569,
-      "bytes": 25378282,
+      "bytes": 21260834,
       "indexUrl": "v1/fr/index.json",
       "coverage": 0.9900145612248976,
       "selection": {
@@ -29,7 +29,7 @@
         "coverage": 0.9900145612248976,
         "audioCandidates": 1569
       },
-      "meanDuration": 0.36577807838665527,
+      "meanDuration": 0.30627127927865433,
       "entriesWithNotes": 43
     },
     {
@@ -37,7 +37,7 @@
       "title": "Italien",
       "voice": "it",
       "entries": 1218,
-      "bytes": 22003260,
+      "bytes": 18728700,
       "indexUrl": "v1/it/index.json",
       "coverage": 0.9900012582139045,
       "selection": {
@@ -48,7 +48,7 @@
         "coverage": 0.9900012582139045,
         "audioCandidates": 1218
       },
-      "meanDuration": 0.40864113132937907,
+      "meanDuration": 0.3476780268757749,
       "entriesWithNotes": 0
     },
     {
@@ -56,7 +56,7 @@
       "title": "Allemand",
       "voice": "de",
       "entries": 3534,
-      "bytes": 66394032,
+      "bytes": 55453744,
       "indexUrl": "v1/de/index.json",
       "coverage": 0.990003133348276,
       "selection": {
@@ -67,7 +67,7 @@
         "coverage": 0.990003133348276,
         "audioCandidates": 3534
       },
-      "meanDuration": 0.4250163042013636,
+      "meanDuration": 0.3548184850246456,
       "entriesWithNotes": 11
     },
     {
@@ -75,7 +75,7 @@
       "title": "Anglais américain",
       "voice": "en-us",
       "entries": 4563,
-      "bytes": 94720974,
+      "bytes": 78501114,
       "indexUrl": "v1/en-US/index.json",
       "coverage": 0.9900030039224037,
       "selection": {
@@ -86,7 +86,7 @@
         "coverage": 0.9900030039224037,
         "audioCandidates": 4563
       },
-      "meanDuration": 0.46971624766496556,
+      "meanDuration": 0.3891119787823084,
       "entriesWithNotes": 0
     },
     {
@@ -94,7 +94,7 @@
       "title": "Latin italien et grec liturgique",
       "voice": "it",
       "entries": 741,
-      "bytes": 13230098,
+      "bytes": 11180288,
       "indexUrl": "v1/la/index.json",
       "coverage": 0.9900005134811117,
       "selection": {
@@ -105,7 +105,7 @@
         "coverage": 0.9900005134811117,
         "audioCandidates": 741
       },
-      "meanDuration": 0.4038635661192052,
+      "meanDuration": 0.34113623497082146,
       "entriesWithNotes": 0
     }
   ],
