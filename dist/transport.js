@@ -89,8 +89,10 @@ class PracticeTransport{
    }
    for(let i=0;i<this.cues.length;i++){
     if(this.scheduledCues.has(i))continue;
-    const cue=this.cues[i],resumed=this.resumeOffsets.get(i),asset=resumed?.asset||this.chooseAsset(cue);
+    const cue=this.cues[i],saved=this.resumeOffsets.get(i),resumed=saved&&!(saved.offset===0&&cue.beat>from)?saved:null,natural=this.chooseAsset(cue);
+    let asset=resumed?.asset||natural;
     if(!asset)throw Error('Son de syllabe indisponible.');
+    if(!resumed&&asset&&this.fitAsset&&Math.max(cue.beat,from)<=until)asset=this.fitAsset(cue,asset,this.buffers.get(asset.url),this.tempo);
     const buffer=this.buffers.get(asset.url);
     if(!buffer)throw Error('Son de syllabe non chargé.');
     const assetEnd=cue.beat+buffer.duration/spb;

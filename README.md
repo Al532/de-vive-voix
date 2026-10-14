@@ -14,7 +14,7 @@ Le lecteur propose le travail par blocs, avec lecture naturelle du texte puis sy
 - tests/ et tools/testing/ : données et dépendances de test.
 - tools/catalogue/ et scripts Python : génération du catalogue et préparation du pilote.
 
-Le latin ecclésiastique des nouveaux imports et du morceau Exaudi nos utilise le phonème eSpeak `R` (r roulé). Les six syllabes concernées d’Exaudi nos ont été régénérées ; le lecteur choisit leurs fichiers à 145 mots/minute. Les anciens imports personnels déjà préparés sur l’appareil doivent être réimportés pour bénéficier de cette conversion.
+Le latin ecclésiastique des nouveaux imports et du morceau Exaudi nos utilise le phonème eSpeak `R` (r roulé). Les six syllabes concernées d’Exaudi nos ont été régénérées ; le lecteur utilise leurs fichiers à 175 mots/minute. Les anciens imports personnels sont préparés de nouveau lors de leur ouverture pour bénéficier de cette conversion.
 
 Les audios sont versionnés dans Git et conservés sans régénération à chaque mise à jour. Le premier envoi comprend tous les fichiers ; les envois suivants depuis le PC ne transfèrent que les objets Git nouveaux ou modifiés. GitHub reconstruit ensuite le site sur ses serveurs.
 
@@ -56,6 +56,8 @@ Aucune nouvelle licence n’est ajoutée au code propre au projet par cette migr
 
 ## Banc de test du débit syllabique
 
-Ouvrir [tempo-bench.html](dist/tempo-bench.html). Il compare 29 syllabes d’Exaudi nos générées à 175 mots/minute avec un time-stretch plafonné, à hauteur conservée. Le tempo musical (30 à 320), le plafond (×1 à ×6, ×1,5 par défaut), trois fenêtres de traitement et l’accompagnement sont réglables. Les sons trop courts restent à leur durée normale ; le plafond peut laisser un chevauchement. La fin audible du traitement est conservée. Le lecteur principal reste à 145 pendant cet essai.
+Ouvrir [tempo-bench.html](dist/tempo-bench.html). Il compare les 29 syllabes d’Exaudi nos à 175 mots/minute avec un time-stretch sans plafond, à hauteur conservée. Le lecteur principal utilise une fenêtre de 40 ms. Les syllabes trop longues sont accélérées pour viser le début de la suivante ; les plus courtes gardent leur durée. La fin audible est conservée, avec quatre voix fixes pour les chevauchements résiduels. Le pilote et Exaudi sont préparés à 175 ; les sons manquants des imports sont générés à 175 et conservés sur l’appareil. Les anciens imports sont migrés lors de leur ouverture. L’ancien catalogue à 145 reste une archive et ne sert plus de source aux syllabes du lecteur.
+
+Le banc garde un tempo réglable de 30 à 320 et trois fenêtres pour comparaison (40 ms par défaut). Un facteur très élevé peut dégrader l’intelligibilité ; aucun plafond artificiel n’est appliqué.
 
 Le traitement WSOLA SoundTouchJS 0.3.0 est calculé sur l’appareil avant de programmer les buffers ; il n’altère pas les fichiers source. Les bibliothèques et licences sont fournies localement. Régénération des sons : `node --expose-gc prepare-tempo-bench.mjs`. Vérification du traitement, de la hauteur et des commandes : `node check-tempo-bench.mjs`. L’écoute reste le critère pour choisir les paramètres.

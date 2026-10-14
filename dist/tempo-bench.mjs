@@ -1,8 +1,8 @@
-import {plan,stretchMono} from './tempo-stretch.mjs?v=limits-2';
+import {plan,stretchMono} from './tempo-stretch.mjs?v=speech-fit-1';
 const $=id=>document.getElementById(id),decoded=new Map(),rendered=new Map();
 let manifest,bundle,context,transport,singleSource,ticket=0,rows=[],loading=false,currentMode='';
 const ms=value=>Math.round(value*1000)+' ms',factor=value=>'×'+value.toFixed(2).replace('.',',');
-function parameters(){return {tempo:Number($('tempo').value),cap:Number($('cap').value),profile:$('profile').value,notes:$('notes').checked};}
+function parameters(){return {tempo:Number($('tempo').value),cap:Infinity,profile:$('profile').value,notes:$('notes').checked};}
 function passage(){
  const score=bundle.score,data=bundle.verses['1'],full=BlocModel.passage(score,0,0,score.starts.length-2);
  const range=$('passage').value==='second'?{start:8,end:11}:{start:0,end:18};
@@ -16,8 +16,8 @@ function highlight(beat){
 function renderTable(){
  if(!bundle||!manifest)return;
  const {tempo,cap}=parameters(),{cues}=passage();
- $('tempoValue').textContent=String(tempo);$('capValue').textContent=factor(cap);
- $('tempo').setAttribute('aria-valuetext',tempo+' pulsations par minute');$('cap').setAttribute('aria-valuetext',factor(cap));
+ $('tempoValue').textContent=String(tempo);
+ $('tempo').setAttribute('aria-valuetext',tempo+' pulsations par minute');
  rows=cues.map(cue=>{const asset=manifest.assets[cue.ipa],room=(cue.endBeat-cue.beat)*60/tempo;return {cue,asset,room,...plan(asset.duration,room,cap)};});
  paintTable();$('lyrics').replaceChildren();
  for(const [i,row]of rows.entries()){
@@ -81,7 +81,7 @@ export async function play(mode){
    onError:error=>{$('status').textContent=error.message;}
   });
   loading=false;transport.configure(selection.range,cues,0,settings.tempo);transport.play();
-  $('status').textContent=mode==='original'?'Original à 175 mots/minute.':'Accélération plafonnée à '+factor(settings.cap)+'.';
+  $('status').textContent=mode==='original'?'Original à 175 mots/minute.':'Accélération sans plafond, fenêtre de 40 ms.';
  }catch(error){if(mine===ticket){stop('');$('status').textContent='Écoute impossible : '+error.message;}}
 }
 async function sample(asset,label){
@@ -104,7 +104,7 @@ async function load(){
  }catch(error){$('status').textContent=error.message;}
 }
 $('original').onclick=()=>play('original');$('stretch').onclick=()=>play('stretch');$('stop').onclick=()=>stop();
-for(const id of ['passage','tempo','cap','profile','notes'])$(id).addEventListener(id==='tempo'||id==='cap'?'input':'change',()=>{stop('Paramètres mis à jour.');renderTable();});
+for(const id of ['passage','tempo','profile','notes'])$(id).addEventListener(id==='tempo'?'input':'change',()=>{stop('Paramètres mis à jour.');renderTable();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});window.addEventListener('pagehide',()=>stop());
 export const ready=load();
 export function getState(){return {loading,currentMode,parameters:parameters(),rows:rows.map(({cue,ratio,outputDuration,overlap})=>({text:cue.text,ratio,outputDuration,overlap})),playback:transport?.state||'stopped'};}

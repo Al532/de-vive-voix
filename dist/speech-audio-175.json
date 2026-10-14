@@ -1,0 +1,555 @@
+{
+  "rateWpm": 175,
+  "engine": "eSpeak NG 1.52-dev WebAssembly",
+  "entries": [
+    {
+      "url": "tempo-bench-audio/fbf70a18d8569761a7e34bc2.wav",
+      "duration": 0.34512471655328797,
+      "gain": 0.39671194623000045,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "eks",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/d94b920f5211fb2b0f4ccb97.wav",
+      "duration": 0.25047619047619046,
+      "gain": 0.3874942186819905,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "au",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/09bfb31931288fdd5af0a99a.wav",
+      "duration": 0.21501133786848073,
+      "gain": 0.38862089822233503,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "di",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/0c62cbe655d2f1a61a153b9a.wav",
+      "duration": 0.36299319727891155,
+      "gain": 0.40471515174240286,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "nos",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/f7cacb297ed03e6235b59507.wav",
+      "duration": 0.21505668934240363,
+      "gain": 0.4648893318505507,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "de",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/cc5827d428e2e6ab57696b81.wav",
+      "duration": 0.2816780045351474,
+      "gain": 0.4664197972260502,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "us",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/ce0b9ea2e800b1402bee2563.wav",
+      "duration": 0.28503401360544217,
+      "gain": 0.417449504449064,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sa",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/89a9a3330284ec9616c278ad.wav",
+      "duration": 0.22789115646258504,
+      "gain": 0.45732136002537066,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "lu",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/77a6a1ce921e218595d67fa6.wav",
+      "duration": 0.23714285714285716,
+      "gain": 0.4017158994827025,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ta",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/64907ca00d3a3f14d54c8f1f.wav",
+      "duration": 0.36394557823129253,
+      "gain": 0.5614298376715497,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ris",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/42a05538118f53308b68f7c0.wav",
+      "duration": 0.2987755102040816,
+      "gain": 0.34181327188286426,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "teR",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/6c459c48b7ed63f0c5ef1f06.wav",
+      "duration": 0.3922902494331066,
+      "gain": 0.3934904930346264,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "spes",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/28f3a75dc3ed1ca5ecbecd0b.wav",
+      "duration": 0.32430839002267575,
+      "gain": 0.30783046293184513,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "om",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/2e05faf9c958dbc4794693df.wav",
+      "duration": 0.27138321995464854,
+      "gain": 0.41434800133712424,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ni",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/b35c5d28eca20872017f0b52.wav",
+      "duration": 0.31414965986394555,
+      "gain": 0.43786512781338865,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "um",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/2d8805afbb2a07c26caf9530.wav",
+      "duration": 0.27764172335600906,
+      "gain": 0.4340242369976673,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "fi",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/86026b77b5a96981d96e9f6e.wav",
+      "duration": 0.2824036281179138,
+      "gain": 0.5416624293152585,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Re",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/2cb8c65450ebca323013c6a1.wav",
+      "duration": 0.25718820861678005,
+      "gain": 0.3256746852367364,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "et",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/2e0f463a10bd61721c7c1164.wav",
+      "duration": 0.3039002267573696,
+      "gain": 0.37233227952159687,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "in",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/6ca989b14e627b9876b3764e.wav",
+      "duration": 0.2819501133786848,
+      "gain": 0.4152108157567869,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ma",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/c0c8055133d54fb706d65438.wav",
+      "duration": 0.282312925170068,
+      "gain": 0.4451880478565747,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ri",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/7a771fbd69caabf4be3443e3.wav",
+      "duration": 0.3739229024943311,
+      "gain": 0.3410926913157491,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "lon",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/465dbefe7ee8c76070d7c216.wav",
+      "duration": 0.23664399092970523,
+      "gain": 0.48299999251792997,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "dZe",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/076cec16435bc6e6f09c0a69.wav",
+      "duration": 0.2931972789115646,
+      "gain": 0.4404934946383954,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ra",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/85205c33418e23339631c36f.wav",
+      "duration": 0.2003174603174603,
+      "gain": 0.3568542635138111,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "i",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/0a2e59b12f48f02d5c39c063.wav",
+      "duration": 0.18970521541950114,
+      "gain": 0.44491265473827096,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "e",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/3dfce54ddc2200230d1f6699.wav",
+      "duration": 0.2818140589569161,
+      "gain": 0.3322011315562223,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "es",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/94a36b9c3ad8cc2ba919ea51.wav",
+      "duration": 0.3036281179138322,
+      "gain": 0.29519185711078383,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "on",
+      "voice": "it"
+    },
+    {
+      "url": "tempo-bench-audio/595595f19982f9854b9d189d.wav",
+      "duration": 0.2620408163265306,
+      "gain": 0.3120305649919803,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "eR",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/b439b91e50ebcd531b3174b5.wav",
+      "duration": 0.2003628117913832,
+      "gain": 0.3617679371765432,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "a",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/12c51a40b0dff1c25fe90eaa.wav",
+      "duration": 0.3037641723356009,
+      "gain": 0.31768710235217884,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "an",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/100db69ce3c575682e7ccca7.wav",
+      "duration": 0.2573242630385488,
+      "gain": 0.330857146739217,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "at",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/c881f4a951f9a3ebda2a01bc.wav",
+      "duration": 0.3142403628117914,
+      "gain": 0.335673499623061,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "em",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/4559cec89f030e8c7558302e.wav",
+      "duration": 0.3035827664399093,
+      "gain": 0.32345936252870006,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "en",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/da30527c1ba9077c536ae5af.wav",
+      "duration": 0.2638548752834467,
+      "gain": 0.39772703184280006,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ik",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/0b84533b47de194cc348d7c8.wav",
+      "duration": 0.25002267573696146,
+      "gain": 0.4841164884483749,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ku",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/3810bf711990d63fb5f3eb04.wav",
+      "duration": 0.2490249433106576,
+      "gain": 0.36746432548969565,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "la",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/b93a0fcf54cf48c7066d88b6.wav",
+      "duration": 0.250249433106576,
+      "gain": 0.40736382705522534,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "li",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/a8f8a944b3406d4369374efc.wav",
+      "duration": 0.2397278911564626,
+      "gain": 0.3849773385321274,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "lo",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/25306ab1792a51647dcf3680.wav",
+      "duration": 0.3856689342403628,
+      "gain": 0.3668207642949903,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "men",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/ae42cc9afd061f8044b5fefd.wav",
+      "duration": 0.3742403628117914,
+      "gain": 0.5601024420888748,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "nunk",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/c25ad44e20ef2631b1a7e9ac.wav",
+      "duration": 0.2003174603174603,
+      "gain": 0.3306366088538691,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "o",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/7a6914d6f57ae13c44e3957d.wav",
+      "duration": 0.2451700680272109,
+      "gain": 0.40616935158273154,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pa",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/efc447820c705b9be55bcb3d.wav",
+      "duration": 0.30680272108843537,
+      "gain": 0.3465550646104353,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "peR",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/fb9b1dbad3a9b1d8660b5995.wav",
+      "duration": 0.23473922902494332,
+      "gain": 0.409374183077549,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pi",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/dbbfa5e472251f5a55b7427d.wav",
+      "duration": 0.4414965986394558,
+      "gain": 0.5363751256852206,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pRin",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/8d68746673e2d8f0d6b462c2.wav",
+      "duration": 0.3493424036281179,
+      "gain": 0.4421248693482907,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Rat",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/834c968bec60d887f4d04bdf.wav",
+      "duration": 0.4174603174603175,
+      "gain": 0.5299157556639601,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Rum",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/79670d97481921667ad8728a.wav",
+      "duration": 0.38843537414965984,
+      "gain": 0.3833528350439466,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "san",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/c7d9d02827e110a81949bab6.wav",
+      "duration": 0.2743764172335601,
+      "gain": 0.5055273702436498,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "se",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/182417f9745ab9bed9e3760f.wav",
+      "duration": 0.39891156462585037,
+      "gain": 0.3755716384555,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sem",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/4ab81b566cafa81e4fc431c3.wav",
+      "duration": 0.3278458049886621,
+      "gain": 0.5120386172049066,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sik",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/80a4dc9b23d012c4f469d5f7.wav",
+      "duration": 0.29029478458049884,
+      "gain": 0.4498217867961688,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "spi",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/5da084cb4506783bc662514c.wav",
+      "duration": 0.23714285714285716,
+      "gain": 0.372674582451942,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "to",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/77ef2d9601676db1e6728ada.wav",
+      "duration": 0.3294331065759637,
+      "gain": 0.479356207561625,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tRi",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/401918372a5f24e31fe7c014.wav",
+      "duration": 0.22612244897959183,
+      "gain": 0.4608332025296877,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tu",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/e71f7e24f92210dccb445bc0.wav",
+      "duration": 0.2640816326530612,
+      "gain": 0.41421388086546285,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tSi",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/39d71a36c042bb0b27db5622.wav",
+      "duration": 0.1893424036281179,
+      "gain": 0.4119468535831173,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "u",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/87cfe4cc5f3ad38044c5615a.wav",
+      "duration": 0.31528344671201813,
+      "gain": 0.4938210768394814,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "unk",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/2394c79f30010931d1b9626a.wav",
+      "duration": 0.24698412698412697,
+      "gain": 0.45638049240138423,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ut",
+      "voice": "it"
+    },
+    {
+      "url": "speech-audio-175/f522fa0874293929850b7048.wav",
+      "duration": 0.25215419501133784,
+      "gain": 0.39652104233183766,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "glo",
+      "voice": "it"
+    }
+  ]
+}

@@ -5,9 +5,9 @@ for(const [key,assets]of Object.entries(bundle.verses['1'].assets).filter(([key]
  const code=key.slice(3),trace=await phonemize(`[[${code}]]`,'it',{wasmBinary});
  assert.equal((trace.match(/R/g)||[]).length,(code.match(/R/g)||[]).length,'the embedded engine must recognize every rolled R');
  for(const asset of assets){
-  const rate=asset.speed===1?145:450,wav=speech.analyseWav(await synthesizeMnemonics(code,'it',{wasmBinary,rate}));
+  const rate=asset.rateWpm,wav=speech.analyseWav(await synthesizeMnemonics(code,'it',{wasmBinary,rate}));
   assert.deepEqual(Buffer.from(wav.bytes),fs.readFileSync('dist/'+asset.url),'published recording must match rolled-R synthesis');
  }
  rolled.push(code);
 }
-assert.equal(rolled.length,6);console.log(JSON.stringify({ok:true,rolledRSyllables:rolled,verifiedRecordings:12}));
+assert.equal(rolled.length,6);console.log(JSON.stringify({ok:true,rolledRSyllables:rolled,verifiedRecordings:6}));

@@ -2,7 +2,7 @@
 const $=id=>document.getElementById(id);
 let importedRecord=null,importedId='',score,part=0,index=0,tempo=80,measureSize=2,leadIn=false,blocId=0,blocSets=[],mode='idle';
 let ctx,primedContext,active=[],ticket=0,mediaPrimed=false,mediaPriming=null,mediaGeneration=0;
-let speechMap,speechAssets,notes,transport,loading=false,storageKey,storageFailed=false;
+let speechMap,speechAssets,notes,transport,fitAsset,loading=false,storageKey,storageFailed=false;
 let memory={version:1,part:0,tempo:80,voices:{}},lastSaved='',lastMeasure=-1,lastLyricKey='',lastTransportState='stopped';
 const decodedSpeech=new Map(),decodeJobs=new Map();
 let brailleCells=32;
@@ -170,7 +170,7 @@ function prepareAudio(){
  // The reported iOS 16 device only enables Web Audio after native file playback.
  // Start that file in the same click, before constructing or resuming the context.
  const mediaReady=legacyIOS?primeMediaOutput():null;
- if(!ctx||ctx.state==='closed')ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if(!ctx||ctx.state==='closed'){ctx=new(window.AudioContext||window.webkitAudioContext)();fitAsset=null;}
  // Start a silent source within the click itself, not after the speech callback.
  // Older mobile Safari may report a running context before its output is unlocked.
  // Confirm the primer actually finished; a stopped/suspended attempt may retry.
@@ -309,12 +309,14 @@ async function decodeAsset(asset){
 async function loadCues(range,mine){
  const cues=BlocSpeech.plan(score,part,range,tempo,speechMap),assets=new Map();
  for(const cue of cues){const variants=speechAssets[cue.ipa];if(!variants?.length)throw Error('Son de syllabe indisponible.');for(const asset of variants)assets.set(asset.url,asset);}
- // Decode every tempo variant for this passage before playback, so changing
- // tempo never depends on a network request while music is sounding.
+ // Decode source recordings before playback; fit them locally to the tempo.
  const queue=[...assets.values()];let next=0;
  await Promise.all(Array.from({length:Math.min(8,queue.length)},async()=>{
   while(next<queue.length){if(mine!==ticket)return;await decodeAsset(queue[next++]);}
  }));
+ if(mine!==ticket)return cues;
+ fitAsset??=await SpeechFit.create(ctx,decodedSpeech);
+ for(const cue of cues){if(mine!==ticket)return cues;const asset=speechAssets[cue.ipa].find(a=>a.speed===1)||speechAssets[cue.ipa][0];fitAsset(cue,asset,decodedSpeech.get(asset.url),tempo);}
  return cues;
 }
 async function requestPlayback(complete,event){
@@ -339,7 +341,7 @@ async function requestPlayback(complete,event){
   if(mine!==ticket)return;
   if(!available)throw Error('Activez le bouton pour autoriser le son.');
   if(!transport||transport.audio!==ctx)transport=new PracticeTransport({
-   audio:ctx,notes,assets:speechAssets,buffers:decodedSpeech,
+   audio:ctx,notes,assets:speechAssets,buffers:decodedSpeech,fitAsset,
    scheduleTone:(e,start,duration,volume)=>NoteSynth.schedule(ctx,e.pitch,start,duration,volume),
    onPosition:positionChanged,
    onState:state=>{

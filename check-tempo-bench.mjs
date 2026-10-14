@@ -33,7 +33,7 @@ function element(kind='element'){
  classList:{toggle(name,on){on?classes.add(name):classes.delete(name);}},setAttribute(k,v){this.attrs[k]=v;},addEventListener(k,fn){this.handlers[k]=fn;},play(){return Promise.resolve();},pause(){}};
 }
 const els=Object.fromEntries([...fs.readFileSync('dist/tempo-bench.html','utf8').matchAll(/id="([^"]+)"/g)].map(([,id])=>[id,element()]));
-for(const [id,value]of Object.entries({tempo:'80',cap:'1.5',profile:'medium',passage:'second'}))els[id].value=value;els.notes.checked=true;
+for(const [id,value]of Object.entries({tempo:'80',profile:'medium',passage:'second'}))els[id].value=value;els.notes.checked=true;
 globalThis.document={hidden:false,getElementById:id=>els[id],createElement:()=>element(),createTextNode:text=>({...element('text'),textContent:text}),addEventListener(){}};
 const sources=[];function audioBuffer(length,rate,pcm=new Float32Array(length)){return {length,sampleRate:rate,duration:length/rate,getChannelData:()=>pcm};}
 class AudioContext{
@@ -48,12 +48,12 @@ globalThis.BlocModel=require('./dist/blocs.js');globalThis.BlocSpeech=require('.
 globalThis.NoteSynth={schedule(context,pitch,time,duration){return {kind:'tone',pitch,time,duration,stop(){}};}};
 globalThis.fetch=async url=>{const bytes=fs.readFileSync('dist/'+url);return {ok:true,json:async()=>JSON.parse(bytes),arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.length)};};
 const bench=await import('./dist/tempo-bench.mjs');await bench.ready;assert.equal(els.rows.children.length,4);assert.equal(els.rSamples.children.length,6);
-await bench.play('stretch');let state=bench.getState();assert.equal(state.playback,'playing');assert(state.rows.some(r=>r.ratio>1));assert(state.rows.every(r=>r.ratio<=1.5));
+await bench.play('stretch');let state=bench.getState();assert.equal(state.playback,'playing');assert(state.rows.some(r=>r.ratio>1));assert.equal(state.parameters.cap,Infinity);assert.equal(state.parameters.profile,'medium');
 AudioContext.latest.currentTime=.2;await new Promise(resolve=>setTimeout(resolve,35));
 const syllables=sources.filter(n=>n.buffer?.length>1);assert(syllables.length>0);assert(syllables.every(n=>n.duration===undefined),'play whole processed buffers');
 bench.stop();assert(syllables.every(n=>n.stopped));
-els.cap.value='1';els.cap.handlers.input();await bench.play('stretch');state=bench.getState();assert(state.rows.every(r=>r.ratio===1));assert(state.rows.some(r=>r.overlap>0));bench.stop();
-els.cap.value='1.5';els.cap.handlers.input();await bench.play('original');state=bench.getState();assert(state.rows.every(r=>r.ratio===1));bench.stop();
-els.tempo.value='320';els.tempo.handlers.input();els.cap.value='6';els.cap.handlers.input();await bench.play('stretch');state=bench.getState();
-assert.equal(state.playback,'playing');assert.equal(state.parameters.tempo,320);assert(state.rows.some(r=>r.ratio>3));assert(state.rows.every(r=>r.ratio<=6));bench.stop();
-console.log(JSON.stringify({ok:true,nominalRateWpm:175,recordings:29,pitchPreservedAt:[22050,48000],profiles:3,controller:'original/stretched/capped/stop verified'}));
+await bench.play('original');state=bench.getState();assert(state.rows.every(r=>r.ratio===1));bench.stop();
+els.tempo.value='320';els.tempo.handlers.input();await bench.play('stretch');state=bench.getState();
+assert.equal(state.playback,'playing');assert.equal(state.parameters.tempo,320);assert(state.rows.some(r=>r.ratio>3));bench.stop();
+assert.equal(plan(.8,.01).ratio,80);const high=stretchMono(Float32Array.from({length:22050},(_,i)=>.2*Math.sin(i*.05)),22050,20);assert(high.every(Number.isFinite));assert(high.some(v=>Math.abs(v)>.003));
+console.log(JSON.stringify({ok:true,nominalRateWpm:175,recordings:29,pitchPreservedAt:[22050,48000],profiles:3,controller:'original/unlimited/40ms/stop verified'}));

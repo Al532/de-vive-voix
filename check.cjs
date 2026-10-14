@@ -2,6 +2,7 @@
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
 const model=require('./dist/blocs.js'),speech=require('./dist/bloc-speech.js'),phonetics=require('./dist/phonetics-engine.js'),Transport=require('./dist/transport.js');
 const score=require('./dist/score.json'),assets=require('./dist/bloc-speech-audio.json'),map=speech.createMap(score,phonetics),settle=()=>new Promise(setImmediate);
+let createFitter;
 const legacy=require('./tests/fixtures/legacy-blocs.cjs');
 function originalFields(b){const {adaptive,targetMeasures,attackEnd,allowAttackAtEnd,...original}=b;return original;}
 for(let part=0;part<5;part++)for(const cells of [8,32,160]){
@@ -52,9 +53,10 @@ assert.equal(model.mergedNotes(held).length,1);assert.equal(model.mergedNotes(he
 const heldMap=speech.createMap(held,phonetics);
 assert.equal(speech.plan(held,0,model.passage(held,0,0,1),80,heldMap).length,1);
 assert.equal(speech.plan(held,0,model.passage(held,0,1,1),80,heldMap)[0].ipa,'a');
+function audioBuffer(length,rate,pcm=new Float32Array(length)){return {length,sampleRate:rate,duration:length/rate,getChannelData:()=>pcm};}
 function clockHarness(){
  let now=0,nextId=0;const timers=new Map(),nodes=[];
- const audio={state:'running',sampleRate:48000,get currentTime(){return now;},
+ const audio={state:'running',sampleRate:48000,createBuffer:(channels,length,rate)=>audioBuffer(length,rate),get currentTime(){return now;},
   createBufferSource(){const node={kind:'syllable',connect(){},disconnect(){},start(time,offset=0,duration){Object.assign(this,{time,offset,duration});nodes.push(this);},stop(){this.stopped=true;}};return node;},
   createGain(){return {gain:{value:0},connect(){},disconnect(){}};}};
  function setTimer(fn,ms){const id=++nextId;timers.set(id,{fn,time:now+ms/1000});return id;}
@@ -121,29 +123,38 @@ async function testSyllableOverlap(){
 }
 async function testExaudiNaturalSyllables(){
  const record=require('./dist/scores/exaudi-nos/bundle.json'),s=record.score,data=record.verses[s.verseNumbers[0]],buffers=new Map();
- for(const asset of Object.values(data.assets).flat())if(!buffers.has(asset.url)){
-  const wav=fs.readFileSync('dist/'+asset.url);let byteRate,length;
-  for(let at=12;at+8<=wav.length;){const size=wav.readUInt32LE(at+4),tag=wav.toString('ascii',at,at+4);if(tag==='fmt ')byteRate=wav.readUInt32LE(at+16);if(tag==='data')length=size;at+=8+size+(size%2);}
-  assert(byteRate&&length);const duration=length/byteRate;assert(Math.abs(duration-asset.duration)<1e-6);
-  buffers.set(asset.url,{url:asset.url,duration});
+ for(const asset of Object.values(data.assets).flat()){
+  const wav=fs.readFileSync('dist/'+asset.url),rate=wav.readUInt32LE(24),length=wav.readUInt32LE(40)/2;
+  const pcm=Float32Array.from({length},(_,i)=>wav.readInt16LE(44+i*2)/32768),buffer=audioBuffer(length,rate,pcm);
+  buffer.url=asset.url;assert(Math.abs(buffer.duration-asset.duration)<1e-6);buffers.set(asset.url,buffer);
  }
  const full=model.passage(s,0,0,s.starts.length-2),cues=speech.plan(s,0,full,s.tempo,data.map);
  const secondEx=cues.filter(c=>c.text.toLowerCase()==='ex')[1],di=cues[cues.indexOf(secondEx)+2];
  assert.equal(s.tempo,80);assert.equal(secondEx.beat,8.5);assert.equal(di.text,'di');
- for(const tempo of [30,s.tempo,160]){
-  const h=clockHarness(),t=new Transport({audio:h.audio,notes:[],assets:data.assets,buffers,setTimer:h.setTimer,clearTimer:h.clearTimer});
-  t.configure(full,cues,0,tempo);
-  for(const cue of cues)assert.equal(t.chooseAsset(cue).speed,1,'short notes must retain natural syllables at every tempo');
-  t.play();await h.tick((di.endBeat+.2)*60/tempo+.035);
+ for(const tempo of [30,80,160,320]){
+  const h=clockHarness(),fitAsset=createFitter(h.audio,buffers),t=new Transport({audio:h.audio,notes:[],assets:data.assets,buffers,fitAsset,setTimer:h.setTimer,clearTimer:h.clearTimer});
+  t.configure(full,cues,0,tempo);t.play();await h.tick((di.endBeat+.2)*60/tempo+.035);
   for(const cue of [secondEx,di]){
-   const n=h.nodes.find(n=>Math.abs(n.time-t.time(cue.beat))<1e-8),natural=data.assets[cue.ipa].find(a=>a.speed===1);
-   assert(n);assert.equal(n.buffer.url,natural.url,'second exaudi uses the same unaccelerated recordings as the first');
-   assert.equal(n.offset,0);assert.equal(n.duration,undefined);assert(!n.stopped);
-   if(tempo===s.tempo)assert(n.time+n.buffer.duration>t.time(cue.endBeat),'ex and di must overlap the following syllable at default tempo');
+   const n=h.nodes.find(n=>Math.abs(n.time-t.time(cue.beat))<1e-8),natural=data.assets[cue.ipa][0],room=(cue.endBeat-cue.beat)*60/tempo;
+   assert(n);assert.equal(n.offset,0);assert.equal(n.duration,undefined);assert(!n.stopped);
+   if(natural.duration<=room)assert.equal(n.buffer.url,natural.url);else assert(n.buffer.duration<natural.duration);
   }
+  // The fitted sample survives pause and a tempo change without jumping its offset.
+  const before=t.cuePlayback.get(cues.indexOf(di));t.pause();t.setTempo(tempo*1.25);t.play();
+  const resumed=t.cuePlayback.get(cues.indexOf(di));if(resumed)assert.equal(resumed.asset.url,before.asset.url);
   assert.equal(t.syllableVoices.length,4);t.stop();
  }
- console.log('Exaudi nos : deuxième ex/di, fichiers WAV réels, durée normale, superposition au tempo 80 et absence d’accélération à 30/160 vérifiés.');
+ console.log('Exaudi nos : vrais WAV à 175, deuxième ex/di ajustés à 30/80/160/320, lecture entière, quatre voix et reprise du même son traité vérifiés.');
+}
+async function testFittedTempoChange(){
+ const h=clockHarness(),pcm=Float32Array.from({length:22050},(_,i)=>.2*Math.sin(i*.05)),buffer=audioBuffer(pcm.length,22050,pcm),asset={url:'source',duration:1,speed:1,gain:.1},buffers=new Map([['source',buffer]]);
+ const t=new Transport({audio:h.audio,notes:[],assets:{a:[asset]},buffers,fitAsset:createFitter(h.audio,buffers),setTimer:h.setTimer,clearTimer:h.clearTimer});
+ t.configure({start:0,end:2},[{ipa:'a',beat:0,endBeat:.25},{ipa:'a',beat:.25,endBeat:.5}],0,120);t.play();
+ const original=t.cuePlayback.get(0).asset,queued=t.cuePlayback.get(1).asset;
+ assert(original.duration<1);await h.tick(.07);t.pause();assert(Math.abs(t.resumeOffsets.get(0).offset-.035)<1e-6);
+ t.setTempo(320);t.play();assert.equal(t.cuePlayback.get(0).asset.url,original.url);assert(Math.abs(t.cuePlayback.get(0).offset-.035)<1e-6);
+ assert.notEqual(t.cuePlayback.get(1).asset.url,queued.url,'future syllable must be fitted to the new tempo');assert(t.cuePlayback.get(1).asset.duration<queued.duration);t.stop();
+ console.log('Time-stretch : reprise à l’offset réel du son traité et nouvel ajustement des syllabes futures après changement de tempo vérifiés.');
 }
 function element(id=''){
  return {id,value:'',textContent:'',hidden:false,disabled:false,checked:false,attrs:{},children:[],
@@ -158,10 +169,10 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
   get currentTime(){return h.audio.currentTime;}
   resume(){this.state='running';return Promise.resolve();}
   createBufferSource(){return h.audio.createBufferSource();}
-  createBuffer(){return {duration:0,primer:true};}
+  createBuffer(channels,length,rate){return {...audioBuffer(length,rate),primer:length===1};}
   createGain(){return {gain:{setValueAtTime(){},linearRampToValueAtTime(){},value:0},connect(){},disconnect(){}};}
   createOscillator(){const node={frequency:{},connect(){},disconnect(){},start(time){this.time=time;h.nodes.push(this);},stop(time){if(time===undefined)this.stopped=true;}};return node;}
-  decodeAudioData(bytes,resolve){resolve({duration:bytes.duration});}
+  decodeAudioData(bytes,resolve){const length=Math.round(bytes.duration*48000);resolve(audioBuffer(length,48000,Float32Array.from({length},(_,i)=>.1*Math.sin(i*.03))));}
  }
  const durations=new Map(Object.values(assets).flat().map(a=>[a.url,a.duration]));
  const window={AudioContext,navigator:{userAgent:'Desktop',platform:'Desktop'},addEventListener:(k,f)=>windowHandlers[k]=f,
@@ -176,6 +187,7 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
   history:{replaceState(a,b,url){href=url.href;}},localStorage:{getItem(k){if(unavailable)throw Error('denied');return store.get(k)||null;},setItem(k,v){if(unavailable)throw Error('denied');store.set(k,v);}},
   fetch:async url=>({ok:true,json:async()=>url==='score.json'?score:assets,arrayBuffer:async()=>({duration:durations.get(url)})}),
   setTimeout:h.setTimer,clearTimeout:h.clearTimer});
+ sandbox.SpeechFit={create:async(context,buffers)=>createFitter(context,buffers)};
  sandbox.PracticeLibrary={list:async()=>{if(options.libraryDenied)throw Error('Stockage refusé');return options.records||[];}};
  if(options.imported){
   const importedScore=JSON.parse(JSON.stringify(score));Object.assign(importedScore,{verse:'1',verseNumbers:['1'],warnings:[],language:options.language||'fr'});
@@ -421,4 +433,4 @@ async function testPlaybackModes(){
  console.log('Modes : repos, blocs, lecture complète, pause/reprise, déplacements, arrêt, fin naturelle et annulation pendant le texte vérifiés.');
 }
 
-(async()=>{await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testExaudiNaturalSyllables();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});
+(async()=>{({createFitter}=await import('./dist/tempo-stretch.mjs'));await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testExaudiNaturalSyllables();await testFittedTempoChange();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,1 +1,442 @@
-{"a": [{"url": "phonetics-audio/s-ca978112ca1b.wav", "duration": 0.2344671201814059, "speed": 1, "gain": 0.2078474065851022}, {"url": "phonetics-audio/s-ca978112ca1b-tempo1.25.wav", "duration": 0.20099773242630387, "speed": 1.25, "gain": 0.2059188113296657}, {"url": "phonetics-audio/s-ca978112ca1b-tempo1.5.wav", "duration": 0.154421768707483, "speed": 1.5, "gain": 0.2098970640776879}, {"url": "phonetics-audio/s-ca978112ca1b-tempo2.wav", "duration": 0.1341950113378685, "speed": 2, "gain": 0.22301470943947013}, {"url": "phonetics-audio/s-ca978112ca1b-tempo3.wav", "duration": 0.06965986394557823, "speed": 3, "gain": 0.20896064954459903}, {"url": "phonetics-audio/s-ca978112ca1b-tempo4.wav", "duration": 0.046439909297052155, "speed": 4, "gain": 0.20596554967466116}], "an": [{"url": "phonetics-audio/s-ea325d761f98.wav", "duration": 0.3707936507936508, "speed": 1, "gain": 0.22625065652059048}, {"url": "phonetics-audio/s-ea325d761f98-tempo1.25.wav", "duration": 0.29900226757369613, "speed": 1.25, "gain": 0.2291822277276089}, {"url": "phonetics-audio/s-ea325d761f98-tempo1.5.wav", "duration": 0.253469387755102, "speed": 1.5, "gain": 0.2279108754047944}, {"url": "phonetics-audio/s-ea325d761f98-tempo2.wav", "duration": 0.1891156462585034, "speed": 2, "gain": 0.23119745809248776}, {"url": "phonetics-audio/s-ea325d761f98-tempo3.wav", "duration": 0.11609977324263039, "speed": 3, "gain": 0.22436935504103858}, {"url": "phonetics-audio/s-ea325d761f98-tempo4.wav", "duration": 0.09936507936507936, "speed": 4, "gain": 0.24440118291311178}], "at": [{"url": "phonetics-audio/s-b1d6b91b67c2.wav", "duration": 0.30253968253968255, "speed": 1, "gain": 0.23371880730666827}, {"url": "phonetics-audio/s-b1d6b91b67c2-tempo1.25.wav", "duration": 0.25342403628117915, "speed": 1.25, "gain": 0.22255326536076417}, {"url": "phonetics-audio/s-b1d6b91b67c2-tempo1.5.wav", "duration": 0.20671201814058957, "speed": 1.5, "gain": 0.24046862698806992}, {"url": "phonetics-audio/s-b1d6b91b67c2-tempo2.wav", "duration": 0.13233560090702948, "speed": 2, "gain": 0.22050118263408558}, {"url": "phonetics-audio/s-b1d6b91b67c2-tempo3.wav", "duration": 0.10090702947845805, "speed": 3, "gain": 0.24520148076144768}, {"url": "phonetics-audio/s-b1d6b91b67c2-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.23950650348206737}], "e": [{"url": "phonetics-audio/s-3f79bb7b435b.wav", "duration": 0.23514739229024945, "speed": 1, "gain": 0.2325667220148625}, {"url": "phonetics-audio/s-3f79bb7b435b-tempo1.25.wav", "duration": 0.2019047619047619, "speed": 1.25, "gain": 0.23093985607578485}, {"url": "phonetics-audio/s-3f79bb7b435b-tempo1.5.wav", "duration": 0.15505668934240363, "speed": 1.5, "gain": 0.23202212882488388}, {"url": "phonetics-audio/s-3f79bb7b435b-tempo2.wav", "duration": 0.1218140589569161, "speed": 2, "gain": 0.2461287791558327}, {"url": "phonetics-audio/s-3f79bb7b435b-tempo3.wav", "duration": 0.06965986394557823, "speed": 3, "gain": 0.22960779371687282}, {"url": "phonetics-audio/s-3f79bb7b435b-tempo4.wav", "duration": 0.046439909297052155, "speed": 4, "gain": 0.23978914921666952}], "em": [{"url": "phonetics-audio/s-84a47f61dd34.wav", "duration": 0.3942857142857143, "speed": 1, "gain": 0.25988892227850535}, {"url": "phonetics-audio/s-84a47f61dd34-tempo1.25.wav", "duration": 0.31546485260770973, "speed": 1.25, "gain": 0.26240975661543703}, {"url": "phonetics-audio/s-84a47f61dd34-tempo1.5.wav", "duration": 0.26970521541950115, "speed": 1.5, "gain": 0.26204178012283863}, {"url": "phonetics-audio/s-84a47f61dd34-tempo2.wav", "duration": 0.18575963718820862, "speed": 2, "gain": 0.2557230180530536}, {"url": "phonetics-audio/s-84a47f61dd34-tempo3.wav", "duration": 0.11609977324263039, "speed": 3, "gain": 0.24257401084323285}, {"url": "phonetics-audio/s-84a47f61dd34-tempo4.wav", "duration": 0.09287981859410431, "speed": 4, "gain": 0.26825688812274273}], "en": [{"url": "phonetics-audio/s-dbd3a49d0d90.wav", "duration": 0.370249433106576, "speed": 1, "gain": 0.2469678009523646}, {"url": "phonetics-audio/s-dbd3a49d0d90-tempo1.25.wav", "duration": 0.2980952380952381, "speed": 1.25, "gain": 0.2506609918874497}, {"url": "phonetics-audio/s-dbd3a49d0d90-tempo1.5.wav", "duration": 0.2531972789115646, "speed": 1.5, "gain": 0.2501229776957788}, {"url": "phonetics-audio/s-dbd3a49d0d90-tempo2.wav", "duration": 0.18893424036281178, "speed": 2, "gain": 0.2525738774533852}, {"url": "phonetics-audio/s-dbd3a49d0d90-tempo3.wav", "duration": 0.134875283446712, "speed": 3, "gain": 0.2570391983101381}, {"url": "phonetics-audio/s-dbd3a49d0d90-tempo4.wav", "duration": 0.10022675736961452, "speed": 4, "gain": 0.27870579953493607}], "er": [{"url": "phonetics-audio/s-cc7e4412564b.wav", "duration": 0.2544671201814059, "speed": 1, "gain": 0.22642426008400166}, {"url": "phonetics-audio/s-cc7e4412564b-tempo1.25.wav", "duration": 0.2068934240362812, "speed": 1.25, "gain": 0.21948990980721267}, {"url": "phonetics-audio/s-cc7e4412564b-tempo1.5.wav", "duration": 0.17242630385487528, "speed": 1.5, "gain": 0.2282873151474391}, {"url": "phonetics-audio/s-cc7e4412564b-tempo2.wav", "duration": 0.13854875283446713, "speed": 2, "gain": 0.24288306522198047}, {"url": "phonetics-audio/s-cc7e4412564b-tempo3.wav", "duration": 0.06965986394557823, "speed": 3, "gain": 0.2015016896187016}, {"url": "phonetics-audio/s-cc7e4412564b-tempo4.wav", "duration": 0.046439909297052155, "speed": 4, "gain": 0.22815473406498107}], "et": [{"url": "phonetics-audio/s-f056b8cae37d.wav", "duration": 0.3019047619047619, "speed": 1, "gain": 0.2557748464845855}, {"url": "phonetics-audio/s-f056b8cae37d-tempo1.25.wav", "duration": 0.2538321995464853, "speed": 1.25, "gain": 0.2724641677868973}, {"url": "phonetics-audio/s-f056b8cae37d-tempo1.5.wav", "duration": 0.20507936507936508, "speed": 1.5, "gain": 0.2643190620470754}, {"url": "phonetics-audio/s-f056b8cae37d-tempo2.wav", "duration": 0.15755102040816327, "speed": 2, "gain": 0.2633459377583953}, {"url": "phonetics-audio/s-f056b8cae37d-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.23968968751408948}, {"url": "phonetics-audio/s-f056b8cae37d-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.2569620458538582}], "fi": [{"url": "phonetics-audio/s-b4bdc8481097.wav", "duration": 0.32476190476190475, "speed": 1, "gain": 0.3625988086352203}, {"url": "phonetics-audio/s-b4bdc8481097-tempo1.25.wav", "duration": 0.2682993197278912, "speed": 1.25, "gain": 0.378250775620681}, {"url": "phonetics-audio/s-b4bdc8481097-tempo1.5.wav", "duration": 0.22058956916099773, "speed": 1.5, "gain": 0.3709050882730766}, {"url": "phonetics-audio/s-b4bdc8481097-tempo2.wav", "duration": 0.17401360544217687, "speed": 2, "gain": 0.3842619606444132}, {"url": "phonetics-audio/s-b4bdc8481097-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.3657310087541642}, {"url": "phonetics-audio/s-b4bdc8481097-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.3803410709011467}], "i": [{"url": "phonetics-audio/s-de7d1b721a1e.wav", "duration": 0.22308390022675736, "speed": 1, "gain": 0.3006051209192826}, {"url": "phonetics-audio/s-de7d1b721a1e-tempo1.25.wav", "duration": 0.19020408163265307, "speed": 1.25, "gain": 0.3025912298449762}, {"url": "phonetics-audio/s-de7d1b721a1e-tempo1.5.wav", "duration": 0.15587301587301589, "speed": 1.5, "gain": 0.3076236574233331}, {"url": "phonetics-audio/s-de7d1b721a1e-tempo2.wav", "duration": 0.10920634920634921, "speed": 2, "gain": 0.30515525884008265}, {"url": "phonetics-audio/s-de7d1b721a1e-tempo3.wav", "duration": 0.089297052154195, "speed": 3, "gain": 0.327136388519754}, {"url": "phonetics-audio/s-de7d1b721a1e-tempo4.wav", "duration": 0.046439909297052155, "speed": 4, "gain": 0.3118347998540118}], "ik": [{"url": "phonetics-audio/s-72a7ab318788.wav", "duration": 0.3106122448979592, "speed": 1, "gain": 0.3422547154300593}, {"url": "phonetics-audio/s-72a7ab318788-tempo1.25.wav", "duration": 0.2597278911564626, "speed": 1.25, "gain": 0.34045478119096906}, {"url": "phonetics-audio/s-72a7ab318788-tempo1.5.wav", "duration": 0.21927437641723355, "speed": 1.5, "gain": 0.35359362264080374}, {"url": "phonetics-audio/s-72a7ab318788-tempo2.wav", "duration": 0.1510657596371882, "speed": 2, "gain": 0.34141135127877037}, {"url": "phonetics-audio/s-72a7ab318788-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.3170213217990849}, {"url": "phonetics-audio/s-72a7ab318788-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.3463818810886255}], "in": [{"url": "phonetics-audio/s-582967534d0f.wav", "duration": 0.35827664399092973, "speed": 1, "gain": 0.3066509458324071}, {"url": "phonetics-audio/s-582967534d0f-tempo1.25.wav", "duration": 0.29174603174603175, "speed": 1.25, "gain": 0.3134292111431808}, {"url": "phonetics-audio/s-582967534d0f-tempo1.5.wav", "duration": 0.24566893424036282, "speed": 1.5, "gain": 0.3099315486103709}, {"url": "phonetics-audio/s-582967534d0f-tempo2.wav", "duration": 0.1763265306122449, "speed": 2, "gain": 0.3050097871824506}, {"url": "phonetics-audio/s-582967534d0f-tempo3.wav", "duration": 0.12126984126984126, "speed": 3, "gain": 0.31413759646345035}, {"url": "phonetics-audio/s-582967534d0f-tempo4.wav", "duration": 0.08312925170068028, "speed": 4, "gain": 0.3195600502621876}], "ku": [{"url": "phonetics-audio/s-88d178d728e8.wav", "duration": 0.3252607709750567, "speed": 1, "gain": 0.3228852634751739}, {"url": "phonetics-audio/s-88d178d728e8-tempo1.25.wav", "duration": 0.26077097505668934, "speed": 1.25, "gain": 0.31863475082769116}, {"url": "phonetics-audio/s-88d178d728e8-tempo1.5.wav", "duration": 0.21759637188208616, "speed": 1.5, "gain": 0.3196887822333497}, {"url": "phonetics-audio/s-88d178d728e8-tempo2.wav", "duration": 0.16489795918367348, "speed": 2, "gain": 0.3255267899130569}, {"url": "phonetics-audio/s-88d178d728e8-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.30550808871016677}, {"url": "phonetics-audio/s-88d178d728e8-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.32215032533712784}], "la": [{"url": "phonetics-audio/s-b737ca7ee563.wav", "duration": 0.29020408163265304, "speed": 1, "gain": 0.23828534137915947}, {"url": "phonetics-audio/s-b737ca7ee563-tempo1.25.wav", "duration": 0.2451700680272109, "speed": 1.25, "gain": 0.23967046564167618}, {"url": "phonetics-audio/s-b737ca7ee563-tempo1.5.wav", "duration": 0.20435374149659863, "speed": 1.5, "gain": 0.2450015200173461}, {"url": "phonetics-audio/s-b737ca7ee563-tempo2.wav", "duration": 0.15006802721088436, "speed": 2, "gain": 0.2591236975009752}, {"url": "phonetics-audio/s-b737ca7ee563-tempo3.wav", "duration": 0.11501133786848072, "speed": 3, "gain": 0.25562467533873096}, {"url": "phonetics-audio/s-b737ca7ee563-tempo4.wav", "duration": 0.09138321995464853, "speed": 4, "gain": 0.297578042591367}], "li": [{"url": "phonetics-audio/s-00a9e4255a5b.wav", "duration": 0.310702947845805, "speed": 1, "gain": 0.33115235555295813}, {"url": "phonetics-audio/s-00a9e4255a5b-tempo1.25.wav", "duration": 0.2579138321995465, "speed": 1.25, "gain": 0.33483184142215494}, {"url": "phonetics-audio/s-00a9e4255a5b-tempo1.5.wav", "duration": 0.21319727891156462, "speed": 1.5, "gain": 0.3357068059539234}, {"url": "phonetics-audio/s-00a9e4255a5b-tempo2.wav", "duration": 0.15854875283446712, "speed": 2, "gain": 0.33502046830482113}, {"url": "phonetics-audio/s-00a9e4255a5b-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.33799604178054793}, {"url": "phonetics-audio/s-00a9e4255a5b-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.3600446305017033}], "lo": [{"url": "phonetics-audio/s-9294ab38039f.wav", "duration": 0.3, "speed": 1, "gain": 0.25948007645841326}, {"url": "phonetics-audio/s-9294ab38039f-tempo1.25.wav", "duration": 0.2451700680272109, "speed": 1.25, "gain": 0.25469196651223774}, {"url": "phonetics-audio/s-9294ab38039f-tempo1.5.wav", "duration": 0.2017233560090703, "speed": 1.5, "gain": 0.26167296343500596}, {"url": "phonetics-audio/s-9294ab38039f-tempo2.wav", "duration": 0.141859410430839, "speed": 2, "gain": 0.2672707276898305}, {"url": "phonetics-audio/s-9294ab38039f-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.2845029094819719}, {"url": "phonetics-audio/s-9294ab38039f-tempo4.wav", "duration": 0.0872562358276644, "speed": 4, "gain": 0.3105070267000924}], "men": [{"url": "phonetics-audio/s-08e3c4c91ca5.wav", "duration": 0.4763718820861678, "speed": 1, "gain": 0.2725489110712232}, {"url": "phonetics-audio/s-08e3c4c91ca5-tempo1.25.wav", "duration": 0.3779138321995465, "speed": 1.25, "gain": 0.27616113073088705}, {"url": "phonetics-audio/s-08e3c4c91ca5-tempo1.5.wav", "duration": 0.3203628117913832, "speed": 1.5, "gain": 0.2790799117747518}, {"url": "phonetics-audio/s-08e3c4c91ca5-tempo2.wav", "duration": 0.24857142857142858, "speed": 2, "gain": 0.279407502290756}, {"url": "phonetics-audio/s-08e3c4c91ca5-tempo3.wav", "duration": 0.1563718820861678, "speed": 3, "gain": 0.2886162189487018}, {"url": "phonetics-audio/s-08e3c4c91ca5-tempo4.wav", "duration": 0.11609977324263039, "speed": 4, "gain": 0.2854810021680149}], "nunk": [{"url": "phonetics-audio/s-9a89027bb055.wav", "duration": 0.4560544217687075, "speed": 1, "gain": 0.3773757047601901}, {"url": "phonetics-audio/s-9a89027bb055-tempo1.25.wav", "duration": 0.37569160997732426, "speed": 1.25, "gain": 0.3841057081885465}, {"url": "phonetics-audio/s-9a89027bb055-tempo1.5.wav", "duration": 0.3107482993197279, "speed": 1.5, "gain": 0.3800087748967428}, {"url": "phonetics-audio/s-9a89027bb055-tempo2.wav", "duration": 0.23224489795918368, "speed": 2, "gain": 0.39372744442351465}, {"url": "phonetics-audio/s-9a89027bb055-tempo3.wav", "duration": 0.13931972789115646, "speed": 3, "gain": 0.36487764718387966}, {"url": "phonetics-audio/s-9a89027bb055-tempo4.wav", "duration": 0.10965986394557824, "speed": 4, "gain": 0.39945266247707467}], "o": [{"url": "phonetics-audio/s-65c74c15a686.wav", "duration": 0.24698412698412697, "speed": 1, "gain": 0.23072099660995415}, {"url": "phonetics-audio/s-65c74c15a686-tempo1.25.wav", "duration": 0.2016326530612245, "speed": 1.25, "gain": 0.22992082201081765}, {"url": "phonetics-audio/s-65c74c15a686-tempo1.5.wav", "duration": 0.16721088435374148, "speed": 1.5, "gain": 0.2339135442482345}, {"url": "phonetics-audio/s-65c74c15a686-tempo2.wav", "duration": 0.13442176870748299, "speed": 2, "gain": 0.24399163254139056}, {"url": "phonetics-audio/s-65c74c15a686-tempo3.wav", "duration": 0.06965986394557823, "speed": 3, "gain": 0.22283516104531323}, {"url": "phonetics-audio/s-65c74c15a686-tempo4.wav", "duration": 0.046439909297052155, "speed": 4, "gain": 0.23999212181105758}], "pa": [{"url": "phonetics-audio/s-9513229d4359.wav", "duration": 0.28321995464852606, "speed": 1, "gain": 0.22986053346336302}, {"url": "phonetics-audio/s-9513229d4359-tempo1.25.wav", "duration": 0.22956916099773242, "speed": 1.25, "gain": 0.21868810126136543}, {"url": "phonetics-audio/s-9513229d4359-tempo1.5.wav", "duration": 0.20294784580498867, "speed": 1.5, "gain": 0.22329775504261362}, {"url": "phonetics-audio/s-9513229d4359-tempo2.wav", "duration": 0.1436281179138322, "speed": 2, "gain": 0.22993504280759294}, {"url": "phonetics-audio/s-9513229d4359-tempo3.wav", "duration": 0.09596371882086167, "speed": 3, "gain": 0.26036635382108425}, {"url": "phonetics-audio/s-9513229d4359-tempo4.wav", "duration": 0.07151927437641724, "speed": 4, "gain": 0.22825943086777475}], "per": [{"url": "phonetics-audio/s-b427c3dec904.wav", "duration": 0.3021768707482993, "speed": 1, "gain": 0.2504525520676219}, {"url": "phonetics-audio/s-b427c3dec904-tempo1.25.wav", "duration": 0.24662131519274377, "speed": 1.25, "gain": 0.24634619978326766}, {"url": "phonetics-audio/s-b427c3dec904-tempo1.5.wav", "duration": 0.2073469387755102, "speed": 1.5, "gain": 0.24538166049350738}, {"url": "phonetics-audio/s-b427c3dec904-tempo2.wav", "duration": 0.16068027210884353, "speed": 2, "gain": 0.249314273477985}, {"url": "phonetics-audio/s-b427c3dec904-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.26263643105624945}, {"url": "phonetics-audio/s-b427c3dec904-tempo4.wav", "duration": 0.08671201814058957, "speed": 4, "gain": 0.2687198468417671}], "pi": [{"url": "phonetics-audio/s-85b42e170287.wav", "duration": 0.28480725623582764, "speed": 1, "gain": 0.34374166182510413}, {"url": "phonetics-audio/s-85b42e170287-tempo1.25.wav", "duration": 0.23179138321995466, "speed": 1.25, "gain": 0.32981061220785807}, {"url": "phonetics-audio/s-85b42e170287-tempo1.5.wav", "duration": 0.19310657596371883, "speed": 1.5, "gain": 0.34129490417071423}, {"url": "phonetics-audio/s-85b42e170287-tempo2.wav", "duration": 0.14666666666666667, "speed": 2, "gain": 0.3401331101138944}, {"url": "phonetics-audio/s-85b42e170287-tempo3.wav", "duration": 0.10934240362811791, "speed": 3, "gain": 0.37143964297563814}, {"url": "phonetics-audio/s-85b42e170287-tempo4.wav", "duration": 0.07229024943310658, "speed": 4, "gain": 0.34706263705779883}], "prin": [{"url": "phonetics-audio/s-44afc1ffd858.wav", "duration": 0.539047619047619, "speed": 1, "gain": 0.3504849920335429}, {"url": "phonetics-audio/s-44afc1ffd858-tempo1.25.wav", "duration": 0.4327891156462585, "speed": 1.25, "gain": 0.34913760393603}, {"url": "phonetics-audio/s-44afc1ffd858-tempo1.5.wav", "duration": 0.3624036281179138, "speed": 1.5, "gain": 0.351406757412266}, {"url": "phonetics-audio/s-44afc1ffd858-tempo2.wav", "duration": 0.25541950113378686, "speed": 2, "gain": 0.33862249188642646}, {"url": "phonetics-audio/s-44afc1ffd858-tempo3.wav", "duration": 0.16253968253968254, "speed": 3, "gain": 0.34252081820245434}, {"url": "phonetics-audio/s-44afc1ffd858-tempo4.wav", "duration": 0.11609977324263039, "speed": 4, "gain": 0.3525882242342276}], "rat": [{"url": "phonetics-audio/s-9950cec246ec.wav", "duration": 0.36775510204081635, "speed": 1, "gain": 0.2544053278535338}, {"url": "phonetics-audio/s-9950cec246ec-tempo1.25.wav", "duration": 0.31065759637188206, "speed": 1.25, "gain": 0.256427303844713}, {"url": "phonetics-audio/s-9950cec246ec-tempo1.5.wav", "duration": 0.2493424036281179, "speed": 1.5, "gain": 0.26073133537923726}, {"url": "phonetics-audio/s-9950cec246ec-tempo2.wav", "duration": 0.18970521541950114, "speed": 2, "gain": 0.26835584196241263}, {"url": "phonetics-audio/s-9950cec246ec-tempo3.wav", "duration": 0.123718820861678, "speed": 3, "gain": 0.27388825626682517}, {"url": "phonetics-audio/s-9950cec246ec-tempo4.wav", "duration": 0.08535147392290249, "speed": 4, "gain": 0.2822151319965643}], "ri": [{"url": "phonetics-audio/s-396a14ab206e.wav", "duration": 0.29950113378684806, "speed": 1, "gain": 0.31432431505780395}, {"url": "phonetics-audio/s-396a14ab206e-tempo1.25.wav", "duration": 0.2453514739229025, "speed": 1.25, "gain": 0.3131457940616216}, {"url": "phonetics-audio/s-396a14ab206e-tempo1.5.wav", "duration": 0.2014512471655329, "speed": 1.5, "gain": 0.31472412042265363}, {"url": "phonetics-audio/s-396a14ab206e-tempo2.wav", "duration": 0.16095238095238096, "speed": 2, "gain": 0.3283222724840928}, {"url": "phonetics-audio/s-396a14ab206e-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.30918751421005586}, {"url": "phonetics-audio/s-396a14ab206e-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.34562086930669456}], "rum": [{"url": "phonetics-audio/s-57f64f1b4557.wav", "duration": 0.4800453514739229, "speed": 1, "gain": 0.3177511997334514}, {"url": "phonetics-audio/s-57f64f1b4557-tempo1.25.wav", "duration": 0.3814965986394558, "speed": 1.25, "gain": 0.317463157376455}, {"url": "phonetics-audio/s-57f64f1b4557-tempo1.5.wav", "duration": 0.32294784580498864, "speed": 1.5, "gain": 0.3223564464451945}, {"url": "phonetics-audio/s-57f64f1b4557-tempo2.wav", "duration": 0.25065759637188206, "speed": 2, "gain": 0.3228164825010888}, {"url": "phonetics-audio/s-57f64f1b4557-tempo3.wav", "duration": 0.16099773242630386, "speed": 3, "gain": 0.31463225380070964}, {"url": "phonetics-audio/s-57f64f1b4557-tempo4.wav", "duration": 0.11609977324263039, "speed": 4, "gain": 0.32706937032209077}], "san": [{"url": "phonetics-audio/s-6b9cd7872ae6.wav", "duration": 0.468390022675737, "speed": 1, "gain": 0.2552131269653883}, {"url": "phonetics-audio/s-6b9cd7872ae6-tempo1.25.wav", "duration": 0.3834013605442177, "speed": 1.25, "gain": 0.264495877080811}, {"url": "phonetics-audio/s-6b9cd7872ae6-tempo1.5.wav", "duration": 0.3197732426303855, "speed": 1.5, "gain": 0.2634667635605116}, {"url": "phonetics-audio/s-6b9cd7872ae6-tempo2.wav", "duration": 0.23609977324263037, "speed": 2, "gain": 0.26352759283026306}, {"url": "phonetics-audio/s-6b9cd7872ae6-tempo3.wav", "duration": 0.15582766439909296, "speed": 3, "gain": 0.27167845462566864}, {"url": "phonetics-audio/s-6b9cd7872ae6-tempo4.wav", "duration": 0.13328798185941043, "speed": 4, "gain": 0.28499337650968665}], "se": [{"url": "phonetics-audio/s-ad9a67fefa84.wav", "duration": 0.3331519274376417, "speed": 1, "gain": 0.2734770121081232}, {"url": "phonetics-audio/s-ad9a67fefa84-tempo1.25.wav", "duration": 0.2761451247165533, "speed": 1.25, "gain": 0.2875757179190177}, {"url": "phonetics-audio/s-ad9a67fefa84-tempo1.5.wav", "duration": 0.2310657596371882, "speed": 1.5, "gain": 0.2975989353489553}, {"url": "phonetics-audio/s-ad9a67fefa84-tempo2.wav", "duration": 0.18222222222222223, "speed": 2, "gain": 0.28779138224569845}, {"url": "phonetics-audio/s-ad9a67fefa84-tempo3.wav", "duration": 0.10888888888888888, "speed": 3, "gain": 0.29274258112211543}, {"url": "phonetics-audio/s-ad9a67fefa84-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.2816036719493799}], "sem": [{"url": "phonetics-audio/s-e604f8c97caa.wav", "duration": 0.4925170068027211, "speed": 1, "gain": 0.28848194932454196}, {"url": "phonetics-audio/s-e604f8c97caa-tempo1.25.wav", "duration": 0.3960997732426304, "speed": 1.25, "gain": 0.31008839864109194}, {"url": "phonetics-audio/s-e604f8c97caa-tempo1.5.wav", "duration": 0.33188208616780046, "speed": 1.5, "gain": 0.3023804298303678}, {"url": "phonetics-audio/s-e604f8c97caa-tempo2.wav", "duration": 0.23219954648526078, "speed": 2, "gain": 0.28389858481998387}, {"url": "phonetics-audio/s-e604f8c97caa-tempo3.wav", "duration": 0.17047619047619048, "speed": 3, "gain": 0.30391072858927276}, {"url": "phonetics-audio/s-e604f8c97caa-tempo4.wav", "duration": 0.11609977324263039, "speed": 4, "gain": 0.2888899299072388}], "sik": [{"url": "phonetics-audio/s-6a13db8eab2e.wav", "duration": 0.408390022675737, "speed": 1, "gain": 0.3831671461214681}, {"url": "phonetics-audio/s-6a13db8eab2e-tempo1.25.wav", "duration": 0.3352380952380952, "speed": 1.25, "gain": 0.4084360199590413}, {"url": "phonetics-audio/s-6a13db8eab2e-tempo1.5.wav", "duration": 0.2770068027210884, "speed": 1.5, "gain": 0.4085285321614314}, {"url": "phonetics-audio/s-6a13db8eab2e-tempo2.wav", "duration": 0.18793650793650793, "speed": 2, "gain": 0.3757099140639793}, {"url": "phonetics-audio/s-6a13db8eab2e-tempo3.wav", "duration": 0.12643990929705215, "speed": 3, "gain": 0.39146598228130924}, {"url": "phonetics-audio/s-6a13db8eab2e-tempo4.wav", "duration": 0.09287981859410431, "speed": 4, "gain": 0.38361771106225084}], "spi": [{"url": "phonetics-audio/s-8f3c56908f47.wav", "duration": 0.35360544217687073, "speed": 1, "gain": 0.3779303030082394}, {"url": "phonetics-audio/s-8f3c56908f47-tempo1.25.wav", "duration": 0.2945124716553288, "speed": 1.25, "gain": 0.3782302608493741}, {"url": "phonetics-audio/s-8f3c56908f47-tempo1.5.wav", "duration": 0.24285714285714285, "speed": 1.5, "gain": 0.3859027263140345}, {"url": "phonetics-audio/s-8f3c56908f47-tempo2.wav", "duration": 0.1710204081632653, "speed": 2, "gain": 0.38194244446941783}, {"url": "phonetics-audio/s-8f3c56908f47-tempo3.wav", "duration": 0.12126984126984126, "speed": 3, "gain": 0.39986525508615817}, {"url": "phonetics-audio/s-8f3c56908f47-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.36834948990922817}], "to": [{"url": "phonetics-audio/s-663ea1bfffe5.wav", "duration": 0.2854875283446712, "speed": 1, "gain": 0.2558246365611606}, {"url": "phonetics-audio/s-663ea1bfffe5-tempo1.25.wav", "duration": 0.2272562358276644, "speed": 1.25, "gain": 0.24486256349945842}, {"url": "phonetics-audio/s-663ea1bfffe5-tempo1.5.wav", "duration": 0.19374149659863946, "speed": 1.5, "gain": 0.25476496754328937}, {"url": "phonetics-audio/s-663ea1bfffe5-tempo2.wav", "duration": 0.14598639455782314, "speed": 2, "gain": 0.24814336951770732}, {"url": "phonetics-audio/s-663ea1bfffe5-tempo3.wav", "duration": 0.11083900226757369, "speed": 3, "gain": 0.27605127361897924}, {"url": "phonetics-audio/s-663ea1bfffe5-tempo4.wav", "duration": 0.0728798185941043, "speed": 4, "gain": 0.26420730263696957}], "tri": [{"url": "phonetics-audio/s-cddd67830982.wav", "duration": 0.37160997732426304, "speed": 1, "gain": 0.34290259557156055}, {"url": "phonetics-audio/s-cddd67830982-tempo1.25.wav", "duration": 0.31065759637188206, "speed": 1.25, "gain": 0.33729223832559524}, {"url": "phonetics-audio/s-cddd67830982-tempo1.5.wav", "duration": 0.2508390022675737, "speed": 1.5, "gain": 0.339318682082285}, {"url": "phonetics-audio/s-cddd67830982-tempo2.wav", "duration": 0.18426303854875284, "speed": 2, "gain": 0.34002321849287465}, {"url": "phonetics-audio/s-cddd67830982-tempo3.wav", "duration": 0.11609977324263039, "speed": 3, "gain": 0.3368928687958134}, {"url": "phonetics-audio/s-cddd67830982-tempo4.wav", "duration": 0.09405895691609978, "speed": 4, "gain": 0.3560888014744658}], "tu": [{"url": "phonetics-audio/s-764c4c7b78d6.wav", "duration": 0.2982766439909297, "speed": 1, "gain": 0.3098028418877483}, {"url": "phonetics-audio/s-764c4c7b78d6-tempo1.25.wav", "duration": 0.24571428571428572, "speed": 1.25, "gain": 0.29783939876260335}, {"url": "phonetics-audio/s-764c4c7b78d6-tempo1.5.wav", "duration": 0.20675736961451247, "speed": 1.5, "gain": 0.30654342567777937}, {"url": "phonetics-audio/s-764c4c7b78d6-tempo2.wav", "duration": 0.16036281179138323, "speed": 2, "gain": 0.30670459018456164}, {"url": "phonetics-audio/s-764c4c7b78d6-tempo3.wav", "duration": 0.11183673469387755, "speed": 3, "gain": 0.31773018362955885}, {"url": "phonetics-audio/s-764c4c7b78d6-tempo4.wav", "duration": 0.08698412698412698, "speed": 4, "gain": 0.33930034607152054}], "tʃi": [{"url": "phonetics-audio/s-0ee5ece17815.wav", "duration": 0.3182766439909297, "speed": 1, "gain": 0.35029563961264887}, {"url": "phonetics-audio/s-0ee5ece17815-tempo1.25.wav", "duration": 0.26648526077097506, "speed": 1.25, "gain": 0.34804707270939444}, {"url": "phonetics-audio/s-0ee5ece17815-tempo1.5.wav", "duration": 0.2145578231292517, "speed": 1.5, "gain": 0.35347816866423487}, {"url": "phonetics-audio/s-0ee5ece17815-tempo2.wav", "duration": 0.152562358276644, "speed": 2, "gain": 0.345600029493396}, {"url": "phonetics-audio/s-0ee5ece17815-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.34209979676584773}, {"url": "phonetics-audio/s-0ee5ece17815-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.38372409237580735}], "u": [{"url": "phonetics-audio/s-0bfe935e70c3.wav", "duration": 0.25900226757369615, "speed": 1, "gain": 0.2846848619086491}, {"url": "phonetics-audio/s-0bfe935e70c3-tempo1.25.wav", "duration": 0.214421768707483, "speed": 1.25, "gain": 0.2864364492064245}, {"url": "phonetics-audio/s-0bfe935e70c3-tempo1.5.wav", "duration": 0.17959183673469387, "speed": 1.5, "gain": 0.2894417235314266}, {"url": "phonetics-audio/s-0bfe935e70c3-tempo2.wav", "duration": 0.11609977324263039, "speed": 2, "gain": 0.27763760404992255}, {"url": "phonetics-audio/s-0bfe935e70c3-tempo3.wav", "duration": 0.08104308390022676, "speed": 3, "gain": 0.28622140537863155}, {"url": "phonetics-audio/s-0bfe935e70c3-tempo4.wav", "duration": 0.06213151927437642, "speed": 4, "gain": 0.301329090266488}], "um": [{"url": "phonetics-audio/s-289c90decf40.wav", "duration": 0.4040362811791383, "speed": 1, "gain": 0.302699444407694}, {"url": "phonetics-audio/s-289c90decf40-tempo1.25.wav", "duration": 0.32625850340136053, "speed": 1.25, "gain": 0.3064648423860625}, {"url": "phonetics-audio/s-289c90decf40-tempo1.5.wav", "duration": 0.27546485260770975, "speed": 1.5, "gain": 0.3031707990494531}, {"url": "phonetics-audio/s-289c90decf40-tempo2.wav", "duration": 0.19927437641723356, "speed": 2, "gain": 0.2979895066472332}, {"url": "phonetics-audio/s-289c90decf40-tempo3.wav", "duration": 0.11609977324263039, "speed": 3, "gain": 0.2810654385227649}, {"url": "phonetics-audio/s-289c90decf40-tempo4.wav", "duration": 0.09287981859410431, "speed": 4, "gain": 0.30196432916502625}], "unk": [{"url": "phonetics-audio/s-065253965353.wav", "duration": 0.37746031746031744, "speed": 1, "gain": 0.34073790647414565}, {"url": "phonetics-audio/s-065253965353-tempo1.25.wav", "duration": 0.3090249433106576, "speed": 1.25, "gain": 0.3414653428750844}, {"url": "phonetics-audio/s-065253965353-tempo1.5.wav", "duration": 0.26022675736961454, "speed": 1.5, "gain": 0.3456811827289857}, {"url": "phonetics-audio/s-065253965353-tempo2.wav", "duration": 0.194875283446712, "speed": 2, "gain": 0.34482288167928477}, {"url": "phonetics-audio/s-065253965353-tempo3.wav", "duration": 0.11609977324263039, "speed": 3, "gain": 0.3398587800143181}, {"url": "phonetics-audio/s-065253965353-tempo4.wav", "duration": 0.0926530612244898, "speed": 4, "gain": 0.3713993335480784}], "ut": [{"url": "phonetics-audio/s-469cc643a19f.wav", "duration": 0.3129251700680272, "speed": 1, "gain": 0.3066840860672826}, {"url": "phonetics-audio/s-469cc643a19f-tempo1.25.wav", "duration": 0.2535600907029478, "speed": 1.25, "gain": 0.30643418767634995}, {"url": "phonetics-audio/s-469cc643a19f-tempo1.5.wav", "duration": 0.22163265306122448, "speed": 1.5, "gain": 0.3148259730804071}, {"url": "phonetics-audio/s-469cc643a19f-tempo2.wav", "duration": 0.13120181405895692, "speed": 2, "gain": 0.2827834318199147}, {"url": "phonetics-audio/s-469cc643a19f-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.2931994726156724}, {"url": "phonetics-audio/s-469cc643a19f-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.3075672091698455}], "ɡlo": [{"url": "phonetics-audio/s-f4e977d5c42e.wav", "duration": 0.30426303854875286, "speed": 1, "gain": 0.2630259962217565}, {"url": "phonetics-audio/s-f4e977d5c42e-tempo1.25.wav", "duration": 0.25160997732426305, "speed": 1.25, "gain": 0.26371501661270913}, {"url": "phonetics-audio/s-f4e977d5c42e-tempo1.5.wav", "duration": 0.20666666666666667, "speed": 1.5, "gain": 0.2684322952484171}, {"url": "phonetics-audio/s-f4e977d5c42e-tempo2.wav", "duration": 0.13931972789115646, "speed": 2, "gain": 0.2597952998384243}, {"url": "phonetics-audio/s-f4e977d5c42e-tempo3.wav", "duration": 0.09287981859410431, "speed": 3, "gain": 0.2708621822408923}, {"url": "phonetics-audio/s-f4e977d5c42e-tempo4.wav", "duration": 0.06965986394557823, "speed": 4, "gain": 0.2843786199394985}]}
+{
+  "a": [
+    {
+      "url": "speech-audio-175/b439b91e50ebcd531b3174b5.wav",
+      "duration": 0.2003628117913832,
+      "gain": 0.3617679371765432,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "a",
+      "voice": "it"
+    }
+  ],
+  "an": [
+    {
+      "url": "speech-audio-175/12c51a40b0dff1c25fe90eaa.wav",
+      "duration": 0.3037641723356009,
+      "gain": 0.31768710235217884,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "an",
+      "voice": "it"
+    }
+  ],
+  "at": [
+    {
+      "url": "speech-audio-175/100db69ce3c575682e7ccca7.wav",
+      "duration": 0.2573242630385488,
+      "gain": 0.330857146739217,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "at",
+      "voice": "it"
+    }
+  ],
+  "e": [
+    {
+      "url": "tempo-bench-audio/0a2e59b12f48f02d5c39c063.wav",
+      "duration": 0.18970521541950114,
+      "gain": 0.44491265473827096,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "e",
+      "voice": "it"
+    }
+  ],
+  "em": [
+    {
+      "url": "speech-audio-175/c881f4a951f9a3ebda2a01bc.wav",
+      "duration": 0.3142403628117914,
+      "gain": 0.335673499623061,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "em",
+      "voice": "it"
+    }
+  ],
+  "en": [
+    {
+      "url": "speech-audio-175/4559cec89f030e8c7558302e.wav",
+      "duration": 0.3035827664399093,
+      "gain": 0.32345936252870006,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "en",
+      "voice": "it"
+    }
+  ],
+  "er": [
+    {
+      "url": "tempo-bench-audio/595595f19982f9854b9d189d.wav",
+      "duration": 0.2620408163265306,
+      "gain": 0.3120305649919803,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "eR",
+      "voice": "it"
+    }
+  ],
+  "et": [
+    {
+      "url": "tempo-bench-audio/2cb8c65450ebca323013c6a1.wav",
+      "duration": 0.25718820861678005,
+      "gain": 0.3256746852367364,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "et",
+      "voice": "it"
+    }
+  ],
+  "fi": [
+    {
+      "url": "tempo-bench-audio/2d8805afbb2a07c26caf9530.wav",
+      "duration": 0.27764172335600906,
+      "gain": 0.4340242369976673,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "fi",
+      "voice": "it"
+    }
+  ],
+  "i": [
+    {
+      "url": "tempo-bench-audio/85205c33418e23339631c36f.wav",
+      "duration": 0.2003174603174603,
+      "gain": 0.3568542635138111,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "i",
+      "voice": "it"
+    }
+  ],
+  "ik": [
+    {
+      "url": "speech-audio-175/da30527c1ba9077c536ae5af.wav",
+      "duration": 0.2638548752834467,
+      "gain": 0.39772703184280006,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ik",
+      "voice": "it"
+    }
+  ],
+  "in": [
+    {
+      "url": "tempo-bench-audio/2e0f463a10bd61721c7c1164.wav",
+      "duration": 0.3039002267573696,
+      "gain": 0.37233227952159687,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "in",
+      "voice": "it"
+    }
+  ],
+  "ku": [
+    {
+      "url": "speech-audio-175/0b84533b47de194cc348d7c8.wav",
+      "duration": 0.25002267573696146,
+      "gain": 0.4841164884483749,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ku",
+      "voice": "it"
+    }
+  ],
+  "la": [
+    {
+      "url": "speech-audio-175/3810bf711990d63fb5f3eb04.wav",
+      "duration": 0.2490249433106576,
+      "gain": 0.36746432548969565,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "la",
+      "voice": "it"
+    }
+  ],
+  "li": [
+    {
+      "url": "speech-audio-175/b93a0fcf54cf48c7066d88b6.wav",
+      "duration": 0.250249433106576,
+      "gain": 0.40736382705522534,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "li",
+      "voice": "it"
+    }
+  ],
+  "lo": [
+    {
+      "url": "speech-audio-175/a8f8a944b3406d4369374efc.wav",
+      "duration": 0.2397278911564626,
+      "gain": 0.3849773385321274,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "lo",
+      "voice": "it"
+    }
+  ],
+  "men": [
+    {
+      "url": "speech-audio-175/25306ab1792a51647dcf3680.wav",
+      "duration": 0.3856689342403628,
+      "gain": 0.3668207642949903,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "men",
+      "voice": "it"
+    }
+  ],
+  "nunk": [
+    {
+      "url": "speech-audio-175/ae42cc9afd061f8044b5fefd.wav",
+      "duration": 0.3742403628117914,
+      "gain": 0.5601024420888748,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "nunk",
+      "voice": "it"
+    }
+  ],
+  "o": [
+    {
+      "url": "speech-audio-175/c25ad44e20ef2631b1a7e9ac.wav",
+      "duration": 0.2003174603174603,
+      "gain": 0.3306366088538691,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "o",
+      "voice": "it"
+    }
+  ],
+  "pa": [
+    {
+      "url": "speech-audio-175/7a6914d6f57ae13c44e3957d.wav",
+      "duration": 0.2451700680272109,
+      "gain": 0.40616935158273154,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pa",
+      "voice": "it"
+    }
+  ],
+  "per": [
+    {
+      "url": "speech-audio-175/efc447820c705b9be55bcb3d.wav",
+      "duration": 0.30680272108843537,
+      "gain": 0.3465550646104353,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "peR",
+      "voice": "it"
+    }
+  ],
+  "pi": [
+    {
+      "url": "speech-audio-175/fb9b1dbad3a9b1d8660b5995.wav",
+      "duration": 0.23473922902494332,
+      "gain": 0.409374183077549,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pi",
+      "voice": "it"
+    }
+  ],
+  "prin": [
+    {
+      "url": "speech-audio-175/dbbfa5e472251f5a55b7427d.wav",
+      "duration": 0.4414965986394558,
+      "gain": 0.5363751256852206,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "pRin",
+      "voice": "it"
+    }
+  ],
+  "rat": [
+    {
+      "url": "speech-audio-175/8d68746673e2d8f0d6b462c2.wav",
+      "duration": 0.3493424036281179,
+      "gain": 0.4421248693482907,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Rat",
+      "voice": "it"
+    }
+  ],
+  "ri": [
+    {
+      "url": "tempo-bench-audio/c0c8055133d54fb706d65438.wav",
+      "duration": 0.282312925170068,
+      "gain": 0.4451880478565747,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ri",
+      "voice": "it"
+    }
+  ],
+  "rum": [
+    {
+      "url": "speech-audio-175/834c968bec60d887f4d04bdf.wav",
+      "duration": 0.4174603174603175,
+      "gain": 0.5299157556639601,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Rum",
+      "voice": "it"
+    }
+  ],
+  "san": [
+    {
+      "url": "speech-audio-175/79670d97481921667ad8728a.wav",
+      "duration": 0.38843537414965984,
+      "gain": 0.3833528350439466,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "san",
+      "voice": "it"
+    }
+  ],
+  "se": [
+    {
+      "url": "speech-audio-175/c7d9d02827e110a81949bab6.wav",
+      "duration": 0.2743764172335601,
+      "gain": 0.5055273702436498,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "se",
+      "voice": "it"
+    }
+  ],
+  "sem": [
+    {
+      "url": "speech-audio-175/182417f9745ab9bed9e3760f.wav",
+      "duration": 0.39891156462585037,
+      "gain": 0.3755716384555,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sem",
+      "voice": "it"
+    }
+  ],
+  "sik": [
+    {
+      "url": "speech-audio-175/4ab81b566cafa81e4fc431c3.wav",
+      "duration": 0.3278458049886621,
+      "gain": 0.5120386172049066,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sik",
+      "voice": "it"
+    }
+  ],
+  "spi": [
+    {
+      "url": "speech-audio-175/80a4dc9b23d012c4f469d5f7.wav",
+      "duration": 0.29029478458049884,
+      "gain": 0.4498217867961688,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "spi",
+      "voice": "it"
+    }
+  ],
+  "to": [
+    {
+      "url": "speech-audio-175/5da084cb4506783bc662514c.wav",
+      "duration": 0.23714285714285716,
+      "gain": 0.372674582451942,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "to",
+      "voice": "it"
+    }
+  ],
+  "tri": [
+    {
+      "url": "speech-audio-175/77ef2d9601676db1e6728ada.wav",
+      "duration": 0.3294331065759637,
+      "gain": 0.479356207561625,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tRi",
+      "voice": "it"
+    }
+  ],
+  "tu": [
+    {
+      "url": "speech-audio-175/401918372a5f24e31fe7c014.wav",
+      "duration": 0.22612244897959183,
+      "gain": 0.4608332025296877,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tu",
+      "voice": "it"
+    }
+  ],
+  "tʃi": [
+    {
+      "url": "speech-audio-175/e71f7e24f92210dccb445bc0.wav",
+      "duration": 0.2640816326530612,
+      "gain": 0.41421388086546285,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "tSi",
+      "voice": "it"
+    }
+  ],
+  "u": [
+    {
+      "url": "speech-audio-175/39d71a36c042bb0b27db5622.wav",
+      "duration": 0.1893424036281179,
+      "gain": 0.4119468535831173,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "u",
+      "voice": "it"
+    }
+  ],
+  "um": [
+    {
+      "url": "tempo-bench-audio/b35c5d28eca20872017f0b52.wav",
+      "duration": 0.31414965986394555,
+      "gain": 0.43786512781338865,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "um",
+      "voice": "it"
+    }
+  ],
+  "unk": [
+    {
+      "url": "speech-audio-175/87cfe4cc5f3ad38044c5615a.wav",
+      "duration": 0.31528344671201813,
+      "gain": 0.4938210768394814,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "unk",
+      "voice": "it"
+    }
+  ],
+  "ut": [
+    {
+      "url": "speech-audio-175/2394c79f30010931d1b9626a.wav",
+      "duration": 0.24698412698412697,
+      "gain": 0.45638049240138423,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ut",
+      "voice": "it"
+    }
+  ],
+  "ɡlo": [
+    {
+      "url": "speech-audio-175/f522fa0874293929850b7048.wav",
+      "duration": 0.25215419501133784,
+      "gain": 0.39652104233183766,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "glo",
+      "voice": "it"
+    }
+  ]
+}
