@@ -13,7 +13,8 @@ button:hover:enabled{filter:brightness(.95)}button:disabled,button[aria-disabled
 #visual{font:2rem/1.35 Georgia,serif;overflow-wrap:anywhere;margin:18px 0;min-height:44px}
 #visual mark{color:#112f36;background:#ffe078;border-radius:3px}
 #currentMeasure{margin:10px 0 4px}
-fieldset,.bloc-settings{border:1px solid #bdcfd3;border-radius:10px;padding:12px 18px 18px;margin:26px 0}
+fieldset{border:1px solid #bdcfd3;border-radius:10px;padding:12px 18px 18px;margin:26px 0}
+.bloc-settings{margin:26px 0}
 legend{font-weight:600;padding:0 8px}label{display:block;margin:10px 0 6px}.settings-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 input[type=range]{height:50px;padding:0;accent-color:#17543e}
 .checkbox{display:flex;align-items:center;gap:12px;margin-top:20px}.checkbox input{width:22px;min-height:22px;height:22px;flex-shrink:0;accent-color:#17543e}
