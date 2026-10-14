@@ -26,6 +26,8 @@ Pause conserve la position exacte ; reprise conserve l’offset des syllabes en 
 
 Le transport partage une horloge AudioContext entre notes et syllabes. Il programme une fenêtre de 250 ms, renouvelée toutes les 25 ms. Déplacement, pause et changement de tempo annulent les sources programmées. Les notes liées sont fusionnées. Les syllabes ne sont répétées ni sur les liaisons ni sur les mélismes ; une entrée sur une continuation rappelle sa voyelle. Les variantes audio sont décodées avant le départ. Les gains instrumentaux restent .13 pour la voix travaillée et .014 pour les autres parties.
 
+Chaque syllabe va jusqu’à la fin de son fichier audio, même si la suivante a déjà commencé. Le lecteur utilise quatre voix syllabiques fixes et réutilise les places libérées. Si elles sont toutes occupées, la prochaine syllabe attend la première place libre sans couper les autres sons ni ajouter de voix. Le choix des variantes de tempo reste conservé. La dernière syllabe peut dépasser la fin musicale du bloc : la fin de lecture n’est annoncée qu’une fois tous les sons terminés. Pause, reprise et changement de tempo conservent la progression réelle des sons superposés et des syllabes en attente.
+
 L’activation audio et l’amorce média silencieuse des anciens iPhone/iPad sont conservées. Un onglet masqué met le transport en pause. La lecture naturelle est annulable par Arrêter, Échap, navigation, changement de voix/taille, nouveau lancement et masquage de la page. Elle garde les marges prévues pour VoiceOver/TalkBack et une attente bornée si la synthèse ne répond pas.
 
 ## Mémoire et parcours accessible
@@ -44,6 +46,7 @@ Les cinq pages index, boutons, liste, pas et syllabe utilisent le même lecteur.
 - Huit tailles, cinq voix, deux options d’amorce, trois tempos (30, 80, 160) : 45 279 placements syllabiques vérifiés.
 - Fusion de clôture, saut des silences et préparation de reprise vérifiés pour les huit tailles.
 - Transport simulé : arrêt des sources programmées, pause/reprise, déplacement, tempo, notes tenues/liées, prolongement et lecture complète.
+- Quatre syllabes superposées et une cinquième en attente : aucune coupure, limite de quatre voix, fin naturelle au-delà du bloc, pause/reprise, tempo et réutilisation des voix.
 - Interface simulée : mémoire par voix, restauration à l’arrêt, navigation dans les silences, synthèse naturelle avant les blocs seulement, annulation et activation iOS.
 - Navigateur intégré : mesures 42–43 fusionnées au réglage 1 ; saut vers 53 ; bloc 41–43 et 44 blocs au réglage 2 ; conservation du focus après navigation.
 - Les parcours VoiceOver/TalkBack et l’écoute sur un appareil physique restent à valider.
