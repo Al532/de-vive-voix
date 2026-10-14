@@ -1,0 +1,6 @@
+* text=auto
+*.wav -text
+*.wasm -text
+*.mxl -text
+*.png -text
+*.jpg -text

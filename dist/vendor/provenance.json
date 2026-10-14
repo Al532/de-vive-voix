@@ -1,0 +1,17 @@
+{
+  "npm": "espeak-ng@1.0.2",
+  "tarball": "https://registry.npmjs.org/espeak-ng/-/espeak-ng-1.0.2.tgz",
+  "engineVersionObserved": "1.52-dev",
+  "upstreamRepository": "https://github.com/ianmarmour/espeak-ng.js",
+  "license": "GPL-3.0-or-later",
+  "notes": [
+    "Original loader restored unchanged; callMain patch experiment discarded.",
+    "Use fresh module instance per operation; repeated CLI calls do not reset getopt.",
+    "Node tests passed; real-browser validation remains."
+  ],
+  "sha256": {
+    "espeak-ng.js": "2384da465e192f957e651515e11f0c3808c0e5234bb0b78a1c09c2c402ad984c",
+    "espeak-ng.wasm": "10d24bb7e4124e983aa9cd8cd96c52c8ea4b607d81956ec70846684e2827d532",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  }
+}

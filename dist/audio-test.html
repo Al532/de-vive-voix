@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#112f36">
+ <title>De vive voix — Test du son</title>
+ <link rel="stylesheet" href="lab.css">
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23112f36'/%3E%3Cpath d='M10 22V10l13-3v12M10 10l13-3' fill='none' stroke='%2399ebc8' stroke-width='3'/%3E%3Cellipse cx='7' cy='23' rx='4' ry='3' fill='%2399ebc8'/%3E%3Cellipse cx='20' cy='20' rx='4' ry='3' fill='%2399ebc8'/%3E%3C/svg%3E">
+ <style>
+  h1{margin-bottom:12px}.tests{display:grid;gap:12px;margin:24px 0}.tests button{text-align:left;background:#112f36;color:white;min-height:72px}button{touch-action:manipulation}#result{min-height:3em}textarea{display:block;width:100%;min-height:230px;font:14px/1.5 monospace;padding:12px;resize:vertical;color:#16363d;background:white;border:1px solid #819da5;border-radius:8px}#copy{margin-top:12px}footer{margin-top:28px}
+ </style>
+ <script src="note-synth.js?v=1" defer></script>
+ <script src="audio-test.js?v=1" defer></script>
+</head>
+<body><main>
+ <h1>Test du son</h1>
+ <p>Essaie les trois boutons, un par un. Chaque test doit faire entendre un la pendant une seconde.</p>
+ <div class="tests">
+  <button id="tone">1. Note seule</button>
+  <button id="speechTone">2. Parole, puis note</button>
+  <button id="file">3. Fichier audio classique</button>
+ </div>
+ <button id="stop">Arrêter</button>
+ <p id="result" aria-live="off">Indique ensuite les numéros pour lesquels tu entends la note.</p>
+ <p>Le test 2 doit d’abord prononcer « La ». Les tests 1 et 2 utilisent le synthétiseur du site ; le test 3 lit un son enregistré.</p>
+ <audio id="recording" preload="auto" src="audio-test.wav"></audio>
+ <details><summary>Détails du test à partager</summary>
+  <p>Ce journal décrit ce que fait le navigateur. Il ne peut pas confirmer que tu entends le son.</p>
+  <label for="report">Journal</label><textarea id="report" readonly spellcheck="false"></textarea>
+  <button id="copy">Copier le journal</button>
+ </details>
+ <footer><a href="./">Retour au morceau</a></footer>
+ <noscript><p>JavaScript est nécessaire pour ces tests.</p></noscript>
+</main></body></html>

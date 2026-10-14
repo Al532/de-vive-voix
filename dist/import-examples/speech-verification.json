@@ -1,0 +1,71 @@
+{
+  "ok": true,
+  "engine": "eSpeak NG WebAssembly 1.52-dev",
+  "profiles": [
+    {
+      "title": "Gloria Patri et Filio — Belissen",
+      "language": "la",
+      "uniqueSounds": 34,
+      "reused": 34,
+      "generated": 0,
+      "cached": 0,
+      "plannedSyllables": 1206
+    },
+    {
+      "title": "Just for Today — Abbott",
+      "language": "en-US",
+      "uniqueSounds": 81,
+      "reused": 53,
+      "generated": 28,
+      "cached": 0,
+      "plannedSyllables": 282
+    },
+    {
+      "title": "Après un rêve — Fauré",
+      "language": "fr",
+      "uniqueSounds": 195,
+      "reused": 115,
+      "generated": 80,
+      "cached": 0,
+      "plannedSyllables": 500
+    },
+    {
+      "title": "Ave Maria — Schubert",
+      "language": "de",
+      "uniqueSounds": 168,
+      "reused": 101,
+      "generated": 67,
+      "cached": 0,
+      "plannedSyllables": 1365
+    },
+    {
+      "title": "L’invito — Rossini",
+      "language": "it",
+      "uniqueSounds": 79,
+      "reused": 42,
+      "generated": 29,
+      "cached": 8,
+      "plannedSyllables": 323
+    },
+    {
+      "title": "Un rêve (duo) — Holmès",
+      "language": "fr",
+      "uniqueSounds": 134,
+      "reused": 79,
+      "generated": 38,
+      "cached": 17,
+      "plannedSyllables": 561
+    },
+    {
+      "title": "Kyrie — Feezell",
+      "language": "la",
+      "uniqueSounds": 37,
+      "reused": 35,
+      "generated": 2,
+      "cached": 0,
+      "plannedSyllables": 1851
+    }
+  ],
+  "localAudioFiles": 879,
+  "elapsedSeconds": 65.606
+}

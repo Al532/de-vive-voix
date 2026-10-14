@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#112f36">
+<title>De vive voix — Gloria Patri et Filio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23112f36'/%3E%3Cpath d='M10 22V10l13-3v12M10 10l13-3' fill='none' stroke='%2399ebc8' stroke-width='3'/%3E%3Cellipse cx='7' cy='23' rx='4' ry='3' fill='%2399ebc8'/%3E%3Cellipse cx='20' cy='20' rx='4' ry='3' fill='%2399ebc8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="lab.css?v=playback-modes-1">
+<script src="blocs.js?v=import-1" defer></script>
+<script src="note-synth.js?v=1" defer></script>
+<script src="phonetics-engine.js" defer></script>
+<script src="bloc-speech.js?v=import-1" defer></script>
+<script src="transport.js?v=2" defer></script>
+<script src="playback-debug.js?v=2" defer></script>
+<script src="musicxml-import.js?v=1" defer></script>
+<script src="practice-library.js?v=1" defer></script>
+<script src="import-speech.js?v=1" defer></script>
+<script src="score-navigation.js?v=1" defer></script>
+<script src="lab.js?v=playback-modes-1" defer></script>
+</head>
+<body>
+<main>
+<header><h1>De vive voix</h1><label for="scoreChoice" class="sr">Morceau</label><select id="scoreChoice"><option value="">Gloria Patri et Filio</option></select></header>
+<p id="status" role="status">Chargement…</p>
+<div id="workspace" hidden>
+<section aria-label="Reprendre le travail">
+<p id="blocInfo" class="position"></p>
+<form id="goMeasure" novalidate>
+<label for="measure">Aller à la mesure</label>
+<div class="jump"><input id="measure" type="number" min="1" step="1" inputmode="numeric" aria-describedby="measureError"><button id="go" type="submit">Aller</button></div>
+<p id="measureError" role="alert" class="error"></p>
+</form>
+<button id="restart" type="button" class="wide">Recommencer au début</button>
+</section>
+<section id="practice">
+<div id="navigation" class="playback-single">
+<button id="previous" type="button" aria-disabled="true" hidden>Bloc précédent</button>
+<button id="blocPlay" type="button" class="primary">Jouer le bloc</button>
+<button id="next" type="button" aria-disabled="false" hidden>Bloc suivant</button>
+</div>
+<p id="visual" lang="la" aria-hidden="true"></p>
+<p id="accessibleLyrics" class="sr" lang="la"></p>
+</section>
+<section aria-label="Lecture et transport">
+<div id="completeNavigation" class="playback-single">
+<button id="backMeasure" type="button" aria-disabled="true" hidden>Reculer d’une mesure</button>
+<button id="fullPlay" type="button" class="primary">Jouer le morceau entier</button>
+<button id="forwardMeasure" type="button" aria-disabled="true" hidden>Avancer d’une mesure</button>
+</div>
+<button id="stop" type="button" class="wide" aria-disabled="true" hidden>Arrêter</button>
+<p id="currentMeasure" hidden></p>
+<label for="tempo">Tempo : <output id="tempoValue" for="tempo" aria-hidden="true">80</output></label>
+<input id="tempo" type="range" min="30" max="160" step="1" value="80" aria-label="Tempo général">
+</section>
+<div class="bloc-settings">
+<label for="measures">Taille des blocs</label><select id="measures"><option value="1">1 mesure</option><option value="2" selected>2 mesures</option><option value="3">3 mesures</option><option value="4">4 mesures</option><option value="5">5 mesures</option><option value="6">6 mesures</option><option value="7">7 mesures</option><option value="8">8 mesures</option></select>
+<label class="checkbox"><input id="leadIn" type="checkbox">Inclure la mesure précédente en amorce</label>
+</div>
+<label for="voice">Voix à travailler</label><select id="voice"></select>
+<div id="verseSettings" hidden><label for="verse">Couplet</label><select id="verse"></select></div>
+<p id="scoreImportInfo" class="hint"></p>
+<p id="storageNotice" role="status" class="hint"></p>
+<details id="playbackDebug" hidden><summary>Journal du test</summary><button id="copyPlaybackTrace" type="button">Copier le journal</button><p id="playbackCopyResult"></p><textarea id="playbackTrace" aria-label="Journal du test audio" readonly rows="12"></textarea></details>
+</div>
+<footer><p><a id="importLink" href="importer.html">Importer une partition</a></p></footer>
+<noscript>JavaScript est nécessaire pour écouter le morceau.</noscript>
+</main>
+<audio id="audioPrimer" src="audio-silence.wav" preload="auto" playsinline aria-hidden="true" hidden></audio>
+<p id="announcement" class="sr" role="status" aria-live="polite"></p>
+</body>
+</html>
+

@@ -1,0 +1,2 @@
+import {phonemizeBatch,synthesizeMnemonics,synthesizeText} from './vendor/espeak-adapter.js';
+self.onmessage=async event=>{const {id,kind,voice,entries,code,text,rate}=event.data;try{const result=kind==='phonemes'?await phonemizeBatch(entries,voice):kind==='text'?await synthesizeText(text,voice,{rate}):await synthesizeMnemonics(code,voice,{rate});self.postMessage({id,result},result instanceof Uint8Array?[result.buffer]:[]);}catch(error){self.postMessage({id,error:error.message});}};

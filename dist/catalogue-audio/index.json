@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "1.0.0",
+  "engine": {
+    "name": "eSpeak NG",
+    "version": "1.52.0",
+    "loader": "espeakng-loader 0.2.4",
+    "sampleRate": 22050,
+    "channels": 1,
+    "sampleWidth": 2,
+    "rateWpm": 145,
+    "inputMode": "explicit phoneme mnemonics",
+    "pitchMode": "natural spoken intonation"
+  },
+  "languages": [
+    {
+      "language": "fr",
+      "title": "Français",
+      "voice": "fr",
+      "entries": 1569,
+      "bytes": 25378282,
+      "indexUrl": "v1/fr/index.json",
+      "coverage": 0.9900145612248976,
+      "selection": {
+        "sourceDistinct": 5469,
+        "sourceTokens": 1240486.3000000035,
+        "selectedSourceSyllables": 1569,
+        "coveredSourceTokens": 1228099.5000000002,
+        "coverage": 0.9900145612248976,
+        "audioCandidates": 1569
+      },
+      "meanDuration": 0.36577807838665527,
+      "entriesWithNotes": 43
+    },
+    {
+      "language": "it",
+      "title": "Italien",
+      "voice": "it",
+      "entries": 1218,
+      "bytes": 22003260,
+      "indexUrl": "v1/it/index.json",
+      "coverage": 0.9900012582139045,
+      "selection": {
+        "sourceDistinct": 3631,
+        "sourceTokens": 7391430.0,
+        "selectedSourceSyllables": 1218,
+        "coveredSourceTokens": 7317525.0,
+        "coverage": 0.9900012582139045,
+        "audioCandidates": 1218
+      },
+      "meanDuration": 0.40864113132937907,
+      "entriesWithNotes": 0
+    },
+    {
+      "language": "de",
+      "title": "Allemand",
+      "voice": "de",
+      "entries": 3534,
+      "bytes": 66394032,
+      "indexUrl": "v1/de/index.json",
+      "coverage": 0.990003133348276,
+      "selection": {
+        "sourceDistinct": 157330,
+        "sourceTokens": 1.0,
+        "selectedSourceSyllables": 3534,
+        "coveredSourceTokens": 0.990003133348276,
+        "coverage": 0.990003133348276,
+        "audioCandidates": 3534
+      },
+      "meanDuration": 0.4250163042013636,
+      "entriesWithNotes": 11
+    },
+    {
+      "language": "en-US",
+      "title": "Anglais américain",
+      "voice": "en-us",
+      "entries": 4563,
+      "bytes": 94720974,
+      "indexUrl": "v1/en-US/index.json",
+      "coverage": 0.9900030039224037,
+      "selection": {
+        "sourceDistinct": 13785,
+        "sourceTokens": 61535211.36666667,
+        "selectedSourceSyllables": 4563,
+        "coveredSourceTokens": 60920044.10000004,
+        "coverage": 0.9900030039224037,
+        "audioCandidates": 4563
+      },
+      "meanDuration": 0.46971624766496556,
+      "entriesWithNotes": 0
+    },
+    {
+      "language": "la",
+      "title": "Latin italien et grec liturgique",
+      "voice": "it",
+      "entries": 741,
+      "bytes": 13230098,
+      "indexUrl": "v1/la/index.json",
+      "coverage": 0.9900005134811117,
+      "selection": {
+        "sourceDistinct": 1992,
+        "sourceTokens": 447923,
+        "selectedSourceSyllables": 741,
+        "coveredSourceTokens": 443444,
+        "coverage": 0.9900005134811117,
+        "audioCandidates": 741
+      },
+      "meanDuration": 0.4038635661192052,
+      "entriesWithNotes": 0
+    }
+  ],
+  "sourceFiles": [
+    {
+      "name": "fr.tsv",
+      "url": "https://www.lexique.org/databases/Lexique383/Lexique383.tsv",
+      "bytes": 25850780,
+      "sha256": "637ba37a767a66679c48371d673ece50cbf541b49a4e40e598963d4f3fbce52b"
+    },
+    {
+      "name": "it-syllables.tsv",
+      "url": "https://raw.githubusercontent.com/stefanocoretta/phonItaliaR/main/data-raw/phonItalia-1.10/phonItalia-1.10-syllables.tsv",
+      "bytes": 569659,
+      "sha256": "5c975b4be402ca250325e8ae899be38a71292929289b52f6af28ba10b2279ef0"
+    },
+    {
+      "name": "it-wordforms.tsv",
+      "url": "https://raw.githubusercontent.com/stefanocoretta/phonItaliaR/main/data-raw/phonItalia-1.10/phonItalia-1.10-wordforms.tsv",
+      "bytes": 46276243,
+      "sha256": "22d22409c1fc3ad2844f47543f3017c50ef9d3f95f5196093ff2203d7f071b17"
+    },
+    {
+      "name": "de.tsv",
+      "url": "https://raw.githubusercontent.com/petrawagner/german-syllable-frequencies/main/syllableFrequencyTables/syllable_frequency_table.txt",
+      "bytes": 26561354,
+      "sha256": "a8637fe5bc4c8a94d42731360bb2f6abced0128ebeec666dd2adbfe33487cab4"
+    },
+    {
+      "name": "en-frequency.zip",
+      "url": "https://blairarmstrong.net/tools/Union_Subtl_CMUPron/SUBTL_BRM-2009_original.zip",
+      "bytes": 8266496,
+      "sha256": "83087a40cd8c7862e7c518e7a31561625725cc07324c75dcabb708296572f245"
+    },
+    {
+      "name": "en-pronunciation.zip",
+      "url": "https://blairarmstrong.net/tools/Union_Subtl_CMUPron/CMU_PronDict_v0.6Syllabified.zip",
+      "bytes": 917114,
+      "sha256": "9bbf115376deaa6d860237953415b6ea4e58eda9293001df7a29ac584c1d8a3b"
+    },
+    {
+      "name": "chant.zip",
+      "url": "https://github.com/bacor/gregobasecorpus/releases/download/v0.4/gregobasecorpus-v0.4.zip",
+      "bytes": 32532498,
+      "sha256": "d417a98471ba7dfdf988c27ced8a6cf3ef95110d82b6f05b11296e935e9b5bf4"
+    }
+  ],
+  "scopeNotes": [
+    "Coverage is measured on source corpus syllable occurrences, not whole scores.",
+    "French, Italian, German and Latin samples carry an isolated-syllable demonstration accent; English retains source lexical stress.",
+    "The Latin profile also includes Greek liturgical formulas pronounced in the Roman Latin tradition.",
+    "English data and voice are American English.",
+    "Pronunciation variants remain subject to refinement."
+  ],
+  "liturgicalWordsUrl": "v1/liturgical-words.json"
+}

@@ -1,0 +1,775 @@
+[
+  {
+    "licence_url": "https://raw.githubusercontent.com/OpenScore/Lieder/main/LICENSE.txt",
+    "language": "en",
+    "source_url": "https://raw.githubusercontent.com/OpenScore/Lieder/refs/heads/main/scores/Abbott%2C_Jane_Bingham/_/Just_for_Today/lc6583477.mxl?raw=true",
+    "source_page": "https://fourscoreandmore.org/openscore/lieder/",
+    "file": "en-abbott-just-for-today.mxl",
+    "licence": "CC0-1.0",
+    "xml_file": "en-abbott-just-for-today.musicxml",
+    "title": "Just for Today",
+    "xml_version": "4.0",
+    "rights": [
+      "OpenScore (CC0)"
+    ],
+    "sha256_mxl": "79a19736fcce71c0acf4b39feff63723d2ff75e29285ea2ab594f9b2b6a835ff",
+    "sha256_xml": "dcdf70389d5b5e29226289f188432df559948224cd8c7066387e1197c3db49e2",
+    "parts": [
+      {
+        "id": "P1",
+        "name": "Voice",
+        "measures": 41,
+        "notes": 116,
+        "lyrics": 156,
+        "verses": [
+          "1",
+          "2"
+        ],
+        "text_sample": "Lord, Let for me to both mor dil row i and gent its ly needs, work, I And do du not ly pray; pray; Keep",
+        "voices": [
+          "1",
+          "2"
+        ],
+        "instruments": [
+          {
+            "name": "Voice",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      },
+      {
+        "id": "P2",
+        "name": "Piano",
+        "measures": 41,
+        "notes": 501,
+        "lyrics": 0,
+        "verses": [],
+        "text_sample": "",
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "5",
+          "6"
+        ],
+        "instruments": [
+          {
+            "name": "Piano",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          }
+        ]
+      }
+    ],
+    "repeats": [],
+    "endings": [],
+    "ties": 4,
+    "tuplets": 0,
+    "backups": 93,
+    "forwards": 18,
+    "extensions": 0
+  },
+  {
+    "licence_url": "https://raw.githubusercontent.com/OpenScore/Lieder/main/LICENSE.txt",
+    "language": "fr",
+    "source_url": "https://raw.githubusercontent.com/OpenScore/Lieder/refs/heads/main/scores/Faur%C3%A9%2C_Gabriel/3_Songs%2C_Op.7/1_Apr%C3%A8s_un_r%C3%AAve/lc6810863.mxl?raw=true",
+    "source_page": "https://fourscoreandmore.org/openscore/lieder/",
+    "file": "fr-faure-apres-un-reve.mxl",
+    "licence": "CC0-1.0",
+    "xml_file": "fr-faure-apres-un-reve.musicxml",
+    "title": "Trois mélodies, Op.7",
+    "xml_version": "4.0",
+    "rights": [
+      "OpenScore (CC0)"
+    ],
+    "sha256_mxl": "c2cb268e1163d3959d0bf2f3befc47bf1e895b0dc7fa94f4983d6052bd6e1ef1",
+    "sha256_xml": "8f917f1cc10b0c37a0b5afcbf80e5674518f48eee5113d942560c726887847f3",
+    "parts": [
+      {
+        "id": "P1",
+        "name": "Voice",
+        "measures": 48,
+        "notes": 220,
+        "lyrics": 261,
+        "verses": [
+          "1",
+          "2"
+        ],
+        "text_sample": "Dans Le un va som ti meil sol que che char la mait lu ton na’ i ele – ma – va ge, ta Je Le rê",
+        "voices": [
+          "1",
+          "2"
+        ],
+        "instruments": [
+          {
+            "name": "Voice",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      },
+      {
+        "id": "P2",
+        "name": "Piano",
+        "measures": 48,
+        "notes": 1054,
+        "lyrics": 0,
+        "verses": [],
+        "text_sample": "",
+        "voices": [
+          "1",
+          "2",
+          "5"
+        ],
+        "instruments": [
+          {
+            "name": "Piano",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          }
+        ]
+      }
+    ],
+    "repeats": [],
+    "endings": [],
+    "ties": 46,
+    "tuplets": 82,
+    "backups": 94,
+    "forwards": 0,
+    "extensions": 7
+  },
+  {
+    "licence_url": "https://raw.githubusercontent.com/OpenScore/Lieder/main/LICENSE.txt",
+    "language": "de",
+    "source_url": "https://raw.githubusercontent.com/OpenScore/Lieder/refs/heads/main/scores/Schubert%2C_Franz/Op.52/6_Ellens_Gesang_III%2C_D.839_%28Ave_Maria%29/lc6389103.mxl?raw=true",
+    "source_page": "https://fourscoreandmore.org/openscore/lieder/",
+    "file": "de-schubert-ave-maria.mxl",
+    "licence": "CC0-1.0",
+    "xml_file": "de-schubert-ave-maria.musicxml",
+    "title": "Op.52",
+    "xml_version": "4.0",
+    "rights": [
+      "OpenScore (CC0)"
+    ],
+    "sha256_mxl": "7929829d7f4134eea7abfc89de2ac4665534f62a247f56bc202a80ab734b0e3b",
+    "sha256_xml": "90703602148d34b4d38182a6eeea86a2e288f13e01a6a702807c8c37901547fc",
+    "parts": [
+      {
+        "id": "P1",
+        "name": "Singstimme\nVoice",
+        "measures": 17,
+        "notes": 116,
+        "lyrics": 219,
+        "verses": [
+          "1",
+          "2",
+          "3"
+        ],
+        "text_sample": "A A A ve ve ve Ma Ma Ma ri ri ri a! a! a! Jung Un Rei frau be ne mild! fleckt! Magd! Er",
+        "voices": [
+          "1"
+        ],
+        "instruments": [
+          {
+            "name": "Voice",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      },
+      {
+        "id": "P2",
+        "name": "Pianoforte",
+        "measures": 17,
+        "notes": 903,
+        "lyrics": 0,
+        "verses": [],
+        "text_sample": "",
+        "voices": [
+          "1",
+          "5"
+        ],
+        "instruments": [
+          {
+            "name": "Piano (2)",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          }
+        ]
+      }
+    ],
+    "repeats": [
+      {
+        "direction": "forward"
+      },
+      {
+        "direction": "backward",
+        "times": "3"
+      },
+      {
+        "direction": "forward"
+      },
+      {
+        "direction": "backward",
+        "times": "3"
+      }
+    ],
+    "endings": [],
+    "ties": 2,
+    "tuplets": 150,
+    "backups": 17,
+    "forwards": 0,
+    "extensions": 1
+  },
+  {
+    "licence_url": "https://raw.githubusercontent.com/OpenScore/Lieder/main/LICENSE.txt",
+    "language": "it",
+    "source_url": "https://raw.githubusercontent.com/OpenScore/Lieder/refs/heads/main/scores/Rossini%2C_Gioachino/Soir%C3%A9es_musicales/5_L%E2%80%99invito/lc30064748.mxl?raw=true",
+    "source_page": "https://fourscoreandmore.org/openscore/lieder/",
+    "file": "it-rossini-invito.mxl",
+    "licence": "CC0-1.0",
+    "xml_file": "it-rossini-invito.musicxml",
+    "title": "Soirées musicales",
+    "xml_version": "4.0",
+    "rights": [
+      "OpenScore (CC0)"
+    ],
+    "sha256_mxl": "ccf50d285dc3ac21583a569dd072638c597e322ae6de90b9a9d4ee9f9ed03927",
+    "sha256_xml": "21058e325c02004d2f0dcb1109a82ee021dad784b067d8e476f52a594277389f",
+    "parts": [
+      {
+        "id": "P1",
+        "name": "Oboe",
+        "measures": 92,
+        "notes": 310,
+        "lyrics": 192,
+        "verses": [
+          "1"
+        ],
+        "text_sample": "Vie ni‿o Rug gie ro, la tua‿E lo i sa da to di vi sa no no no non può res tar Al le mie",
+        "voices": [
+          "1"
+        ],
+        "instruments": [
+          {
+            "name": "Oboe",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      },
+      {
+        "id": "P2",
+        "name": "Piano",
+        "measures": 92,
+        "notes": 1428,
+        "lyrics": 0,
+        "verses": [],
+        "text_sample": "",
+        "voices": [
+          "1",
+          "5"
+        ],
+        "instruments": [
+          {
+            "name": "Piano",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      }
+    ],
+    "repeats": [],
+    "endings": [],
+    "ties": 64,
+    "tuplets": 150,
+    "backups": 92,
+    "forwards": 0,
+    "extensions": 17
+  },
+  {
+    "licence_url": "https://raw.githubusercontent.com/OpenScore/Lieder/main/LICENSE.txt",
+    "language": "fr",
+    "source_url": "https://raw.githubusercontent.com/OpenScore/Lieder/refs/heads/main/scores/Holm%C3%A8s%2C_Augusta_Mary_Anne/M%C3%A9lodies_pour_piano_et_chant/19_Un_r%C3%AAve%2C%C2%A0%C3%A0_2_voix/lc6017382.mxl?raw=true",
+    "source_page": "https://fourscoreandmore.org/openscore/lieder/",
+    "file": "fr-holmes-un-reve-duet.mxl",
+    "licence": "CC0-1.0",
+    "xml_file": "fr-holmes-un-reve-duet.musicxml",
+    "title": "Mélodies pour Piano et Chant (Chansons populaires)",
+    "xml_version": "4.0",
+    "rights": [
+      "OpenScore (CC0)"
+    ],
+    "sha256_mxl": "07fbb6339e4da2dc3f25ed735f7cc2ce574a7732795d3097642d681936f4c43b",
+    "sha256_xml": "55b317d5cc563f5ba234e285526b89158f3ec96aa7b6fba735d247877c57c462",
+    "parts": [
+      {
+        "id": "P1",
+        "name": "Contralto",
+        "measures": 92,
+        "notes": 148,
+        "lyrics": 50,
+        "verses": [
+          "1"
+        ],
+        "text_sample": "Ce n'est pas vrai! Je rêve, hé las! Le Prin ce Char mant ne m'ap - pel le pas!  Ah! c'est donc vrai! Je ne rê",
+        "voices": [
+          "1"
+        ],
+        "instruments": [
+          {
+            "name": "Alto",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "G",
+            "line": "2",
+            "clef-octave-change": "-1"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "G",
+            "line": "2",
+            "clef-octave-change": "-1"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      },
+      {
+        "id": "P2",
+        "name": "Tenor",
+        "measures": 92,
+        "notes": 376,
+        "lyrics": 244,
+        "verses": [
+          "1"
+        ],
+        "text_sample": "Viens a vec moi! Viens a vec moi! la barque est prête Et nous at - tend! Suis moi! Le vais seau du Rêve est en",
+        "voices": [
+          "1"
+        ],
+        "instruments": [
+          {
+            "name": "Tenor",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2",
+            "clef-octave-change": "-1"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "G",
+            "line": "2",
+            "clef-octave-change": "-1"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "G",
+            "line": "2",
+            "clef-octave-change": "-1"
+          }
+        ]
+      },
+      {
+        "id": "P3",
+        "name": "Piano",
+        "measures": 92,
+        "notes": 3442,
+        "lyrics": 0,
+        "verses": [],
+        "text_sample": "",
+        "voices": [
+          "1",
+          "5",
+          "6"
+        ],
+        "instruments": [
+          {
+            "name": "Piano",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          }
+        ]
+      }
+    ],
+    "repeats": [],
+    "endings": [],
+    "ties": 156,
+    "tuplets": 80,
+    "backups": 113,
+    "forwards": 0,
+    "extensions": 43
+  },
+  {
+    "file": "la-grc-feezell-kyrie.musicxml",
+    "xml_file": "la-grc-feezell-kyrie.musicxml",
+    "source_url": "https://drfeezell.com/wp-content/uploads/kyrie-2003-choir-piano-feezell.xml",
+    "source_page": "https://drfeezell.com/kyrie-2003-choir-and-piano/",
+    "licence": "CC0-1.0",
+    "licence_url": "https://drfeezell.com/kyrie-2003-choir-and-piano/",
+    "language": [
+      "la",
+      "grc-liturgical-latin"
+    ],
+    "xml_version": "3.0",
+    "title": "Kyrie",
+    "rights": [
+      "Composed 2003 by Mark Feezell / DrFeezell.com. Dedicated to the Public Domain (CC0 1.0) 2024. \nNo use restrictions whatsoever. Visit DrFeezell.com for the latest editions and updates. "
+    ],
+    "sha256_xml": "8462417ecbe05cf4d0682b407ae8ccb4006b0b2effa60f2a20028b092fe565c6",
+    "parts": [
+      {
+        "id": "P1",
+        "name": "P1",
+        "measures": 197,
+        "notes": 527,
+        "lyrics": 235,
+        "verses": [
+          "part1verse1"
+        ],
+        "text_sample": "Ky ri e, e le i son. Ky ri e, Ky ri e, Ky ri e e le i son. Ky ri e, Ky ri",
+        "voices": [
+          "1",
+          "2"
+        ],
+        "instruments": [
+          {
+            "name": "Soprano (2)",
+            "abbreviation": null
+          },
+          {
+            "name": "Soprano (3)",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      },
+      {
+        "id": "P2",
+        "name": "P2",
+        "measures": 197,
+        "notes": 547,
+        "lyrics": 253,
+        "verses": [
+          "part2verse1"
+        ],
+        "text_sample": "Ky ri e, Ky ri e e le i son, Ky ri e, Ky ri e, Ky ri e, Ky ri e e lei son,",
+        "voices": [
+          "1"
+        ],
+        "instruments": [
+          {
+            "name": "Alto (2)",
+            "abbreviation": null
+          },
+          {
+            "name": "Alto (3)",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      },
+      {
+        "id": "P3",
+        "name": "P3",
+        "measures": 197,
+        "notes": 468,
+        "lyrics": 231,
+        "verses": [
+          "part3verse1"
+        ],
+        "text_sample": "e le i son, Ky ri e, e le i son. Ky ri e, Ky ri e, Ky ri e, Ky ri e, Ky ri",
+        "voices": [
+          "1"
+        ],
+        "instruments": [
+          {
+            "name": "Tenor (2)",
+            "abbreviation": null
+          },
+          {
+            "name": "Tenor (3)",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2",
+            "clef-octave-change": "-1"
+          }
+        ]
+      },
+      {
+        "id": "P4",
+        "name": "P4",
+        "measures": 197,
+        "notes": 584,
+        "lyrics": 371,
+        "verses": [
+          "part4verse1"
+        ],
+        "text_sample": "Ky ri e e le i son, e le i son. Ky ri e, Ky ri e, Ky ri e e le i son. Ky",
+        "voices": [
+          "1"
+        ],
+        "instruments": [
+          {
+            "name": "Bass (2) (2)",
+            "abbreviation": null
+          },
+          {
+            "name": "Bass (2) (3)",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "F",
+            "line": "4"
+          }
+        ]
+      },
+      {
+        "id": "P5",
+        "name": "P5",
+        "measures": 197,
+        "notes": 2304,
+        "lyrics": 0,
+        "verses": [],
+        "text_sample": "",
+        "voices": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "instruments": [
+          {
+            "name": "Piano (2) (2)",
+            "abbreviation": null
+          },
+          {
+            "name": "Piano (3)",
+            "abbreviation": null
+          }
+        ],
+        "clefs": [
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          },
+          {
+            "sign": "F",
+            "line": "4"
+          },
+          {
+            "sign": "G",
+            "line": "2"
+          }
+        ]
+      }
+    ],
+    "repeats": [],
+    "endings": [],
+    "ties": 302,
+    "tuplets": 35,
+    "backups": 236,
+    "forwards": 11,
+    "extensions": 43
+  }
+]

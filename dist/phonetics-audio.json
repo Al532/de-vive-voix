@@ -1,0 +1,519 @@
+{
+  "engine": "eSpeak NG (espeakng-loader 0.2.4)",
+  "mode": "explicit phoneme input; Italian sound inventory",
+  "rate": 22050,
+  "syllables": {
+    "a": {
+      "url": "phonetics-audio/s-ca978112ca1b.wav",
+      "duration": 0.2344671201814059,
+      "mnemonic": "'a",
+      "engineIPA": "ˈa"
+    },
+    "an": {
+      "url": "phonetics-audio/s-ea325d761f98.wav",
+      "duration": 0.3707936507936508,
+      "mnemonic": "'an",
+      "engineIPA": "ˈan"
+    },
+    "at": {
+      "url": "phonetics-audio/s-b1d6b91b67c2.wav",
+      "duration": 0.30253968253968255,
+      "mnemonic": "'at",
+      "engineIPA": "ˈat"
+    },
+    "e": {
+      "url": "phonetics-audio/s-3f79bb7b435b.wav",
+      "duration": 0.23514739229024945,
+      "mnemonic": "'e",
+      "engineIPA": "ˈe"
+    },
+    "em": {
+      "url": "phonetics-audio/s-84a47f61dd34.wav",
+      "duration": 0.3942857142857143,
+      "mnemonic": "'em",
+      "engineIPA": "ˈem"
+    },
+    "en": {
+      "url": "phonetics-audio/s-dbd3a49d0d90.wav",
+      "duration": 0.370249433106576,
+      "mnemonic": "'en",
+      "engineIPA": "ˈen"
+    },
+    "er": {
+      "url": "phonetics-audio/s-cc7e4412564b.wav",
+      "duration": 0.2544671201814059,
+      "mnemonic": "'er/",
+      "engineIPA": "ˈer"
+    },
+    "et": {
+      "url": "phonetics-audio/s-f056b8cae37d.wav",
+      "duration": 0.3019047619047619,
+      "mnemonic": "'et",
+      "engineIPA": "ˈet"
+    },
+    "fi": {
+      "url": "phonetics-audio/s-b4bdc8481097.wav",
+      "duration": 0.32476190476190475,
+      "mnemonic": "f'i",
+      "engineIPA": "fˈi"
+    },
+    "i": {
+      "url": "phonetics-audio/s-de7d1b721a1e.wav",
+      "duration": 0.22308390022675736,
+      "mnemonic": "'i",
+      "engineIPA": "ˈi"
+    },
+    "ik": {
+      "url": "phonetics-audio/s-72a7ab318788.wav",
+      "duration": 0.3106122448979592,
+      "mnemonic": "'ik",
+      "engineIPA": "ˈik"
+    },
+    "in": {
+      "url": "phonetics-audio/s-582967534d0f.wav",
+      "duration": 0.35827664399092973,
+      "mnemonic": "'in",
+      "engineIPA": "ˈin"
+    },
+    "ku": {
+      "url": "phonetics-audio/s-88d178d728e8.wav",
+      "duration": 0.3252607709750567,
+      "mnemonic": "k'u",
+      "engineIPA": "kˈu"
+    },
+    "la": {
+      "url": "phonetics-audio/s-b737ca7ee563.wav",
+      "duration": 0.29020408163265304,
+      "mnemonic": "l'a",
+      "engineIPA": "lˈa"
+    },
+    "li": {
+      "url": "phonetics-audio/s-00a9e4255a5b.wav",
+      "duration": 0.310702947845805,
+      "mnemonic": "l'i",
+      "engineIPA": "lˈi"
+    },
+    "lo": {
+      "url": "phonetics-audio/s-9294ab38039f.wav",
+      "duration": 0.3,
+      "mnemonic": "l'o",
+      "engineIPA": "lˈo"
+    },
+    "men": {
+      "url": "phonetics-audio/s-08e3c4c91ca5.wav",
+      "duration": 0.4763718820861678,
+      "mnemonic": "m'en",
+      "engineIPA": "mˈen"
+    },
+    "nunk": {
+      "url": "phonetics-audio/s-9a89027bb055.wav",
+      "duration": 0.4560544217687075,
+      "mnemonic": "n'unk",
+      "engineIPA": "nˈunk"
+    },
+    "o": {
+      "url": "phonetics-audio/s-65c74c15a686.wav",
+      "duration": 0.24698412698412697,
+      "mnemonic": "'o",
+      "engineIPA": "ˈo"
+    },
+    "pa": {
+      "url": "phonetics-audio/s-9513229d4359.wav",
+      "duration": 0.28321995464852606,
+      "mnemonic": "p'a",
+      "engineIPA": "pˈa"
+    },
+    "per": {
+      "url": "phonetics-audio/s-b427c3dec904.wav",
+      "duration": 0.3021768707482993,
+      "mnemonic": "p'er/",
+      "engineIPA": "pˈer"
+    },
+    "pi": {
+      "url": "phonetics-audio/s-85b42e170287.wav",
+      "duration": 0.28480725623582764,
+      "mnemonic": "p'i",
+      "engineIPA": "pˈi"
+    },
+    "prin": {
+      "url": "phonetics-audio/s-44afc1ffd858.wav",
+      "duration": 0.539047619047619,
+      "mnemonic": "pr/'in",
+      "engineIPA": "prˈin"
+    },
+    "rat": {
+      "url": "phonetics-audio/s-9950cec246ec.wav",
+      "duration": 0.36775510204081635,
+      "mnemonic": "r/'at",
+      "engineIPA": "rˈat"
+    },
+    "ri": {
+      "url": "phonetics-audio/s-396a14ab206e.wav",
+      "duration": 0.29950113378684806,
+      "mnemonic": "r/'i",
+      "engineIPA": "rˈi"
+    },
+    "rum": {
+      "url": "phonetics-audio/s-57f64f1b4557.wav",
+      "duration": 0.4800453514739229,
+      "mnemonic": "r/'um",
+      "engineIPA": "rˈum"
+    },
+    "san": {
+      "url": "phonetics-audio/s-6b9cd7872ae6.wav",
+      "duration": 0.468390022675737,
+      "mnemonic": "s'an",
+      "engineIPA": "sˈan"
+    },
+    "se": {
+      "url": "phonetics-audio/s-ad9a67fefa84.wav",
+      "duration": 0.3331519274376417,
+      "mnemonic": "s'e",
+      "engineIPA": "sˈe"
+    },
+    "sem": {
+      "url": "phonetics-audio/s-e604f8c97caa.wav",
+      "duration": 0.4925170068027211,
+      "mnemonic": "s'em",
+      "engineIPA": "sˈem"
+    },
+    "sik": {
+      "url": "phonetics-audio/s-6a13db8eab2e.wav",
+      "duration": 0.408390022675737,
+      "mnemonic": "s'ik",
+      "engineIPA": "sˈik"
+    },
+    "spi": {
+      "url": "phonetics-audio/s-8f3c56908f47.wav",
+      "duration": 0.35360544217687073,
+      "mnemonic": "sp'i",
+      "engineIPA": "spˈi"
+    },
+    "to": {
+      "url": "phonetics-audio/s-663ea1bfffe5.wav",
+      "duration": 0.2854875283446712,
+      "mnemonic": "t'o",
+      "engineIPA": "tˈo"
+    },
+    "tri": {
+      "url": "phonetics-audio/s-cddd67830982.wav",
+      "duration": 0.37160997732426304,
+      "mnemonic": "tr/'i",
+      "engineIPA": "trˈi"
+    },
+    "tu": {
+      "url": "phonetics-audio/s-764c4c7b78d6.wav",
+      "duration": 0.2982766439909297,
+      "mnemonic": "t'u",
+      "engineIPA": "tˈu"
+    },
+    "tʃi": {
+      "url": "phonetics-audio/s-0ee5ece17815.wav",
+      "duration": 0.3182766439909297,
+      "mnemonic": "tS'i",
+      "engineIPA": "tʃˈi"
+    },
+    "u": {
+      "url": "phonetics-audio/s-0bfe935e70c3.wav",
+      "duration": 0.25900226757369615,
+      "mnemonic": "'u",
+      "engineIPA": "ˈu"
+    },
+    "um": {
+      "url": "phonetics-audio/s-289c90decf40.wav",
+      "duration": 0.4040362811791383,
+      "mnemonic": "'um",
+      "engineIPA": "ˈum"
+    },
+    "unk": {
+      "url": "phonetics-audio/s-065253965353.wav",
+      "duration": 0.37746031746031744,
+      "mnemonic": "'unk",
+      "engineIPA": "ˈunk"
+    },
+    "ut": {
+      "url": "phonetics-audio/s-469cc643a19f.wav",
+      "duration": 0.3129251700680272,
+      "mnemonic": "'ut",
+      "engineIPA": "ˈut"
+    },
+    "ɡlo": {
+      "url": "phonetics-audio/s-f4e977d5c42e.wav",
+      "duration": 0.30426303854875286,
+      "mnemonic": "gl'o",
+      "engineIPA": "ɡlˈo"
+    }
+  },
+  "sequences": {
+    "ɡlo|ri|a": {
+      "url": "phonetics-audio/w-a5de3e70c61d.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.30426303854875286
+        },
+        {
+          "index": 1,
+          "start": 0.48426303854875286,
+          "end": 0.7837641723356009
+        },
+        {
+          "index": 2,
+          "start": 0.9637641723356009,
+          "end": 1.1982312925170069
+        }
+      ],
+      "duration": 1.1982312925170069
+    },
+    "pa|tri": {
+      "url": "phonetics-audio/w-926763fc895b.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.28321995464852606
+        },
+        {
+          "index": 1,
+          "start": 0.46321995464852606,
+          "end": 0.8348299319727891
+        }
+      ],
+      "duration": 0.8348299319727891
+    },
+    "et": {
+      "url": "phonetics-audio/w-f056b8cae37d.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.3019047619047619
+        }
+      ],
+      "duration": 0.3019047619047619
+    },
+    "fi|li|o": {
+      "url": "phonetics-audio/w-eac9a1364c4c.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.32476190476190475
+        },
+        {
+          "index": 1,
+          "start": 0.5047619047619047,
+          "end": 0.8154648526077097
+        },
+        {
+          "index": 2,
+          "start": 0.9954648526077098,
+          "end": 1.2424489795918368
+        }
+      ],
+      "duration": 1.2424489795918368
+    },
+    "spi|ri|tu|i": {
+      "url": "phonetics-audio/w-b80382cf0604.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.35360544217687073
+        },
+        {
+          "index": 1,
+          "start": 0.5336054421768708,
+          "end": 0.8331065759637188
+        },
+        {
+          "index": 2,
+          "start": 1.0131065759637188,
+          "end": 1.3113832199546485
+        },
+        {
+          "index": 3,
+          "start": 1.4913832199546486,
+          "end": 1.714467120181406
+        }
+      ],
+      "duration": 1.714467120181406
+    },
+    "san|to": {
+      "url": "phonetics-audio/w-f6ec7c65e52b.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.468390022675737
+        },
+        {
+          "index": 1,
+          "start": 0.648390022675737,
+          "end": 0.9338775510204081
+        }
+      ],
+      "duration": 0.9338775510204081
+    },
+    "sik|ut": {
+      "url": "phonetics-audio/w-cc4f4d4067c7.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.408390022675737
+        },
+        {
+          "index": 1,
+          "start": 0.5883900226757369,
+          "end": 0.9013151927437641
+        }
+      ],
+      "duration": 0.9013151927437641
+    },
+    "e|rat": {
+      "url": "phonetics-audio/w-e51115813c8d.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.23514739229024945
+        },
+        {
+          "index": 1,
+          "start": 0.41514739229024944,
+          "end": 0.7829024943310657
+        }
+      ],
+      "duration": 0.7829024943310657
+    },
+    "in": {
+      "url": "phonetics-audio/w-582967534d0f.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.35827664399092973
+        }
+      ],
+      "duration": 0.35827664399092973
+    },
+    "prin|tʃi|pi|o": {
+      "url": "phonetics-audio/w-64462bb19230.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.539047619047619
+        },
+        {
+          "index": 1,
+          "start": 0.719047619047619,
+          "end": 1.0373242630385489
+        },
+        {
+          "index": 2,
+          "start": 1.2173242630385488,
+          "end": 1.5021315192743765
+        },
+        {
+          "index": 3,
+          "start": 1.6821315192743764,
+          "end": 1.9291156462585033
+        }
+      ],
+      "duration": 1.9291156462585033
+    },
+    "nunk": {
+      "url": "phonetics-audio/w-9a89027bb055.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.4560544217687075
+        }
+      ],
+      "duration": 0.4560544217687075
+    },
+    "sem|per": {
+      "url": "phonetics-audio/w-409687e504b1.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.4925170068027211
+        },
+        {
+          "index": 1,
+          "start": 0.6725170068027211,
+          "end": 0.9746938775510204
+        }
+      ],
+      "duration": 0.9746938775510204
+    },
+    "se|ku|la": {
+      "url": "phonetics-audio/w-b21b251d4785.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.3331519274376417
+        },
+        {
+          "index": 1,
+          "start": 0.5131519274376417,
+          "end": 0.8384126984126984
+        },
+        {
+          "index": 2,
+          "start": 1.0184126984126984,
+          "end": 1.3086167800453514
+        }
+      ],
+      "duration": 1.3086167800453514
+    },
+    "se|ku|lo|rum": {
+      "url": "phonetics-audio/w-aef6e4a53917.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.3331519274376417
+        },
+        {
+          "index": 1,
+          "start": 0.5131519274376417,
+          "end": 0.8384126984126984
+        },
+        {
+          "index": 2,
+          "start": 1.0184126984126984,
+          "end": 1.3184126984126985
+        },
+        {
+          "index": 3,
+          "start": 1.4984126984126984,
+          "end": 1.9784580498866213
+        }
+      ],
+      "duration": 1.9784580498866213
+    },
+    "a|men": {
+      "url": "phonetics-audio/w-07470e676fd2.wav",
+      "cues": [
+        {
+          "index": 0,
+          "start": 0.0,
+          "end": 0.2344671201814059
+        },
+        {
+          "index": 1,
+          "start": 0.4144671201814059,
+          "end": 0.8908390022675737
+        }
+      ],
+      "duration": 0.8908390022675737
+    }
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "title": "Gloria Patri et Filio — Belissen",
+    "url": "Belissen.mxl",
+    "filename": "Belissen.mxl",
+    "language": "la"
+  },
+  {
+    "title": "Just for Today — Abbott",
+    "url": "import-examples/en-abbott-just-for-today.mxl",
+    "filename": "en-abbott-just-for-today.mxl",
+    "language": "en-US",
+    "source": "https://fourscoreandmore.org/openscore/lieder/",
+    "license": "CC0-1.0"
+  },
+  {
+    "title": "Après un rêve — Fauré",
+    "url": "import-examples/fr-faure-apres-un-reve.mxl",
+    "filename": "fr-faure-apres-un-reve.mxl",
+    "language": "fr",
+    "source": "https://fourscoreandmore.org/openscore/lieder/",
+    "license": "CC0-1.0"
+  },
+  {
+    "title": "Ave Maria — Schubert",
+    "url": "import-examples/de-schubert-ave-maria.mxl",
+    "filename": "de-schubert-ave-maria.mxl",
+    "language": "de",
+    "source": "https://fourscoreandmore.org/openscore/lieder/",
+    "license": "CC0-1.0"
+  },
+  {
+    "title": "L’invito — Rossini",
+    "url": "import-examples/it-rossini-invito.mxl",
+    "filename": "it-rossini-invito.mxl",
+    "language": "it",
+    "source": "https://fourscoreandmore.org/openscore/lieder/",
+    "license": "CC0-1.0"
+  },
+  {
+    "title": "Un rêve (duo) — Holmès",
+    "url": "import-examples/fr-holmes-un-reve-duet.mxl",
+    "filename": "fr-holmes-un-reve-duet.mxl",
+    "language": "fr",
+    "source": "https://fourscoreandmore.org/openscore/lieder/",
+    "license": "CC0-1.0"
+  },
+  {
+    "title": "Kyrie — Feezell",
+    "url": "import-examples/la-grc-feezell-kyrie.musicxml",
+    "filename": "la-grc-feezell-kyrie.musicxml",
+    "language": "la",
+    "source": "https://drfeezell.com/kyrie-2003-choir-and-piano/",
+    "license": "CC0-1.0"
+  }
+]

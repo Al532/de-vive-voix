@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "fixtures": [
+    {
+      "title": "Gloria Patri et Filio — Belissen",
+      "parts": 8,
+      "vocalParts": 5,
+      "measures": 108,
+      "verses": 1,
+      "warnings": []
+    },
+    {
+      "title": "Just for Today — Abbott",
+      "parts": 3,
+      "vocalParts": 1,
+      "measures": 41,
+      "verses": 2,
+      "warnings": []
+    },
+    {
+      "title": "Après un rêve — Fauré",
+      "parts": 3,
+      "vocalParts": 1,
+      "measures": 48,
+      "verses": 2,
+      "warnings": []
+    },
+    {
+      "title": "Ave Maria — Schubert",
+      "parts": 2,
+      "vocalParts": 1,
+      "measures": 43,
+      "verses": 3,
+      "warnings": [
+        "Les reprises sont dépliées : 43 mesures lues pour 17 mesures écrites. Les numéros du lecteur suivent l’ordre de lecture."
+      ]
+    },
+    {
+      "title": "L’invito — Rossini",
+      "parts": 2,
+      "vocalParts": 1,
+      "measures": 92,
+      "verses": 1,
+      "warnings": []
+    },
+    {
+      "title": "Un rêve (duo) — Holmès",
+      "parts": 3,
+      "vocalParts": 2,
+      "measures": 92,
+      "verses": 1,
+      "warnings": [
+        "Le tempo de départ est repris ; le réglage du lecteur reste commun à tout le morceau."
+      ]
+    },
+    {
+      "title": "Kyrie — Feezell",
+      "parts": 6,
+      "vocalParts": 4,
+      "measures": 197,
+      "verses": 1,
+      "warnings": [
+        "Le tempo de départ est repris ; le réglage du lecteur reste commun à tout le morceau."
+      ]
+    }
+  ],
+  "syntheticChecks": [
+    "pickup",
+    "transposition",
+    "timewise",
+    "chords",
+    "repeat endings",
+    "XML rejection",
+    "phonetic alignment",
+    "polyphonic ties"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "engine": {
+    "name": "eSpeak NG",
+    "version": "1.52.0",
+    "loader": "espeakng-loader 0.2.4",
+    "sampleRate": 22050,
+    "channels": 1,
+    "sampleWidth": 2,
+    "rateWpm": 145,
+    "inputMode": "explicit phoneme mnemonics",
+    "pitchMode": "natural spoken intonation"
+  },
+  "files": 11625,
+  "bytes": 221726646,
+  "seconds": 5016.216462585034,
+  "notes": {
+    "fr": 43,
+    "it": 0,
+    "de": 11,
+    "en-US": 0,
+    "la": 0
+  },
+  "profiles": [
+    {
+      "language": "fr",
+      "title": "Français",
+      "voice": "fr",
+      "entries": 1569,
+      "bytes": 25378282,
+      "indexUrl": "v1/fr/index.json",
+      "coverage": 0.9900145612248976,
+      "selection": {
+        "sourceDistinct": 5469,
+        "sourceTokens": 1240486.3000000035,
+        "selectedSourceSyllables": 1569,
+        "coveredSourceTokens": 1228099.5000000002,
+        "coverage": 0.9900145612248976,
+        "audioCandidates": 1569
+      },
+      "meanDuration": 0.36577807838665527,
+      "entriesWithNotes": 43
+    },
+    {
+      "language": "it",
+      "title": "Italien",
+      "voice": "it",
+      "entries": 1218,
+      "bytes": 22003260,
+      "indexUrl": "v1/it/index.json",
+      "coverage": 0.9900012582139045,
+      "selection": {
+        "sourceDistinct": 3631,
+        "sourceTokens": 7391430.0,
+        "selectedSourceSyllables": 1218,
+        "coveredSourceTokens": 7317525.0,
+        "coverage": 0.9900012582139045,
+        "audioCandidates": 1218
+      },
+      "meanDuration": 0.40864113132937907,
+      "entriesWithNotes": 0
+    },
+    {
+      "language": "de",
+      "title": "Allemand",
+      "voice": "de",
+      "entries": 3534,
+      "bytes": 66394032,
+      "indexUrl": "v1/de/index.json",
+      "coverage": 0.990003133348276,
+      "selection": {
+        "sourceDistinct": 157330,
+        "sourceTokens": 1.0,
+        "selectedSourceSyllables": 3534,
+        "coveredSourceTokens": 0.990003133348276,
+        "coverage": 0.990003133348276,
+        "audioCandidates": 3534
+      },
+      "meanDuration": 0.4250163042013636,
+      "entriesWithNotes": 11
+    },
+    {
+      "language": "en-US",
+      "title": "Anglais américain",
+      "voice": "en-us",
+      "entries": 4563,
+      "bytes": 94720974,
+      "indexUrl": "v1/en-US/index.json",
+      "coverage": 0.9900030039224037,
+      "selection": {
+        "sourceDistinct": 13785,
+        "sourceTokens": 61535211.36666667,
+        "selectedSourceSyllables": 4563,
+        "coveredSourceTokens": 60920044.10000004,
+        "coverage": 0.9900030039224037,
+        "audioCandidates": 4563
+      },
+      "meanDuration": 0.46971624766496556,
+      "entriesWithNotes": 0
+    },
+    {
+      "language": "la",
+      "title": "Latin italien et grec liturgique",
+      "voice": "it",
+      "entries": 741,
+      "bytes": 13230098,
+      "indexUrl": "v1/la/index.json",
+      "coverage": 0.9900005134811117,
+      "selection": {
+        "sourceDistinct": 1992,
+        "sourceTokens": 447923,
+        "selectedSourceSyllables": 741,
+        "coveredSourceTokens": 443444,
+        "coverage": 0.9900005134811117,
+        "audioCandidates": 741
+      },
+      "meanDuration": 0.4038635661192052,
+      "entriesWithNotes": 0
+    }
+  ],
+  "elapsedSeconds": 52.31,
+  "allFilesReopened": true
+}
