@@ -1,0 +1,240 @@
+{
+  "engine": "eSpeak NG 1.52-dev WebAssembly",
+  "voice": "it",
+  "rateWpm": 175,
+  "score": "Exaudi nos — Jean Gilles",
+  "assets": {
+    "la:eks": {
+      "url": "tempo-bench-audio/fbf70a18d8569761a7e34bc2.wav",
+      "duration": 0.34512471655328797,
+      "gain": 0.39671194623000045,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "eks"
+    },
+    "la:au": {
+      "url": "tempo-bench-audio/d94b920f5211fb2b0f4ccb97.wav",
+      "duration": 0.25047619047619046,
+      "gain": 0.3874942186819905,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "au"
+    },
+    "la:di": {
+      "url": "tempo-bench-audio/09bfb31931288fdd5af0a99a.wav",
+      "duration": 0.21501133786848073,
+      "gain": 0.38862089822233503,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "di"
+    },
+    "la:nos": {
+      "url": "tempo-bench-audio/0c62cbe655d2f1a61a153b9a.wav",
+      "duration": 0.36299319727891155,
+      "gain": 0.40471515174240286,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "nos"
+    },
+    "la:de": {
+      "url": "tempo-bench-audio/f7cacb297ed03e6235b59507.wav",
+      "duration": 0.21505668934240363,
+      "gain": 0.4648893318505507,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "de"
+    },
+    "la:us": {
+      "url": "tempo-bench-audio/cc5827d428e2e6ab57696b81.wav",
+      "duration": 0.2816780045351474,
+      "gain": 0.4664197972260502,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "us"
+    },
+    "la:sa": {
+      "url": "tempo-bench-audio/ce0b9ea2e800b1402bee2563.wav",
+      "duration": 0.28503401360544217,
+      "gain": 0.417449504449064,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "sa"
+    },
+    "la:lu": {
+      "url": "tempo-bench-audio/89a9a3330284ec9616c278ad.wav",
+      "duration": 0.22789115646258504,
+      "gain": 0.45732136002537066,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "lu"
+    },
+    "la:ta": {
+      "url": "tempo-bench-audio/77a6a1ce921e218595d67fa6.wav",
+      "duration": 0.23714285714285716,
+      "gain": 0.4017158994827025,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ta"
+    },
+    "la:Ris": {
+      "url": "tempo-bench-audio/64907ca00d3a3f14d54c8f1f.wav",
+      "duration": 0.36394557823129253,
+      "gain": 0.5614298376715497,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ris"
+    },
+    "la:teR": {
+      "url": "tempo-bench-audio/42a05538118f53308b68f7c0.wav",
+      "duration": 0.2987755102040816,
+      "gain": 0.34181327188286426,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "teR"
+    },
+    "la:spes": {
+      "url": "tempo-bench-audio/6c459c48b7ed63f0c5ef1f06.wav",
+      "duration": 0.3922902494331066,
+      "gain": 0.3934904930346264,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "spes"
+    },
+    "la:om": {
+      "url": "tempo-bench-audio/28f3a75dc3ed1ca5ecbecd0b.wav",
+      "duration": 0.32430839002267575,
+      "gain": 0.30783046293184513,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "om"
+    },
+    "la:ni": {
+      "url": "tempo-bench-audio/2e05faf9c958dbc4794693df.wav",
+      "duration": 0.27138321995464854,
+      "gain": 0.41434800133712424,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ni"
+    },
+    "la:um": {
+      "url": "tempo-bench-audio/b35c5d28eca20872017f0b52.wav",
+      "duration": 0.31414965986394555,
+      "gain": 0.43786512781338865,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "um"
+    },
+    "la:fi": {
+      "url": "tempo-bench-audio/2d8805afbb2a07c26caf9530.wav",
+      "duration": 0.27764172335600906,
+      "gain": 0.4340242369976673,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "fi"
+    },
+    "la:Re": {
+      "url": "tempo-bench-audio/86026b77b5a96981d96e9f6e.wav",
+      "duration": 0.2824036281179138,
+      "gain": 0.5416624293152585,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Re"
+    },
+    "la:et": {
+      "url": "tempo-bench-audio/2cb8c65450ebca323013c6a1.wav",
+      "duration": 0.25718820861678005,
+      "gain": 0.3256746852367364,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "et"
+    },
+    "la:in": {
+      "url": "tempo-bench-audio/2e0f463a10bd61721c7c1164.wav",
+      "duration": 0.3039002267573696,
+      "gain": 0.37233227952159687,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "in"
+    },
+    "la:ma": {
+      "url": "tempo-bench-audio/6ca989b14e627b9876b3764e.wav",
+      "duration": 0.2819501133786848,
+      "gain": 0.4152108157567869,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "ma"
+    },
+    "la:Ri": {
+      "url": "tempo-bench-audio/c0c8055133d54fb706d65438.wav",
+      "duration": 0.282312925170068,
+      "gain": 0.4451880478565747,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ri"
+    },
+    "la:lon": {
+      "url": "tempo-bench-audio/7a771fbd69caabf4be3443e3.wav",
+      "duration": 0.3739229024943311,
+      "gain": 0.3410926913157491,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "lon"
+    },
+    "la:dZe": {
+      "url": "tempo-bench-audio/465dbefe7ee8c76070d7c216.wav",
+      "duration": 0.23664399092970523,
+      "gain": 0.48299999251792997,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "dZe"
+    },
+    "la:Ra": {
+      "url": "tempo-bench-audio/076cec16435bc6e6f09c0a69.wav",
+      "duration": 0.2931972789115646,
+      "gain": 0.4404934946383954,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "Ra"
+    },
+    "la:i": {
+      "url": "tempo-bench-audio/85205c33418e23339631c36f.wav",
+      "duration": 0.2003174603174603,
+      "gain": 0.3568542635138111,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "i"
+    },
+    "la:e": {
+      "url": "tempo-bench-audio/0a2e59b12f48f02d5c39c063.wav",
+      "duration": 0.18970521541950114,
+      "gain": 0.44491265473827096,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "e"
+    },
+    "la:es": {
+      "url": "tempo-bench-audio/3dfce54ddc2200230d1f6699.wav",
+      "duration": 0.2818140589569161,
+      "gain": 0.3322011315562223,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "es"
+    },
+    "la:on": {
+      "url": "tempo-bench-audio/94a36b9c3ad8cc2ba919ea51.wav",
+      "duration": 0.3036281179138322,
+      "gain": 0.29519185711078383,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "on"
+    },
+    "la:eR": {
+      "url": "tempo-bench-audio/595595f19982f9854b9d189d.wav",
+      "duration": 0.2620408163265306,
+      "gain": 0.3120305649919803,
+      "speed": 1,
+      "rateWpm": 175,
+      "code": "eR"
+    }
+  }
+}

@@ -14,6 +14,8 @@ Le lecteur propose le travail par blocs, avec lecture naturelle du texte puis sy
 - tests/ et tools/testing/ : données et dépendances de test.
 - tools/catalogue/ et scripts Python : génération du catalogue et préparation du pilote.
 
+Le latin ecclésiastique des nouveaux imports et du morceau Exaudi nos utilise le phonème eSpeak `R` (r roulé). Les six syllabes concernées d’Exaudi nos ont été régénérées ; le lecteur choisit leurs fichiers à 145 mots/minute. Les anciens imports personnels déjà préparés sur l’appareil doivent être réimportés pour bénéficier de cette conversion.
+
 Les audios sont versionnés dans Git et conservés sans régénération à chaque mise à jour. Le premier envoi comprend tous les fichiers ; les envois suivants depuis le PC ne transfèrent que les objets Git nouveaux ou modifiés. GitHub reconstruit ensuite le site sur ses serveurs.
 
 ## Essayer localement
@@ -51,3 +53,9 @@ Le morceau pilote et le catalogue audio fourni dans ce dépôt fonctionnent dire
 Les notices et provenances des composants fournis sont conservées sous dist/vendor/, notamment eSpeak NG (GPL-3.0-or-later) et fflate. Les partitions de démonstration conservent leurs indications de provenance dans dist/import-examples/. Les références du catalogue sont documentées dans tools/catalogue/README.md et dist/catalogue-audio/index.json.
 
 Aucune nouvelle licence n’est ajoutée au code propre au projet par cette migration.
+
+## Banc de test du débit syllabique
+
+Ouvrir [tempo-bench.html](dist/tempo-bench.html). Il compare 29 syllabes d’Exaudi nos générées à 175 mots/minute avec un time-stretch plafonné, à hauteur conservée. Le tempo musical, le plafond (×1 à ×3, ×1,5 par défaut), trois fenêtres de traitement et l’accompagnement sont réglables. Les sons trop courts restent à leur durée normale ; le plafond peut laisser un chevauchement. La fin audible du traitement est conservée. Le lecteur principal reste à 145 pendant cet essai.
+
+Le traitement WSOLA SoundTouchJS 0.3.0 est calculé sur l’appareil avant de programmer les buffers ; il n’altère pas les fichiers source. Les bibliothèques et licences sont fournies localement. Régénération des sons : `node --expose-gc prepare-tempo-bench.mjs`. Vérification du traitement, de la hauteur et des commandes : `node check-tempo-bench.mjs`. L’écoute reste le critère pour choisir les paramètres.

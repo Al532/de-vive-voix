@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const model=require('./dist/blocs.js'),planner=require('./dist/bloc-speech.js'),navigation=require('./dist/score-navigation.js');
+const speech=require('./dist/import-speech.js');assert.equal(speech.latinCode('r'),'R');assert.equal(speech.latinCode('ɡlorja'),'gloRja');
 const manifest=JSON.parse(fs.readFileSync('dist/scores/index.json','utf8'));
 for(const entry of manifest.scores){
  const record=JSON.parse(fs.readFileSync('dist/'+entry.bundleUrl,'utf8')),bytes=fs.readFileSync('dist/'+entry.sourceUrl);
@@ -8,6 +9,8 @@ for(const entry of manifest.scores){
  assert.equal(record.id,entry.id);assert.equal(record.score.title,entry.score.title);
  assert.equal(record.score.starts.length-1,16);assert.equal(record.score.parts.length,7);assert.equal(record.score.parts.filter(p=>p.vocal).length,5);
  for(const [verse,data]of Object.entries(record.verses)){
+  assert(!Object.keys(data.assets).some(key=>key.includes('r/')),'Latin r must use the rolled phoneme');
+  assert.equal(Object.keys(data.assets).filter(key=>key.includes('R')).length,6,'all six Exaudi r syllables must be regenerated');
   const score=structuredClone(record.score);score.continuationMap=data.continuations;
   for(const [part,p]of score.parts.entries()){
    if(!p.vocal)continue;

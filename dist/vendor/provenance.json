@@ -13,5 +13,15 @@
     "espeak-ng.js": "2384da465e192f957e651515e11f0c3808c0e5234bb0b78a1c09c2c402ad984c",
     "espeak-ng.wasm": "10d24bb7e4124e983aa9cd8cd96c52c8ea4b607d81956ec70846684e2827d532",
     "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  "soundtouchjs": {
+    "version": "0.3.0",
+    "source": "https://github.com/cutterbl/SoundTouchJS/tree/36b161bb7d69d801b6a81674ad0fc0c42082729f",
+    "tarball": "https://registry.npmjs.org/soundtouchjs/-/soundtouchjs-0.3.0.tgz",
+    "license": "LGPL-2.1",
+    "files": {
+      "soundtouch.mjs": "5143b5e14251a1e2068c83a7851ffe4bee27a0628cb0e587e2d941e0f06bf9c0",
+      "soundtouch-LICENSE.txt": "a1a33180d02960ab1c5de36cf20b1a2f0fe9888d83826ad263da5db52f1b183b"
+    }
   }
 }
