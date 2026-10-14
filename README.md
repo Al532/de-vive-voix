@@ -56,6 +56,6 @@ Aucune nouvelle licence n’est ajoutée au code propre au projet par cette migr
 
 ## Banc de test du débit syllabique
 
-Ouvrir [tempo-bench.html](dist/tempo-bench.html). Il compare 29 syllabes d’Exaudi nos générées à 175 mots/minute avec un time-stretch plafonné, à hauteur conservée. Le tempo musical, le plafond (×1 à ×3, ×1,5 par défaut), trois fenêtres de traitement et l’accompagnement sont réglables. Les sons trop courts restent à leur durée normale ; le plafond peut laisser un chevauchement. La fin audible du traitement est conservée. Le lecteur principal reste à 145 pendant cet essai.
+Ouvrir [tempo-bench.html](dist/tempo-bench.html). Il compare 29 syllabes d’Exaudi nos générées à 175 mots/minute avec un time-stretch plafonné, à hauteur conservée. Le tempo musical (30 à 320), le plafond (×1 à ×6, ×1,5 par défaut), trois fenêtres de traitement et l’accompagnement sont réglables. Les sons trop courts restent à leur durée normale ; le plafond peut laisser un chevauchement. La fin audible du traitement est conservée. Le lecteur principal reste à 145 pendant cet essai.
 
 Le traitement WSOLA SoundTouchJS 0.3.0 est calculé sur l’appareil avant de programmer les buffers ; il n’altère pas les fichiers source. Les bibliothèques et licences sont fournies localement. Régénération des sons : `node --expose-gc prepare-tempo-bench.mjs`. Vérification du traitement, de la hauteur et des commandes : `node check-tempo-bench.mjs`. L’écoute reste le critère pour choisir les paramètres.

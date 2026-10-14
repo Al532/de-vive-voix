@@ -8,17 +8,20 @@ function readWav(bytes){
 }
 assert.equal(manifest.rateWpm,175);assert.equal(Object.keys(manifest.assets).length,29);
 assert.equal(plan(.4,.3,1.5).ratio,.4/.3);assert.equal(plan(.4,.1,1.5).ratio,1.5);assert.equal(plan(.1,.3,1.5).ratio,1);
-for(const sr of [22050,48000])for(const ratio of [1,1.05,1.25,1.5,2,3]){
- const samples=Float32Array.from({length:sr/2},(_,i)=>.2*Math.sin(i*2*Math.PI*200/sr)),output=stretchMono(samples,sr,ratio);
+assert.equal(plan(.8,.1,6).ratio,6);
+for(const sr of [22050,48000])for(const ratio of [1,1.05,1.25,1.5,2,3,4,6]){
+ const seconds=ratio>3?2:.5,samples=Float32Array.from({length:sr*seconds},(_,i)=>.2*Math.sin(i*2*Math.PI*200/sr)),output=stretchMono(samples,sr,ratio);
  if(ratio===1)assert.deepEqual(output,samples);
- assert(Math.abs(output.length/sr-.5/ratio)<.025);
+ // At high compression the final WSOLA grain can extend past the target;
+ // keep that audible tail (as the bench reports) rather than truncate it.
+ assert(Math.abs(output.length/sr-seconds/ratio)<(ratio>3?.045:.025));
  const first=Math.round(sr*.035),last=output.length-Math.round(sr*.035);let crossings=0;
  for(let i=first+1;i<last;i++)if(output[i-1]<=0&&output[i]>0)crossings++;
  const frequency=crossings*sr/(last-first);assert(Math.abs(frequency-200)<8,'time-stretch must preserve a 200 Hz tone, not raise pitch with speed');
 }
 for(const [key,asset]of Object.entries(manifest.assets)){
  assert.equal(asset.rateWpm,175);const {samples,rate}=readWav(fs.readFileSync('dist/'+asset.url));assert(Math.abs(samples.length/rate-asset.duration)<1e-6);
- for(const profile of ['short','medium','long'])for(const ratio of [1.25,1.5,2,3]){
+ for(const profile of ['short','medium','long'])for(const ratio of [1.25,1.5,2,3,4,6]){
   const output=stretchMono(samples,rate,ratio,profile);assert(output.every(Number.isFinite));assert(output.some(v=>Math.abs(v)>.003));
   assert(output.length>=Math.ceil(samples.length/ratio),'a processing tail may be kept, never clip to a shorter slot');
  }
@@ -51,4 +54,6 @@ const syllables=sources.filter(n=>n.buffer?.length>1);assert(syllables.length>0)
 bench.stop();assert(syllables.every(n=>n.stopped));
 els.cap.value='1';els.cap.handlers.input();await bench.play('stretch');state=bench.getState();assert(state.rows.every(r=>r.ratio===1));assert(state.rows.some(r=>r.overlap>0));bench.stop();
 els.cap.value='1.5';els.cap.handlers.input();await bench.play('original');state=bench.getState();assert(state.rows.every(r=>r.ratio===1));bench.stop();
+els.tempo.value='320';els.tempo.handlers.input();els.cap.value='6';els.cap.handlers.input();await bench.play('stretch');state=bench.getState();
+assert.equal(state.playback,'playing');assert.equal(state.parameters.tempo,320);assert(state.rows.some(r=>r.ratio>3));assert(state.rows.every(r=>r.ratio<=6));bench.stop();
 console.log(JSON.stringify({ok:true,nominalRateWpm:175,recordings:29,pitchPreservedAt:[22050,48000],profiles:3,controller:'original/stretched/capped/stop verified'}));

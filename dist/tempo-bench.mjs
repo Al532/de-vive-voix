@@ -1,4 +1,4 @@
-import {plan,stretchMono} from './tempo-stretch.mjs';
+import {plan,stretchMono} from './tempo-stretch.mjs?v=limits-2';
 const $=id=>document.getElementById(id),decoded=new Map(),rendered=new Map();
 let manifest,bundle,context,transport,singleSource,ticket=0,rows=[],loading=false,currentMode='';
 const ms=value=>Math.round(value*1000)+' ms',factor=value=>'×'+value.toFixed(2).replace('.',',');
