@@ -7,7 +7,7 @@ function originalFields(b){const {adaptive,targetMeasures,attackEnd,allowAttackA
 for(let part=0;part<5;part++)for(const cells of [8,32,160]){
  assert.deepEqual(model.buildBlocs(score,part,{measures:2,cells}).map(originalFields),legacy.buildBlocs(score,part,{cells}));
 }
-let placements=0,overlapping=0;
+let placements=0,overlapping=0;const assetSelector=new Transport({assets});
 for(let size=1;size<=8;size++)for(let part=0;part<5;part++){
  const blocks=model.buildBlocs(score,part,{measures:size});
  const active=[...new Set(score.parts[part].events.filter(e=>e.pitch!==null).map(e=>e.m))].sort((a,b)=>a-b);
@@ -26,7 +26,7 @@ for(let size=1;size<=8;size++)for(let part=0;part<5;part++){
     for(const cue of cues){
      assert(cue.beat>=range.start&&cue.beat<range.end);
      assert(cue.endBeat>cue.beat);assert(assets[cue.ipa]?.length);
-     const asset=assets[cue.ipa].find(a=>a.duration<=cue.room-.012)||assets[cue.ipa].at(-1);
+     const asset=assetSelector.chooseAsset(cue);
      if(asset.duration>cue.room)overlapping++;
      assert(fs.existsSync('dist/'+asset.url));placements++;
     }
@@ -118,6 +118,32 @@ async function testSyllableOverlap(){
  t.configure({start:0,end:3},[{ipa:'a',beat:.2,endBeat:3,index:0}],0,60);t.play();t.pause();t.play();
  assert(Math.abs(h.nodes.at(-1).time-(h.audio.currentTime+.235))<1e-8);t.stop();
  console.log('Syllabes : quatre voix fixes, superposition sans coupure, attente en cas de saturation, fin naturelle, pause/reprise, tempo et réutilisation vérifiés.');
+}
+async function testExaudiNaturalSyllables(){
+ const record=require('./dist/scores/exaudi-nos/bundle.json'),s=record.score,data=record.verses[s.verseNumbers[0]],buffers=new Map();
+ for(const asset of Object.values(data.assets).flat())if(!buffers.has(asset.url)){
+  const wav=fs.readFileSync('dist/'+asset.url);let byteRate,length;
+  for(let at=12;at+8<=wav.length;){const size=wav.readUInt32LE(at+4),tag=wav.toString('ascii',at,at+4);if(tag==='fmt ')byteRate=wav.readUInt32LE(at+16);if(tag==='data')length=size;at+=8+size+(size%2);}
+  assert(byteRate&&length);const duration=length/byteRate;assert(Math.abs(duration-asset.duration)<1e-6);
+  buffers.set(asset.url,{url:asset.url,duration});
+ }
+ const full=model.passage(s,0,0,s.starts.length-2),cues=speech.plan(s,0,full,s.tempo,data.map);
+ const secondEx=cues.filter(c=>c.text.toLowerCase()==='ex')[1],di=cues[cues.indexOf(secondEx)+2];
+ assert.equal(s.tempo,80);assert.equal(secondEx.beat,8.5);assert.equal(di.text,'di');
+ for(const tempo of [30,s.tempo,160]){
+  const h=clockHarness(),t=new Transport({audio:h.audio,notes:[],assets:data.assets,buffers,setTimer:h.setTimer,clearTimer:h.clearTimer});
+  t.configure(full,cues,0,tempo);
+  for(const cue of cues)assert.equal(t.chooseAsset(cue).speed,1,'short notes must retain natural syllables at every tempo');
+  t.play();await h.tick((di.endBeat+.2)*60/tempo+.035);
+  for(const cue of [secondEx,di]){
+   const n=h.nodes.find(n=>Math.abs(n.time-t.time(cue.beat))<1e-8),natural=data.assets[cue.ipa].find(a=>a.speed===1);
+   assert(n);assert.equal(n.buffer.url,natural.url,'second exaudi uses the same unaccelerated recordings as the first');
+   assert.equal(n.offset,0);assert.equal(n.duration,undefined);assert(!n.stopped);
+   if(tempo===s.tempo)assert(n.time+n.buffer.duration>t.time(cue.endBeat),'ex and di must overlap the following syllable at default tempo');
+  }
+  assert.equal(t.syllableVoices.length,4);t.stop();
+ }
+ console.log('Exaudi nos : deuxième ex/di, fichiers WAV réels, durée normale, superposition au tempo 80 et absence d’accélération à 30/160 vérifiés.');
 }
 function element(id=''){
  return {id,value:'',textContent:'',hidden:false,disabled:false,checked:false,attrs:{},children:[],
@@ -395,4 +421,4 @@ async function testPlaybackModes(){
  console.log('Modes : repos, blocs, lecture complète, pause/reprise, déplacements, arrêt, fin naturelle et annulation pendant le texte vérifiés.');
 }
 
-(async()=>{await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});
+(async()=>{await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testExaudiNaturalSyllables();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});

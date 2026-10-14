@@ -56,11 +56,10 @@ class PracticeTransport{
   if(this.range)this.restart(this.state,position,true);
  }
  chooseAsset(cue){
-  const room=(cue.endBeat-cue.beat)*60/this.tempo;
   const variants=this.assets[cue.ipa]||[];
-  // Prefer a variant fitting the rhythm; if none fits, let the shortest finish
-  // naturally, overlapping the following syllable or the end of the block.
-  return variants.find(v=>v.duration<=room-.012)||variants.at(-1);
+  // Keep speech at its natural rate. Short notes may overlap full syllables;
+  // legacy manifests without speed metadata use their longest recording.
+  return variants.find(v=>v.speed===1)||variants.reduce((best,v)=>!best||v.duration>best.duration?v:best,null);
  }
  time(beat){return this.anchorTime+(beat-this.anchorBeat)*60/this.tempo;}
  track(node){
