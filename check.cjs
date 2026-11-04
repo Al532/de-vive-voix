@@ -406,6 +406,8 @@ async function testPieceSettings(){
  await deleting.click('fullPlay');await deleting.click('deleteLocalScore');assert.equal(removed,1);assert.equal(new URL(deleting.location.href).search,'');assert.equal(deleting.get().playback,'stopped');
  const failed=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:localRecords,remove:async()=>{throw Error('Suppression impossible');}});
  await failed.click('deleteLocalScore');assert.equal(failed.els.deleteLocalScore.disabled,false);assert.equal(new URL(failed.location.href).searchParams.get('score'),'local-piece');
+ const duplicate=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:[{...localRecords[0],bundled:true}],confirm:text=>{assert(text.includes('catalogue en ligne'));return true;}});
+ assert(duplicate.els.deleteLocalScore.textContent.includes('copie locale'));await duplicate.click('deleteLocalScore');assert.equal(new URL(duplicate.location.href).search,'?score=local-piece');
  console.log('Morceaux : pilote et deux imports de même titre, réglages distincts, réouverture et changement sans transfert des réglages vérifiés.');
 }
 

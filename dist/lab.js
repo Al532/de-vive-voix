@@ -472,12 +472,14 @@ async function setupScoreChoice(requestedId){
  }
  select.value=requestedId;
  const deleteButton=$('deleteLocalScore');
- deleteButton.hidden=!records.some(record=>record.id===requestedId&&record.local);
+ const selectedRecord=records.find(record=>record.id===requestedId);
+ deleteButton.hidden=!selectedRecord?.local;
+ deleteButton.textContent=selectedRecord?.bundled?'Supprimer la copie locale de cette partition':'Supprimer cette partition de l’appareil';
  deleteButton.onclick=async()=>{
   if(deleteButton.hidden||deleteButton.disabled)return;
-  if(!window.confirm('Supprimer « '+(score?.title||'cette partition')+' » de cet appareil ? Vous pourrez la réimporter avec son fichier MusicXML.'))return;
+  if(!window.confirm('Supprimer « '+(score?.title||'cette partition')+' » de cet appareil ? '+(selectedRecord.bundled?'La partition restera disponible dans le catalogue en ligne.':'Vous pourrez la réimporter avec son fichier MusicXML.')))return;
   deleteButton.disabled=true;cancelPlayback();
-  try{await PracticeLibrary.remove(requestedId);location.assign(ScoreNavigation.readerUrl(''));}
+  try{await PracticeLibrary.remove(requestedId);location.assign(ScoreNavigation.readerUrl(selectedRecord.bundled?requestedId:''));}
   catch(error){deleteButton.disabled=false;announce(error.message);}
  };
 }

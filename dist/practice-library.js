@@ -11,7 +11,8 @@ async function list(){
  const results=await Promise.allSettled([bundled(),operation('scores','readonly',s=>s.getAll())]);
  if(results.every(r=>r.status==='rejected'))throw results[1].reason;
  const supplied=results[0].status==='fulfilled'?results[0].value:[],local=results[1].status==='fulfilled'?results[1].value:[];
- return [...new Map([...local.map(record=>({...record,local:true})),...supplied.map(record=>({...record,local:false}))].map(record=>[record.id,record])).values()];
+ const localIds=new Set(local.map(record=>record.id));
+ return [...new Map([...local.map(record=>({...record,local:true,bundled:false})),...supplied.map(record=>({...record,local:localIds.has(record.id),bundled:true}))].map(record=>[record.id,record])).values()];
 }
 function audioIds(record){return new Set(Object.values(record.verses||{}).flatMap(verse=>Object.values(verse.assets||{}).flat().map(asset=>asset.cacheId).filter(Boolean)));}
 async function remove(id){

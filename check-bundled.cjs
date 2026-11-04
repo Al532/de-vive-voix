@@ -43,7 +43,7 @@ function mount({storage=true,catalogue=true,legacy=false}={}){
  const entry=manifest.scores[0],library=mount(),records=await library.list();
  assert.equal(records.filter(r=>r.id===entry.id).length,1,'Provided and identical local score must not appear twice');
  assert(records.some(r=>r.id==='local-piece'));
- assert.equal(records.find(r=>r.id==='local-piece').local,true);assert.equal(records.find(r=>r.id===entry.id).local,false);
+ assert.equal(records.find(r=>r.id==='local-piece').local,true);assert.equal(records.find(r=>r.id===entry.id).local,true);assert.equal(records.find(r=>r.id===entry.id).bundled,true);
  const campra=manifest.scores.find(r=>r.score.title==='Omnes gentes');assert(campra,'Campra must be provided in the catalogue');
  const campraBundle=await library.loadBundle(campra.id);assert.equal(campraBundle.score.parts.length,3);assert.equal(campraBundle.score.parts.filter(p=>p.vocal).length,2);
  assert(navigation.entries(records,{title:'Pilote'}).some(r=>r.id===entry.id&&r.title==='Exaudi nos — Jean Gilles'));
@@ -56,7 +56,7 @@ function mount({storage=true,catalogue=true,legacy=false}={}){
  assert.equal(await deletion.remove('local-piece'),true);assert(!deletion.stores.scores.has('local-piece'));assert(deletion.stores.audio.has('local-audio'),'shared audio must survive');assert(!deletion.stores.audio.has('exclusive-audio'));
  assert(!deletion.settings.has('de-vive-voix:practice:v1:local-piece:position'));assert(deletion.settings.has('de-vive-voix:practice:v1:other-piece:position'));
  assert.equal(await deletion.remove('local-piece'),false);assert((await deletion.list()).some(r=>r.id===entry.id),'bundled score must survive local deletion');
- assert.equal(await deletion.remove(entry.id),true);assert(!deletion.stores.audio.has('local-audio'),'unreferenced audio must be deleted');assert.equal((await deletion.loadBundle(entry.id)).score.title,'Exaudi nos');
+ assert.equal(await deletion.remove(entry.id),true);assert(!deletion.stores.audio.has('local-audio'),'unreferenced audio must be deleted');assert.equal((await deletion.loadBundle(entry.id)).score.title,'Exaudi nos');assert.equal((await deletion.list()).find(r=>r.id===entry.id).local,false);
  await assert.rejects(()=>noStorage.remove('local-piece'),/stockage local/);
  console.log('Exaudi nos et Campra : sources, parties, mesures, syllabes, catalogue, imports, suppression locale et conservation des sons partagés vérifiés.');
 })().catch(e=>{console.error(e);process.exitCode=1;});
