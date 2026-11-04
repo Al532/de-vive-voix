@@ -14,11 +14,11 @@
 <script src="transport.js?v=catalogue-175-1" defer></script>
 <script src="playback-debug.js?v=2" defer></script>
 <script src="musicxml-import.js?v=1" defer></script>
-<script src="practice-library.js?v=catalogue-175-1" defer></script>
+<script src="practice-library.js?v=local-delete-1" defer></script>
 <script src="import-speech.js?v=catalogue-175-1" defer></script>
 <script src="score-navigation.js?v=1" defer></script>
 <script src="speech-fit.js?v=1" defer></script>
-<script src="lab.js?v=preload-175-2" defer></script>
+<script src="lab.js?v=local-delete-1" defer></script>
 </head>
 <body>
 <main>
@@ -63,7 +63,7 @@
 <p id="storageNotice" role="status" class="hint"></p>
 <details id="playbackDebug" hidden><summary>Journal du test</summary><button id="copyPlaybackTrace" type="button">Copier le journal</button><p id="playbackCopyResult"></p><textarea id="playbackTrace" aria-label="Journal du test audio" readonly rows="12"></textarea></details>
 </div>
-<footer><p><a id="importLink" href="importer.html">Importer une partition</a></p></footer>
+<footer><p><a id="importLink" href="importer.html">Importer une partition</a></p><button id="deleteLocalScore" type="button" class="wide" hidden>Supprimer cette partition de l’appareil</button></footer>
 <noscript>JavaScript est nécessaire pour écouter le morceau.</noscript>
 </main>
 <audio id="audioPrimer" src="audio-silence.wav" preload="auto" playsinline aria-hidden="true" hidden></audio>

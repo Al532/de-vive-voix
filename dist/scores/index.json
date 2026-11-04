@@ -10,6 +10,16 @@
       },
       "bundleUrl": "scores/exaudi-nos/bundle.json",
       "sourceUrl": "scores/exaudi-nos/Exaudi-nos-Jean-Gilles.mxl"
+    },
+    {
+      "id": "9bb7069ee2fa5c45a2ab5bd10b30c0ff92983eaea760287919191dcd95975fc5-la",
+      "filename": "Omnes_gentes_Campra.musicxml",
+      "score": {
+        "title": "Omnes gentes",
+        "composer": "André Campra"
+      },
+      "bundleUrl": "scores/omnes-gentes/bundle.json",
+      "sourceUrl": "scores/omnes-gentes/Omnes_gentes_Campra.musicxml"
     }
   ]
 }

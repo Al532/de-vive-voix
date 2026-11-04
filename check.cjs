@@ -176,7 +176,7 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
  }
  const durations=new Map(Object.values(assets).flat().map(a=>[a.url,a.duration]));
  class OfflineAudioContext extends AudioContext{constructor(channels,length,rate){super();this.sampleRate=rate;}}
- const window={AudioContext,OfflineAudioContext,navigator:{userAgent:'Desktop',platform:'Desktop'},addEventListener:(k,f)=>windowHandlers[k]=f,
+ const window={AudioContext,OfflineAudioContext,confirm:options.confirm||(()=>true),navigator:{userAgent:'Desktop',platform:'Desktop'},addEventListener:(k,f)=>windowHandlers[k]=f,
   SpeechSynthesisUtterance:class{constructor(text){this.text=text;}},
   speechSynthesis:{getVoices(){return options.voices??[{lang:'it-IT',name:'Test italien'}];},addEventListener(){},
    speak(u){spoken++;utterances.push(u);if(autoSpeech)queueMicrotask(()=>{u.onstart?.();u.onend?.();});},
@@ -192,7 +192,7 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
  sandbox.PracticeLibrary={list:async()=>{if(options.libraryDenied)throw Error('Stockage refusé');return options.records||[];}};
  if(options.imported){
   const importedScore=JSON.parse(JSON.stringify(score));Object.assign(importedScore,{verse:'1',verseNumbers:['1'],warnings:[],language:options.language||'fr'});
-  sandbox.PracticeLibrary={list:async()=>options.records||[],loadBundle:async()=>({record:{verses:{1:{}}},score:importedScore,assets,map,continuations:{},language:importedScore.language}),
+  sandbox.PracticeLibrary={list:async()=>options.records||[],remove:options.remove||(async()=>true),loadBundle:async()=>({record:{verses:{1:{}}},score:importedScore,assets,map,continuations:{},language:importedScore.language}),
    getAudio:async()=>{localTextReads++;return {blob:{arrayBuffer:async()=>({duration:1})},gain:.1};}};
   sandbox.MusicXMLImport={applyVerse(){}};sandbox.ImportSpeech={romanGreek:text=>text};
  }
@@ -398,6 +398,14 @@ async function testPieceSettings(){
  const destination=new URL(a2.location.href);assert.equal(destination.search,'?score=piece-b','piece changes must not copy outgoing tempo/voice/size into the next piece');assert.equal(a2.spoken(),0);
  a2.els.scoreChoice.value='';a2.els.scoreChoice.onchange();assert.equal(new URL(a2.location.href).search,'');
  const noLibrary=await mount(new Map(),'',false,true,{libraryDenied:true});assert(noLibrary.els.storageNotice.textContent);assert.equal(noLibrary.els.scoreChoice.children.length,1);assert.equal(noLibrary.get().tempo,80);
+ assert(pilot.els.deleteLocalScore.hidden);assert(a2.els.deleteLocalScore.hidden,'provided scores cannot be deleted');
+ let removed=0,confirmation='';const localRecords=[{id:'local-piece',local:true,score:{title:'Partition locale'}}];
+ const cancelled=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:localRecords,confirm:text=>{confirmation=text;return false;},remove:async()=>{removed++;}});
+ assert(!cancelled.els.deleteLocalScore.hidden);await cancelled.click('deleteLocalScore');assert.equal(removed,0);assert(confirmation.includes('MusicXML'));assert.equal(new URL(cancelled.location.href).searchParams.get('score'),'local-piece');
+ const deleting=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:localRecords,remove:async id=>{assert.equal(id,'local-piece');removed++;}});
+ await deleting.click('fullPlay');await deleting.click('deleteLocalScore');assert.equal(removed,1);assert.equal(new URL(deleting.location.href).search,'');assert.equal(deleting.get().playback,'stopped');
+ const failed=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:localRecords,remove:async()=>{throw Error('Suppression impossible');}});
+ await failed.click('deleteLocalScore');assert.equal(failed.els.deleteLocalScore.disabled,false);assert.equal(new URL(failed.location.href).searchParams.get('score'),'local-piece');
  console.log('Morceaux : pilote et deux imports de même titre, réglages distincts, réouverture et changement sans transfert des réglages vérifiés.');
 }
 

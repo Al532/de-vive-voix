@@ -471,6 +471,15 @@ async function setupScoreChoice(requestedId){
   const option=document.createElement('option');option.value=requestedId;option.textContent='Morceau indisponible sur cet appareil';select.append(option);
  }
  select.value=requestedId;
+ const deleteButton=$('deleteLocalScore');
+ deleteButton.hidden=!records.some(record=>record.id===requestedId&&record.local);
+ deleteButton.onclick=async()=>{
+  if(deleteButton.hidden||deleteButton.disabled)return;
+  if(!window.confirm('Supprimer « '+(score?.title||'cette partition')+' » de cet appareil ? Vous pourrez la réimporter avec son fichier MusicXML.'))return;
+  deleteButton.disabled=true;cancelPlayback();
+  try{await PracticeLibrary.remove(requestedId);location.assign(ScoreNavigation.readerUrl(''));}
+  catch(error){deleteButton.disabled=false;announce(error.message);}
+ };
 }
 async function init(){
  try{

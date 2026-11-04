@@ -9,7 +9,7 @@ Le lecteur propose le travail par blocs, avec lecture naturelle du texte puis sy
 ## Organisation
 
 - dist/ : site statique prêt à servir, catalogue audio et moteur vocal local compris.
-- dist/scores/ : morceaux fournis avec le site, dont Exaudi nos de Jean Gilles (16 mesures, 7 parties, 5 voix avec paroles), fichier MusicXML original et préparation audio.
+- dist/scores/ : morceaux fournis avec le site, dont Exaudi nos de Jean Gilles (16 mesures, 7 parties, 5 voix avec paroles), fichier MusicXML original et préparation audio. Omnes gentes de Campra est également fourni : 25 mesures, soprano, basse et orgue sur deux portées.
 - check.cjs, check-import.cjs, check-phonetics.cjs : vérifications du lecteur et de l’import.
 - tests/ et tools/testing/ : données et dépendances de test.
 - tools/catalogue/ et scripts Python : génération du catalogue et préparation du pilote.
@@ -24,7 +24,7 @@ Depuis la racine du dépôt :
 
     python -m http.server 8766 --directory dist
 
-Ouvrir http://localhost:8766/ . Aucun service applicatif ni clé d’API n’est nécessaire. L’import et la préparation vocale des partitions s’exécutent sur l’appareil.
+Ouvrir http://localhost:8766/ . Aucun service applicatif ni clé d’API n’est nécessaire. L’import et la préparation vocale des partitions s’exécutent sur l’appareil. Pour retirer un import, ouvrir le morceau puis choisir « Supprimer cette partition de l’appareil » en bas de page et confirmer. La suppression retire aussi ses réglages et ses sons exclusifs ; les sons partagés avec d’autres imports sont conservés.
 
 ## Vérifier
 
