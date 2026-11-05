@@ -1,6 +1,6 @@
 'use strict';
 const $=id=>document.getElementById(id);
-let importedRecord=null,importedId='',score,part=0,index=0,tempo=80,measureSize=2,leadIn=false,blocId=0,blocSets=[],mode='idle';
+let importedRecord=null,importedId='',score,part=0,index=0,tempo=80,measureSize=2,leadIn=false,readBlockText=true,blocId=0,blocSets=[],mode='idle';
 let ctx,primedContext,active=[],ticket=0,mediaPrimed=false,mediaPriming=null,mediaGeneration=0;
 let speechMap,speechAssets,notes,transport,fitAsset,loading=false,storageKey,storageFailed=false;
 let memory={version:1,part:0,tempo:80,voices:{}},lastSaved='',lastMeasure=-1,lastLyricKey='',lastTransportState='stopped';
@@ -191,7 +191,7 @@ function validMeasure(value){return Number.isInteger(value)&&value>=0&&value<sco
 function voiceMemory(){return memory.voices[part]||{};}
 function savePosition(measure=bloc().core[0]){
  if(!validMeasure(measure))measure=bloc().core[0];
- memory.part=part;memory.tempo=tempo;if(importedId)memory.verse=score.verse;memory.voices[part]={measure,measures:measureSize,leadIn};
+ memory.part=part;memory.tempo=tempo;memory.readBlockText=readBlockText;if(importedId)memory.verse=score.verse;memory.voices[part]={measure,measures:measureSize,leadIn};
  const serialized=JSON.stringify(memory);
  if(serialized===lastSaved||storageFailed)return;
  try{localStorage.setItem(storageKey,serialized);lastSaved=serialized;}
@@ -201,6 +201,7 @@ function syncSettings(){
  try{
   const url=new URL(location.href),trace=url.searchParams.get('trace');
   url.search=new URLSearchParams({part,tempo,measures:measureSize,leadIn:leadIn?'1':'0'}).toString();
+  if(!readBlockText)url.searchParams.set('readBlockText','0');
   if(trace==='1')url.searchParams.set('trace','1');
   if(importedId){url.searchParams.set('score',importedId);url.searchParams.set('verse',score.verse);}
   if(brailleCells!==32)url.searchParams.set('cells',String(brailleCells));
@@ -264,6 +265,8 @@ function render(){
  if(document.activeElement!==$('measure')&&!$('measureError').textContent)prefillMeasure();
  setText('blocInfo',positionSummary());setUnavailable('previous',blocId===0);setUnavailable('next',blocId===blocs().length-1);
  $('voice').value=String(part);$('measures').value=String(measureSize);$('leadIn').checked=leadIn;
+ $('leadInSetting').hidden=$('leadIn').disabled=measureSize<2;
+ $('readBlockText').checked=readBlockText;
  $('tempo').value=String(tempo);setText('tempoValue',String(tempo));
  $('tempo').setAttribute('aria-valuetext',tempo+' pulsations par minute');
  renderLyrics(transport?.state==='playing');renderState();syncSettings();
@@ -369,7 +372,7 @@ async function requestPlayback(complete,event){
  tracePlayback('playback-request',{part,bloc:blocId,mode});
  try{
   const ready=prepareAudio(); // Called synchronously within the native click.
-  const natural=complete||!range.text?Promise.resolve():(()=>{
+  const natural=complete||!readBlockText||!range.text?Promise.resolve():(()=>{
    speechPhase='waiting';renderState();
    return waitSpeech(range.text,mine,speechHandoffDelay(event)).catch(error=>{
     if(mine!==ticket)throw error;
@@ -427,14 +430,16 @@ async function togglePause(){
 function changeSize(){
  const first=bloc().core[0],continuous=mode==='complete',beat=transport?.position();
  if(!continuous)cancelPlayback();
- measureSize=Number($('measures').value);rebuild();
+ measureSize=Number($('measures').value);
+ if(measureSize<2)leadIn=false;
+ rebuild();
  selectMeasure(continuous&&Number.isFinite(beat)?BlocModel.measureAt(score,beat):first,continuous);
  savePosition(continuous?BlocModel.measureAt(score,beat??bloc().start):bloc().core[0]);render();
  announce(selectedDescription());
 }
 function changeVoice(){
  cancelPlayback();part=Number($('voice').value);mode='idle';
- const saved=voiceMemory();measureSize=Number.isInteger(saved.measures)&&saved.measures>=1&&saved.measures<=8?saved.measures:2;leadIn=saved.leadIn===true;
+ const saved=voiceMemory();measureSize=Number.isInteger(saved.measures)&&saved.measures>=1&&saved.measures<=8?saved.measures:2;leadIn=measureSize>=2&&saved.leadIn===true;
  rebuild();selectMeasure(validMeasure(saved.measure)?saved.measure:0);prefillMeasure();savePosition();render();announce(score.parts[part].name+'. '+selectedDescription());void preloadSpeech();
 }
 function state(){
@@ -519,7 +524,8 @@ async function init(){
   tempo=Number.isFinite(t)&&t>=30&&t<=160?t:80;
   const size=Number(query.get('measures')??saved.measures??2);
   measureSize=Number.isInteger(size)&&size>=1&&size<=8?size:2;
-  leadIn=query.has('leadIn')?query.get('leadIn')==='1':saved.leadIn===true;
+  leadIn=measureSize>=2&&(query.has('leadIn')?query.get('leadIn')==='1':saved.leadIn===true);
+  readBlockText=query.has('readBlockText')?query.get('readBlockText')!=='0':memory.readBlockText!==false;
   rebuild();selectMeasure(validMeasure(saved.measure)?saved.measure:0);
   score.parts.forEach((p,i)=>{if(p.vocal||!score.parts.some(p=>p.vocal)){const o=document.createElement('option');o.value=i;o.textContent=p.name;$('voice').append(o);}});
   $('measure').max=String(score.starts.length-1);
@@ -528,7 +534,11 @@ async function init(){
   $('restart').onclick=restartBeginning;$('stop').onclick=()=>{if($('stop').getAttribute('aria-disabled')!=='true')stopPlayback();};
   $('backMeasure').onclick=()=>seekMeasure(-1);$('forwardMeasure').onclick=()=>seekMeasure(1);
   $('voice').onchange=changeVoice;$('measures').onchange=changeSize;
-  $('leadIn').onchange=()=>{if(mode!=='complete')cancelPlayback();leadIn=$('leadIn').checked;lastLyricKey='';savePosition(mode==='complete'&&transport?.range?BlocModel.measureAt(score,transport.position()):bloc().core[0]);render();announce(leadIn?'Mesure d’amorce activée.':'Mesure d’amorce désactivée.');};
+  $('leadIn').onchange=()=>{if(measureSize<2)return;if(mode!=='complete')cancelPlayback();leadIn=$('leadIn').checked;lastLyricKey='';savePosition(mode==='complete'&&transport?.range?BlocModel.measureAt(score,transport.position()):bloc().core[0]);render();announce(leadIn?'Mesure d’amorce activée.':'Mesure d’amorce désactivée.');};
+  $('readBlockText').onchange=()=>{
+   readBlockText=$('readBlockText').checked;
+   savePosition(mode==='complete'&&transport?.range?BlocModel.measureAt(score,transport.position()):bloc().core[0]);syncSettings();
+  };
   $('tempo').oninput=()=>{
    tempo=Number($('tempo').value);transport?.setTempo(tempo);
    savePosition(mode==='complete'&&transport?.range?BlocModel.measureAt(score,transport.position()):bloc().core[0]);render();
