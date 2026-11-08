@@ -497,7 +497,6 @@ async function init(){
    importedRecord=bundle.record;importedId=requestedId;score=bundle.score;
    MusicXMLImport.applyVerse(score,new URLSearchParams(location.search).get('verse')||score.verseNumbers[0]);
    speechAssets=bundle.assets;speechMap=bundle.map;score.continuationMap=bundle.continuations;score.language=bundle.language;
-   document.title=score.title+' — De vive voix';
    $('verseSettings').hidden=score.verseNumbers.length<2;
    for(const verse of score.verseNumbers){const option=document.createElement('option');option.value=verse;option.textContent='Couplet '+verse+(score.verseLanguages?' — '+({fr:'français',it:'italien',de:'allemand','en-US':'anglais américain',la:'latin italien et grec liturgique'}[score.verseLanguages[verse]]||''):'');$('verse').append(option);}$('verse').value=score.verse;
    $('verse').onchange=()=>void changeVerse();
