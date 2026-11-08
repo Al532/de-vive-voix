@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>De vive voix — De la partition PDF au MusicXML</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f8f7;
+      color: #112f36;
+      font: 1.1rem/1.6 system-ui, sans-serif;
+    }
+
+    main {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 2rem 1.25rem;
+    }
+
+    h1, h2 { line-height: 1.25; }
+    li + li { margin-top: .5rem; }
+    code { overflow-wrap: anywhere; }
+
+    button {
+      padding: .65em 1em;
+      border: 1px solid #112f36;
+      border-radius: .4rem;
+      background: #112f36;
+      color: white;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #005a80;
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article id="consignes">
+      <h1>De vive voix — De la partition PDF au MusicXML</h1>
+      <p>Lis visuellement la partition PDF jointe à la conversation et transcris-la directement en un fichier <code>.musicxml</code> téléchargeable. Le cas courant est une partition imprimée, propre et lisible. Utilise le code pour écrire et contrôler le fichier. Si un détail est difficile à lire, agrandis le passage ou demande une image ciblée.</p>
+
+      <h2>Transcrire la partition</h2>
+      <ul>
+        <li>Repère les parties, les portées, les clés, les armures, la métrique, les anacrouses et les reprises. Lis chaque voix mesure par mesure, y compris quand deux voix partagent une portée. Donne à chaque voix chantée distincte une partie nommée et sélectionnable. Conserve l’accompagnement séparément, avec ses portées et ses voix simultanées.</li>
+        <li>Pour chaque note, relève sa position dans la mesure, sa hauteur, son octave et sa durée. Conserve les silences et distingue les liaisons de prolongation, les liaisons de phrasé et les mélismes. Encode la hauteur de chaque note avec l’altération qui s’applique, y compris lorsqu’elle provient de l’armure ou d’une altération précédente.</li>
+        <li>Relève les paroles pour chaque voix. Attache chaque syllabe à la note où elle commence et conserve la ponctuation, les élisions et les couplets. Utilise <code>&lt;syllabic&gt;</code> pour le découpage des mots et <code>&lt;extend&gt;</code> pour les mélismes. Sur les notes qui prolongent une syllabe, encode la continuation sans recopier le texte.</li>
+      </ul>
+
+      <h2>Vérifier et livrer</h2>
+      <ol>
+        <li><strong>Retour au PDF.</strong> Relis les hauteurs et les rythmes, puis fais une passe consacrée aux paroles. Pour chaque voix, vérifie à la fois le texte reconstitué et les notes sur lesquelles commencent les syllabes. Revois les entrées, les changements de système, les liaisons et les reprises.</li>
+        <li><strong>Contrôle du fichier.</strong> Produis du MusicXML 4.0 <code>score-partwise</code> en UTF-8. Rouvre le fichier généré et vérifie que les parties, les mesures et les événements encodés correspondent au relevé. Contrôle les positions et durées par voix en tenant compte des anacrouses, des accords, des voix simultanées et des notes d’agrément. En cas d’écart, retourne au PDF avant de corriger.</li>
+        <li><strong>Contrôle dans De vive voix.</strong> Si tu peux tester l’import, vérifie les voix sélectionnables, l’ordre de lecture des mesures et l’alignement des syllabes, notamment après un silence, dans un mélisme ou sur un passage sans texte. Si le lecteur restitue un passage différemment de la partition, conserve la notation fidèle et signale l’écart.</li>
+        <li><strong>Remise.</strong> Pour une partition imprimée lisible, livre le fichier directement avec un bilan bref des contrôles effectués. Précise si l’import a été testé. Si une ambiguïté peut changer ce qui sera entendu, indique que le passage est à vérifier et donne la page, la mesure, la voix et le détail en cause.</li>
+      </ol>
+
+      <h2>Fac-similés</h2>
+      <p>Livre une transcription de travail avec relecture humaine requise. Vérifie la clé et les notes repères de chaque portée à chaque système. Distingue les signes visibles des propositions éditoriales. Localise les lectures provisoires et pose une question précise pour chaque doute qui change une note, un rythme, un agrément ou une syllabe.</p>
+    </article>
+
+    <button id="copier" type="button" hidden>Copier les consignes complètes</button>
+    <p id="copie-statut" role="status"></p>
+  </main>
+
+  <script>
+    const boutonCopier = document.getElementById('copier');
+    const consignes = document.getElementById('consignes');
+    const statutCopie = document.getElementById('copie-statut');
+
+    boutonCopier.addEventListener('click', async () => {
+      statutCopie.textContent = '';
+
+      try {
+        await navigator.clipboard.writeText(consignes.innerText);
+        statutCopie.textContent = 'Consignes copiées.';
+      } catch {
+        statutCopie.textContent = 'La copie automatique a échoué. Sélectionne le texte des consignes pour le copier.';
+      }
+    });
+
+    boutonCopier.hidden = false;
+  </script>
+</body>
+</html>
