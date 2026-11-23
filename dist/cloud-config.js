@@ -1,2 +1,1 @@
-// Les paramètres publics sont renseignés après le transfert du catalogue.
-globalThis.DVV_CLOUD_CONFIG = null;
+globalThis.DVV_CLOUD_CONFIG = { url: "https://jilmhnzshegvfvsvwnvi.supabase.co", publicKey: "sb_publishable_j9P-gLqmEpLoYW1rE7VqPg_tHmqOzi7", cutover: false };

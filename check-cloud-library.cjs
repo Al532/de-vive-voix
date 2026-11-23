@@ -4,16 +4,17 @@ const vm = require('node:vm');
 
 function build() {
   let user = 'first';
+  const members = new Set(['first', 'second']);
   const rows = new Map(), catalogue = new Map(), objects = new Map();
   function table(name) {
     const data = name === 'dvv_catalogue' ? catalogue : rows;
-    const rowKey = id => name === 'dvv_catalogue' ? id : user + '/' + id;
     return {
-      select: () => ({ eq: (_column, id) => ({ maybeSingle: async () => ({ data: data.get(rowKey(id)) || null }) }) }),
+      select: () => ({ eq: (_column, id) => ({ maybeSingle: async () => ({
+        data: members.has(user) ? name === 'dvv_members' ? { user_id: user } : data.get(id) || null : null
+      }) }) }),
       insert: async row => {
-        const key = rowKey(row.id);
-        if (data.has(key)) return { error: { code: '23505' } };
-        data.set(key, row);
+        if (data.has(row.id)) return { error: { code: '23505' } };
+        data.set(row.id, row);
         return {};
       }
     };
@@ -25,7 +26,7 @@ function build() {
       return { data: {} };
     },
     async download(path) {
-      if (!path.startsWith(user + '/') && !path.startsWith('catalogue/')) return { error: { status: 403 } };
+      if (!members.has(user) || !/^(shared|catalogue)\//.test(path)) return { error: { status: 403 } };
       return objects.has(path) ? { data: objects.get(path) } : { error: { status: 404 } };
     }
   };
@@ -69,12 +70,15 @@ async function verify() {
   objects.set(audioPath, audio);
 
   setUser('second');
-  assert.equal(await api.getRecord(record.id), null);
-  await assert.rejects(api.transfer(record), /uniquement sur cet appareil/);
+  assert.equal((await api.getRecord(record.id)).record.score.title, 'Partition');
+  await api.transfer(record);
+  setUser('visitor');
+  await assert.rejects(api.getRecord(record.id), /n’a pas accès/);
+  await assert.rejects(api.transfer(record, { upload: true }), /n’a pas accès/);
   setUser(null);
   await assert.rejects(api.transfer(record, { upload: true }), /Connecte-toi/);
   assert.equal(rows.size, 1);
-  console.log('Bibliothèque en ligne : reprise sans doublon, relecture des fichiers et refus de purge sur copie absente ou corrompue.');
+  console.log('Bibliothèque partagée : accès aux deux membres, compte tiers refusé, vérification avant purge et reprise sans doublon.');
 }
 
 verify().catch(error => { console.error(error); process.exitCode = 1; });

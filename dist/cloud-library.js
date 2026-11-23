@@ -3,6 +3,7 @@
 
   const config = root.DVV_CLOUD_CONFIG;
   const cataloguePrefix = 'catalogue';
+  const sharedPrefix = 'shared';
   const bucketName = 'dvv-library';
   const entriesTable = 'dvv_scores';
   const catalogueTable = 'dvv_catalogue';
@@ -43,7 +44,13 @@
     const active = await session();
     if (!active) throw Error('Connecte-toi pour accéder à tes partitions en ligne.');
     const db = await client();
-    return { db, owner: active.user.id, bucket: db.storage.from(bucketName) };
+    await requireMembership(db, active.user.id);
+    return { db, bucket: db.storage.from(bucketName) };
+  }
+
+  async function requireMembership(db, userId) {
+    const membership = result(await db.from('dvv_members').select('user_id').eq('user_id', userId).maybeSingle());
+    if (!membership) throw Error('Ce compte n’a pas accès à la bibliothèque partagée.');
   }
 
   async function hash(value) {
@@ -82,11 +89,11 @@
   }
 
   async function getRecord(id) {
-    const { db, owner, bucket } = await connection();
-    const own = result(await db.from(entriesTable).select('checksum').eq('id', id).maybeSingle());
-    const row = own || result(await db.from(catalogueTable).select('checksum').eq('id', id).maybeSingle());
+    const { db, bucket } = await connection();
+    const shared = result(await db.from(entriesTable).select('checksum').eq('id', id).maybeSingle());
+    const row = shared || result(await db.from(catalogueTable).select('checksum').eq('id', id).maybeSingle());
     if (!row) return null;
-    const prefix = own ? owner : cataloguePrefix;
+    const prefix = shared ? sharedPrefix : cataloguePrefix;
     const file = await readFile(bucket, prefix, 'bundles', row.checksum);
     const record = JSON.parse(await file.text());
     if (record.id !== id) throw Error('La partition en ligne ne correspond pas à celle demandée.');
@@ -115,25 +122,25 @@
   }
 
   async function transfer(record, { upload = false } = {}) {
-    const { db, owner, bucket } = await connection();
+    const { db, bucket } = await connection();
     const copy = await snapshot(record);
     const lookup = () => db.from(entriesTable).select('checksum').eq('id', record.id).maybeSingle();
     let existing = result(await lookup());
     if (!existing && upload) {
-      for (const { checksum, blob } of copy.audio.values()) await writeFile(bucket, owner, 'audio', checksum, blob, 'audio/wav');
-      if (copy.sourceChecksum) await writeFile(bucket, owner, 'sources', copy.sourceChecksum, copy.originalFile, 'application/octet-stream');
-      await writeFile(bucket, owner, 'bundles', copy.checksum, copy.file, 'application/json');
+      for (const { checksum, blob } of copy.audio.values()) await writeFile(bucket, sharedPrefix, 'audio', checksum, blob, 'audio/wav');
+      if (copy.sourceChecksum) await writeFile(bucket, sharedPrefix, 'sources', copy.sourceChecksum, copy.originalFile, 'application/octet-stream');
+      await writeFile(bucket, sharedPrefix, 'bundles', copy.checksum, copy.file, 'application/json');
       const { error } = await db.from(entriesTable).insert({
-        owner, id: record.id, title: record.score.title, composer: record.score.composer || '', checksum: copy.checksum
+        id: record.id, title: record.score.title, composer: record.score.composer || '', checksum: copy.checksum
       });
       if (error && error.code !== '23505') throw Error('Impossible d’inscrire la partition dans la bibliothèque en ligne.', { cause: error });
       existing = result(await lookup());
     }
     if (!existing) throw Error('Cette partition est encore uniquement sur cet appareil.');
     if (existing.checksum !== copy.checksum) throw Error('Une autre version de cette partition existe en ligne. La copie locale a été conservée.');
-    await readFile(bucket, owner, 'bundles', copy.checksum);
-    if (copy.sourceChecksum) await readFile(bucket, owner, 'sources', copy.sourceChecksum);
-    for (const checksum of new Set([...copy.audio.values()].map(file => file.checksum))) await readFile(bucket, owner, 'audio', checksum);
+    await readFile(bucket, sharedPrefix, 'bundles', copy.checksum);
+    if (copy.sourceChecksum) await readFile(bucket, sharedPrefix, 'sources', copy.sourceChecksum);
+    for (const checksum of new Set([...copy.audio.values()].map(file => file.checksum))) await readFile(bucket, sharedPrefix, 'audio', checksum);
   }
 
   async function sendCode(email) {
@@ -142,7 +149,9 @@
   }
   async function verifyCode(email, token) {
     const db = await client();
-    result(await db.auth.verifyOtp({ email, token, type: 'email' }), 'Ce code est incorrect ou a expiré.');
+    const { user } = result(await db.auth.verifyOtp({ email, token, type: 'email' }), 'Ce code est incorrect ou a expiré.');
+    try { await requireMembership(db, user.id); }
+    catch (error) { await db.auth.signOut({ scope: 'local' }); throw error; }
   }
   async function signOut() {
     result(await (await client()).auth.signOut({ scope: 'local' }), 'Impossible de te déconnecter.');
@@ -157,9 +166,9 @@
     result(await db.from('dvv_folders').delete().eq('id', id), 'Impossible de supprimer ce dossier.');
   }
   async function move(scoreId, folderId) {
-    const { db, owner } = await connection();
+    const { db } = await connection();
     const table = db.from('dvv_locations');
-    result(await (folderId ? table.upsert({ owner, score_id: scoreId, folder_id: folderId }, { onConflict: 'owner,score_id' }) : table.delete().eq('score_id', scoreId)), 'Impossible de déplacer cette partition.');
+    result(await (folderId ? table.upsert({ score_id: scoreId, folder_id: folderId }, { onConflict: 'score_id' }) : table.delete().eq('score_id', scoreId)), 'Impossible de déplacer cette partition.');
   }
 
   root.CloudLibrary = {
