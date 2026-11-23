@@ -143,13 +143,9 @@
     for (const checksum of new Set([...copy.audio.values()].map(file => file.checksum))) await readFile(bucket, sharedPrefix, 'audio', checksum);
   }
 
-  async function sendCode(email) {
+  async function signIn(email, password) {
     const db = await client();
-    result(await db.auth.signInWithOtp({ email, options: { shouldCreateUser: false } }), 'Impossible d’envoyer le code de connexion. Vérifie que ton adresse a été autorisée.');
-  }
-  async function verifyCode(email, token) {
-    const db = await client();
-    const { user } = result(await db.auth.verifyOtp({ email, token, type: 'email' }), 'Ce code est incorrect ou a expiré.');
+    const { user } = result(await db.auth.signInWithPassword({ email, password }), 'Connexion impossible. Vérifie ton adresse e-mail et ton mot de passe.');
     try { await requireMembership(db, user.id); }
     catch (error) { await db.auth.signOut({ scope: 'local' }); throw error; }
   }
@@ -173,6 +169,6 @@
 
   root.CloudLibrary = {
     configured: Boolean(config?.url && config?.publicKey), cutover: config?.cutover === true, pilotId,
-    session, summary, getRecord, transfer, sendCode, verifyCode, signOut, saveFolder, removeFolder, move
+    session, summary, getRecord, transfer, signIn, signOut, saveFolder, removeFolder, move
   };
 })(globalThis);

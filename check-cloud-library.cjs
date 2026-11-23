@@ -37,7 +37,15 @@ function build() {
     supabase: { createClient: () => ({
       from: table,
       storage: { from: () => storage },
-      auth: { getSession: async () => ({ data: { session: user ? { user: { id: user } } : null } }) }
+      auth: {
+        getSession: async () => ({ data: { session: user ? { user: { id: user } } : null } }),
+        signInWithPassword: async ({ email, password }) => {
+          if (password !== 'test-password') return { error: new Error('Invalid password') };
+          user = email;
+          return { data: { user: { id: user } } };
+        },
+        signOut: async () => { user = null; return {}; }
+      }
     }) }
   };
   vm.runInNewContext(fs.readFileSync('dist/cloud-library.js', 'utf8'), sandbox);
@@ -77,6 +85,13 @@ async function verify() {
   await assert.rejects(api.transfer(record, { upload: true }), /n’a pas accès/);
   setUser(null);
   await assert.rejects(api.transfer(record, { upload: true }), /Connecte-toi/);
+  await assert.rejects(api.signIn('first', 'incorrect'), /Connexion impossible/);
+  await api.signIn('first', 'test-password');
+  assert.equal((await api.session()).user.id, 'first');
+  await api.signIn('second', 'test-password');
+  assert.equal((await api.getRecord(record.id)).record.id, 'partition');
+  await assert.rejects(api.signIn('visitor', 'test-password'), /n’a pas accès/);
+  assert.equal(await api.session(), null);
   assert.equal(rows.size, 1);
   console.log('Bibliothèque partagée : accès aux deux membres, compte tiers refusé, vérification avant purge et reprise sans doublon.');
 }

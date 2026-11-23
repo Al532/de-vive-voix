@@ -6,26 +6,22 @@
 <title>Mes partitions — De vive voix</title>
 <link rel="stylesheet" href="lab.css?v=library-1">
 <script src="cloud-config.js" defer></script>
-<script src="cloud-library.js?v=1" defer></script>
+<script src="cloud-library.js?v=2" defer></script>
 <script src="practice-library.js?v=cloud-1" defer></script>
 <script src="score-navigation.js?v=1" defer></script>
-<script src="bibliotheque.js?v=1" defer></script>
+<script src="bibliotheque.js?v=2" defer></script>
 </head>
 <body><main>
 <header><h1 id="libraryTitle" tabindex="-1">Mes partitions</h1></header>
 <p id="libraryStatus" role="status" aria-atomic="true">Chargement de la bibliothèque…</p>
 <section id="account" aria-labelledby="accountTitle" hidden>
 <h2 id="accountTitle">Connexion</h2>
-<form id="emailForm">
+<form id="loginForm">
 <label for="email">Adresse e-mail</label>
-<input id="email" type="email" name="email" autocomplete="email" required>
-<button type="submit" class="primary">Recevoir un code</button>
-</form>
-<form id="codeForm" hidden>
-<label for="code">Code reçu par e-mail</label>
-<input id="code" type="text" autocomplete="one-time-code" inputmode="numeric" required>
+<input id="email" type="email" name="email" autocomplete="username" required>
+<label for="password">Mot de passe</label>
+<input id="password" type="password" name="password" autocomplete="current-password" required>
 <button type="submit" class="primary">Se connecter</button>
-<button id="anotherEmail" type="button">Changer d’adresse ou renvoyer le code</button>
 </form>
 </section>
 <section id="onlineLibrary" aria-labelledby="onlineTitle" hidden>

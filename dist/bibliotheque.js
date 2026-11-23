@@ -4,7 +4,7 @@ const byId = id => document.getElementById(id);
 const ui = Object.fromEntries([...document.querySelectorAll('[id]')].map(element => [element.id, element]));
 const titleOf = score => [score.title, score.composer].filter(Boolean).join(' — ');
 const status = message => { ui.libraryStatus.textContent = message; };
-let localRecords = [], email, running = false;
+let localRecords = [], running = false;
 
 function make(tag, text) {
   const element = document.createElement(tag);
@@ -144,34 +144,18 @@ async function transferLocal(upload) {
   status(completed + ' sur ' + entries.length + (upload ? ' partitions vérifiées en ligne.' : ' copies locales retirées.') + (errors.length ? ' Les autres copies locales sont conservées.' : ''));
 }
 
-ui.emailForm.onsubmit = action(async () => {
-  email = ui.email.value.trim();
-  await CloudLibrary.sendCode(email);
-  ui.emailForm.hidden = true;
-  ui.codeForm.hidden = false;
-  ui.code.focus();
-  status('Code envoyé à ' + email + '.');
-});
-ui.codeForm.onsubmit = action(async () => {
-  await CloudLibrary.verifyCode(email, ui.code.value.trim());
-  ui.code.value = '';
+ui.loginForm.onsubmit = action(async () => {
+  await CloudLibrary.signIn(ui.email.value.trim(), ui.password.value);
+  ui.password.value = '';
   await refresh();
   ui.onlineTitle.focus();
-  status('Tu es connectée.');
-});
-ui.anotherEmail.onclick = action(async () => {
-  ui.codeForm.hidden = true;
-  ui.emailForm.hidden = false;
-  ui.code.value = '';
-  ui.email.focus();
+  status('Connexion réussie.');
 });
 ui.signOut.onclick = action(async () => {
   await CloudLibrary.signOut();
-  ui.codeForm.hidden = true;
-  ui.emailForm.hidden = false;
   await refresh();
   ui.email.focus();
-  status('Tu es déconnectée.');
+  status('Déconnexion réussie.');
 });
 ui.folderForm.onsubmit = action(async () => {
   const name = ui.folderName.value.trim();
