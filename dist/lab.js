@@ -577,6 +577,10 @@ async function init(){
    }catch{}
   }
   $('workspace').hidden=false;setText('status','');prefillMeasure();render();savePosition();void preloadSpeech();
- }catch(error){setText('status','Impossible de charger le morceau. ' + error.message + '');tracePlayback('initialization-error',{message:error.message});}
+ }catch(error){
+  if(error.code==='sign-in-required'&&globalThis.CloudLibrary?.cutover){location.assign('bibliotheque.html');return;}
+  setText('status','Impossible de charger le morceau. ' + error.message + '');tracePlayback('initialization-error',{message:error.message});
+ }
 }
 prepareVoices();init();
+

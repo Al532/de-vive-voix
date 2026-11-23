@@ -196,6 +196,8 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
    getAudio:async()=>{localTextReads++;return {blob:{arrayBuffer:async()=>({duration:1})},gain:.1};}};
   sandbox.MusicXMLImport={applyVerse(){}};sandbox.ImportSpeech={romanGreek:text=>text};
  }
+ if(options.cloud) sandbox.CloudLibrary=options.cloud;
+ if(options.loadBundle) sandbox.PracticeLibrary.loadBundle=options.loadBundle;
  if(options.noNative){delete window.speechSynthesis;delete window.SpeechSynthesisUtterance;}
  for(const file of ['blocs.js','note-synth.js','phonetics-engine.js','bloc-speech.js','transport.js','score-navigation.js','lab.js']){vm.runInContext(fs.readFileSync('dist/'+file,'utf8'),sandbox);if(file==='phonetics-engine.js')sandbox.LatinPhonetics=window.LatinPhonetics;}
  for(let i=0;i<25;i++)await settle();
@@ -203,6 +205,21 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
  const get=()=>registry.get_practice_position.execute();
  async function click(id){if(els[id].hidden)return;els[id].onclick();for(let i=0;i<25;i++)await settle();}
  return {els,get,click,h,handlers,window,document,registry,store,location,spoken:()=>spoken,localTextReads:()=>localTextReads,utterances,cancelCount:()=>cancelCount,traces,audioFetches,audioContexts,mediaPlays:()=>mediaPlays};
+}
+async function testPrivateCatalogue(){
+ const cloud={configured:true,cutover:true,pilotId:'belissen-pilote'};
+ const home=await mount(new Map(),'',false,true,{cloud});
+ assert.equal(new URL(home.location.href).pathname,'/bibliotheque.html');
+ const loadBundle=async id=>{
+  assert.equal(id,cloud.pilotId);
+  throw Object.assign(new Error('Connecte-toi.'),{code:'sign-in-required'});
+ };
+ const bookmark=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud,loadBundle});
+ assert.equal(new URL(bookmark.location.href).pathname,'/bibliotheque.html');
+ assert.equal(bookmark.els.scoreChoice.children.length,0);
+ const signedIn=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud,loadBundle:async()=>({score,assets})});
+ assert.equal(signedIn.get().totalBlocs,44);
+ assert(signedIn.els.scoreChoice.hidden);
 }
 async function testPreloadSpeech(){
  for(const options of [{},{imported:true,language:'la'}]){
@@ -459,4 +476,4 @@ async function testPlaybackModes(){
  console.log('Modes : repos, blocs, lecture complète, pause/reprise, déplacements, arrêt, fin naturelle et annulation pendant le texte vérifiés.');
 }
 
-(async()=>{({createFitter}=await import('./dist/tempo-stretch.mjs'));await testPreloadSpeech();await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testExaudiNaturalSyllables();await testFittedTempoChange();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});
+(async()=>{({createFitter}=await import('./dist/tempo-stretch.mjs'));await testPrivateCatalogue();await testPreloadSpeech();await testPlaybackModes();await testPieceSettings();await testTransport();await testSyllableOverlap();await testExaudiNaturalSyllables();await testFittedTempoChange();await testEnding();await testNaturalSpeech();await testImportedNaturalSpeech();await testApp();console.log('Protocole historique identique : 5 voix × 3 budgets de texte au réglage 2.');console.log('Blocs : 8 tailles × 5 voix × 2 options d’amorce × 3 tempos ; '+placements+' placements vérifiés ('+overlapping+' syllabes pouvant se superposer au lieu d’être coupées).');})().catch(e=>{console.error(e);process.exitCode=1;});

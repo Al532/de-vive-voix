@@ -42,7 +42,11 @@
 
   async function connection() {
     const active = await session();
-    if (!active) throw Error('Connecte-toi pour accéder à tes partitions en ligne.');
+    if (!active) {
+      const error = Error('Connecte-toi pour accéder à tes partitions en ligne.');
+      error.code = 'sign-in-required';
+      throw error;
+    }
     const db = await client();
     await requireMembership(db, active.user.id);
     return { db, bucket: db.storage.from(bucketName) };
