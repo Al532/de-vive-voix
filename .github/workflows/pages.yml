@@ -69,6 +69,8 @@ jobs:
         run: node check.cjs
       - name: Vérifier les morceaux fournis
         run: node check-bundled.cjs
+      - name: Vérifier la migration vers la bibliothèque en ligne
+        run: node check-cloud-library.cjs
       - name: Vérifier les imports MusicXML
         run: node check-import.cjs
       - name: Vérifier la phonétique
@@ -96,6 +98,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ needs.prepare-audio.outputs.revision }}
+      - name: Retirer les partitions transférées du site public
+        run: node tools/cloud-library/strip-public-scores.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

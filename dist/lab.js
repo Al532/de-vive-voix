@@ -200,10 +200,12 @@ function savePosition(measure=bloc().core[0]){
 function syncSettings(){
  try{
   const url=new URL(location.href),trace=url.searchParams.get('trace');
+  const scoreInUrl=url.searchParams.get('score');
   url.search=new URLSearchParams({part,tempo,measures:measureSize,leadIn:leadIn?'1':'0'}).toString();
   if(!readBlockText)url.searchParams.set('readBlockText','0');
   if(trace==='1')url.searchParams.set('trace','1');
   if(importedId){url.searchParams.set('score',importedId);url.searchParams.set('verse',score.verse);}
+  else if(scoreInUrl)url.searchParams.set('score',scoreInUrl);
   if(brailleCells!==32)url.searchParams.set('cells',String(brailleCells));
   if(url.href!==location.href)history.replaceState(null,'',url);
  }catch{}
@@ -473,7 +475,7 @@ async function setupScoreChoice(requestedId){
   const option=document.createElement('option');option.value=entry.id;option.textContent=entry.title;select.append(option);
  }
  if(requestedId&&!records.some(r=>r.id===requestedId)){
-  const option=document.createElement('option');option.value=requestedId;option.textContent='Morceau indisponible sur cet appareil';select.append(option);
+  const option=document.createElement('option');option.value=requestedId;option.textContent='Morceau sélectionné';select.append(option);
  }
  select.value=requestedId;
  const deleteButton=$('deleteLocalScore');
@@ -490,9 +492,17 @@ async function setupScoreChoice(requestedId){
 }
 async function init(){
  try{
-  const requestedId=new URLSearchParams(location.search).get('score')||'';
-  await setupScoreChoice(requestedId);
-  if(requestedId){
+  const queryAtEntry=new URLSearchParams(location.search),cloud=globalThis.CloudLibrary;
+  const requestedId=queryAtEntry.get('score')||(cloud?.cutover&&queryAtEntry.has('part')?cloud.pilotId:'');
+  if(cloud?.cutover){
+   if(!requestedId){location.assign('bibliotheque.html');return;}
+   $('scoreChoice').hidden=true;
+   $('importLink').href=ScoreNavigation.importUrl(requestedId);
+  }else await setupScoreChoice(requestedId);
+  if(cloud?.configured&&requestedId===cloud.pilotId){
+   const bundle=await PracticeLibrary.loadBundle(requestedId);
+   score=bundle.score;speechAssets=bundle.assets;speechMap=BlocSpeech.createMap(score,LatinPhonetics);
+  }else if(requestedId){
    const bundle=await PracticeLibrary.loadBundle(requestedId,new URLSearchParams(location.search).get('verse'));
    importedRecord=bundle.record;importedId=requestedId;score=bundle.score;
    MusicXMLImport.applyVerse(score,new URLSearchParams(location.search).get('verse')||score.verseNumbers[0]);
@@ -506,6 +516,10 @@ async function init(){
    if(responses.some(r=>!r.ok))throw Error('Chargement impossible.');
    [score,speechAssets]=await Promise.all(responses.map(r=>r.json()));
    speechMap=BlocSpeech.createMap(score,LatinPhonetics);
+  }
+  if(requestedId&&!cloud?.cutover){
+   const selected=$('scoreChoice').selectedOptions?.[0];
+   if(selected)selected.textContent=[score.title,score.composer].filter(Boolean).join(' - ');
   }
   notes=BlocModel.mergedNotes(score);
   storageKey='de-vive-voix:practice:v1:'+(importedId?importedId+':':'')+fingerprint({title:score.title,composer:score.composer,starts:score.starts,voices:score.parts.map(p=>p.name)});
