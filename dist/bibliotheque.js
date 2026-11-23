@@ -4,7 +4,7 @@ const byId = id => document.getElementById(id);
 const ui = Object.fromEntries([...document.querySelectorAll('[id]')].map(element => [element.id, element]));
 const titleOf = score => [score.title, score.composer].filter(Boolean).join(' — ');
 const status = message => { ui.libraryStatus.textContent = message; };
-let localRecords = [], running = false;
+let localRecords = [], onlineModel, selectedFolder = '', running = false;
 
 function make(tag, text) {
   const element = document.createElement(tag);
@@ -38,8 +38,25 @@ function action(handler) {
 function scoreRow(score, folders, location) {
   const title = titleOf(score), row = make('li');
   row.append(linkTo(score.id, title));
-  if (!folders.length) return row;
-  const details = make('details'), form = make('form'), select = make('select');
+  const details = make('details');
+  details.append(make('summary', 'Gérer « ' + title + ' »'));
+  if (folders.length) details.append(moveForm(score, folders, location));
+  const remove = button('Supprimer la partition');
+  remove.onclick = action(async () => {
+    if (!window.confirm('Supprimer « ' + title + ' » de la bibliothèque partagée pour les deux comptes ?')) return;
+    await CloudLibrary.removeScore(score);
+    await refresh();
+    (byId('folder-' + (location || 'root')) || ui.onlineTitle).focus();
+    status('« ' + title + ' » a été retirée de la bibliothèque partagée.');
+  });
+  details.append(remove);
+  row.append(details);
+  return row;
+}
+
+function moveForm(score, folders, location) {
+  const form = make('form'), select = make('select');
+  const title = titleOf(score);
   const label = make('label', 'Dossier de destination pour « ' + title + ' »');
   select.id = 'destination-' + score.id;
   label.htmlFor = select.id;
@@ -48,14 +65,29 @@ function scoreRow(score, folders, location) {
   select.value = location || '';
   form.append(label, select, button('Déplacer', 'submit'));
   form.onsubmit = action(async () => {
-    await CloudLibrary.move(score.id, select.value);
+    const folder = select.value;
+    await CloudLibrary.move(score.id, folder);
+    if (selectedFolder) selectedFolder = folder || ScoreNavigation.noFolder;
     await refresh();
-    byId('folder-' + (select.value || 'root'))?.focus();
+    (byId('folder-' + (folder || 'root')) || ui.onlineTitle).focus();
     status('« ' + title + ' » a été déplacée.');
   });
-  details.append(make('summary', 'Déplacer « ' + title + ' »'), form);
-  row.append(details);
-  return row;
+  return form;
+}
+
+function localRow(record) {
+  const title = titleOf(record.score), item = make('li'), details = make('details');
+  const remove = button('Supprimer la copie de cet appareil');
+  remove.onclick = action(async () => {
+    if (!window.confirm('Supprimer la copie de « ' + title + ' » de cet appareil ?')) return;
+    await PracticeLibrary.remove(record.id);
+    await refresh();
+    (ui.localLibrary.hidden ? ui.libraryTitle : ui.localTitle).focus();
+    status('Copie locale retirée.');
+  });
+  details.append(make('summary', 'Gérer la copie de « ' + title + ' »'), remove);
+  item.append(linkTo(record.id, title), details);
+  return item;
 }
 
 function folderSection(folder, scores, folders, assignments) {
@@ -109,17 +141,44 @@ async function refresh() {
   ui.migrate.hidden = !connected || !showLocal;
   ui.purge.hidden = !connected || !showLocal;
   ui.localList.replaceChildren();
-  for (const record of localRecords) {
-    const item = make('li');
-    item.append(linkTo(record.id, titleOf(record.score)));
-    ui.localList.append(item);
+  for (const record of localRecords) ui.localList.append(localRow(record));
+  onlineModel = connected ? await CloudLibrary.summary() : null;
+  if (onlineModel) renderLibrary();
+  else ui.folderList.replaceChildren();
+  return connected;
+}
+
+function renderLibrary() {
+  const { scores, folders, locations } = onlineModel;
+  const choices = ScoreNavigation.folderOptions(folders);
+  if (!choices.some(choice => choice.id === selectedFolder)) selectedFolder = '';
+  ui.folderFilter.replaceChildren(...choices.map(choice => new Option(choice.name, choice.id)));
+  ui.folderFilter.value = selectedFolder;
+  const assignments = ScoreNavigation.folderAssignments(locations);
+  const ordered = [...scores].sort((a, b) => titleOf(a).localeCompare(titleOf(b), 'fr'));
+  const sections = [null, ...folders].filter(folder => !selectedFolder || (folder?.id || ScoreNavigation.noFolder) === selectedFolder);
+  ui.folderList.replaceChildren(...sections.map(folder => folderSection(folder, ScoreNavigation.scoresInFolder(ordered, assignments, folder?.id || ScoreNavigation.noFolder), folders, assignments)));
+}
+
+function showMigrationErrors(errors) {
+  ui.migrationErrors.replaceChildren(...errors.map(message => make('li', message)));
+  ui.migrationErrors.hidden = !errors.length;
+}
+
+async function openLibrary() {
+  const account = await refresh();
+  if (!account) {
+    status(CloudLibrary.configured ? '' : 'La bibliothèque en ligne n’est pas encore configurée.');
+    return;
   }
-  if (!connected) return;
-  const { scores, folders, locations } = await CloudLibrary.summary();
-  const assignments = new Map(locations.map(item => [item.score_id, item.folder_id]));
-  const ordered = scores.sort((a, b) => titleOf(a).localeCompare(titleOf(b), 'fr'));
-  ui.folderList.replaceChildren(folderSection(null, ordered.filter(s => !assignments.has(s.id)), folders, assignments));
-  for (const folder of folders) ui.folderList.append(folderSection(folder, ordered.filter(s => assignments.get(s.id) === folder.id), folders, assignments));
+  const migration = await globalThis.MarieMigration?.run({ account, folders: onlineModel.folders, records: localRecords }, status);
+  if (!migration) { status(''); return; }
+  if (migration.folder && migration.completed) selectedFolder = migration.folder.id;
+  await refresh();
+  showMigrationErrors(migration.errors);
+  status(migration.folder
+    ? `${migration.completed} partition(s) transférée(s) dans « ${migration.folder.name} » et retirée(s) de cet appareil.${migration.errors.length ? ' Les copies non transférées ont été conservées.' : ''}`
+    : 'Transfert reporté. Les copies locales ont été conservées.');
 }
 
 async function transferLocal(upload) {
@@ -130,13 +189,12 @@ async function transferLocal(upload) {
   for (const record of entries) {
     status((upload ? 'Copie' : 'Vérification') + ' de la partition ' + (completed + errors.length + 1) + ' sur ' + entries.length + '.');
     try {
-      await CloudLibrary.transfer(record, { upload });
+      await CloudLibrary.transfer(record, { upload, restore: upload });
       if (!upload && !await PracticeLibrary.remove(record.id, record)) throw Error('La copie locale a changé. Elle a été conservée.');
       completed++;
     } catch (error) { errors.push(titleOf(record.score) + ' : ' + error.message); }
   }
-  ui.migrationErrors.replaceChildren(...errors.map(message => make('li', message)));
-  ui.migrationErrors.hidden = !errors.length;
+  showMigrationErrors(errors);
   ui.confirmPurge.hidden = true;
   await refresh();
   const trigger = upload ? ui.migrate : ui.purge;
@@ -147,15 +205,20 @@ async function transferLocal(upload) {
 ui.loginForm.onsubmit = action(async () => {
   await CloudLibrary.signIn(ui.email.value.trim(), ui.password.value);
   ui.password.value = '';
-  await refresh();
-  ui.onlineTitle.focus();
   status('Connexion réussie.');
+  await openLibrary();
+  ui.onlineTitle.focus();
 });
 ui.signOut.onclick = action(async () => {
   await CloudLibrary.signOut();
   await refresh();
+  showMigrationErrors([]);
   ui.email.focus();
   status('Déconnexion réussie.');
+});
+ui.folderFilter.onchange = action(async () => {
+  selectedFolder = ui.folderFilter.value;
+  renderLibrary();
 });
 ui.folderForm.onsubmit = action(async () => {
   const name = ui.folderName.value.trim();
@@ -170,7 +233,8 @@ ui.purge.onclick = action(async () => { ui.confirmPurge.hidden = false; ui.apply
 ui.cancelPurge.onclick = action(async () => { ui.confirmPurge.hidden = true; ui.purge.focus(); });
 ui.applyPurge.onclick = action(() => transferLocal(false));
 if (CloudLibrary.cutover) ui.readerLink.hidden = true;
-refresh().then(() => status(CloudLibrary.configured ? '' : 'La bibliothèque en ligne n’est pas encore configurée.')).catch(error => status(error.message));
+running = true;
+openLibrary().catch(error => status(error.message)).finally(() => { running = false; });
 window.addEventListener('pageshow', event => {
   if (event.persisted && !running) refresh().catch(error => status(error.message));
 });

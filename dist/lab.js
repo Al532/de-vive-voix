@@ -459,36 +459,50 @@ async function changeVerse(){
   if(transport){transport.cancelSources();transport=null;}mode='idle';rebuild();selectMeasure(at);lastLyricKey='';loading=false;savePosition();render();announce('Couplet '+verse+'. '+selectedDescription());void preloadSpeech();
  }catch(error){if(mine===ticket){$('verse').value=previousVerse;loading=false;render();announce(error.message);}}finally{$('verseSettings').removeAttribute('aria-busy');}
 }
+function openScore(target){
+ if(score&&bloc())savePosition(mode==='complete'&&transport?.range?BlocModel.measureAt(score,transport.position()):bloc().core[0]);
+ cancelPlayback();location.assign(ScoreNavigation.readerUrl(target));
+}
+function scoreOption(value,title){
+ const option=document.createElement('option');option.value=value;option.textContent=title;return option;
+}
 async function setupScoreChoice(requestedId){
  const select=$('scoreChoice');
- select.onchange=()=>{
-  const target=select.value;
-  if(score&&bloc())savePosition(mode==='complete'&&transport?.range?BlocModel.measureAt(score,transport.position()):bloc().core[0]);
-  cancelPlayback();location.assign(ScoreNavigation.readerUrl(target));
- };
+ select.onchange=()=>openScore(select.value);
  $('importLink').href=ScoreNavigation.importUrl(requestedId);
  let records=[];
  try{records=await PracticeLibrary.list();}
  catch{setText('storageNotice','Les morceaux de cet appareil ne peuvent pas être chargés dans ce navigateur.');}
  select.replaceChildren();
  for(const entry of ScoreNavigation.entries(records,{title:'Gloria Patri et Filio',composer:'Belissen'})){
-  const option=document.createElement('option');option.value=entry.id;option.textContent=entry.title;select.append(option);
+  select.append(scoreOption(entry.id,entry.title));
  }
  if(requestedId&&!records.some(r=>r.id===requestedId)){
-  const option=document.createElement('option');option.value=requestedId;option.textContent='Morceau sélectionné';select.append(option);
+  select.append(scoreOption(requestedId,'Morceau sélectionné'));
  }
  select.value=requestedId;
- const deleteButton=$('deleteLocalScore');
- const selectedRecord=records.find(record=>record.id===requestedId);
- deleteButton.hidden=!selectedRecord?.local;
- deleteButton.textContent=selectedRecord?.bundled?'Supprimer la copie locale de cette partition':'Supprimer cette partition de l’appareil';
- deleteButton.onclick=async()=>{
-  if(deleteButton.hidden||deleteButton.disabled)return;
-  if(!window.confirm('Supprimer « '+(score?.title||'cette partition')+' » de cet appareil ? '+(selectedRecord.bundled?'La partition restera disponible dans le catalogue en ligne.':'Vous pourrez la réimporter avec son fichier MusicXML.')))return;
-  deleteButton.disabled=true;cancelPlayback();
-  try{await PracticeLibrary.remove(requestedId);location.assign(ScoreNavigation.readerUrl(selectedRecord.bundled?requestedId:''));}
-  catch(error){deleteButton.disabled=false;announce(error.message);}
- };
+}
+async function setupCloudScoreChoice(requestedId){
+ const {scores,folders,locations}=await globalThis.CloudLibrary.summary();
+ const folder=$('readerFolder'),select=$('scoreChoice');
+ const assignments=ScoreNavigation.folderAssignments(locations);
+ const ordered=[...scores].sort((a,b)=>a.title.localeCompare(b.title,'fr'));
+ folder.replaceChildren(...ScoreNavigation.folderOptions(folders).map(entry=>scoreOption(entry.id,entry.name)));
+ folder.value=ordered.some(entry=>entry.id===requestedId)?(assignments.get(requestedId)||ScoreNavigation.noFolder):'';
+ function showFolder(){
+  const choices=ScoreNavigation.scoresInFolder(ordered,assignments,folder.value);
+  const hasCurrent=choices.some(entry=>entry.id===requestedId);
+  const placeholder=scoreOption('',choices.length?'Choisir un morceau':'Aucun morceau dans ce dossier');
+  placeholder.disabled=true;
+  select.replaceChildren(...(hasCurrent?[]:[placeholder]),...choices.map(entry=>scoreOption(entry.id,[entry.title,entry.composer].filter(Boolean).join(' — '))));
+  select.value=hasCurrent?requestedId:'';
+  select.disabled=!choices.length;
+ }
+ folder.onchange=showFolder;
+ select.onchange=()=>{if(select.value)openScore(select.value);};
+ showFolder();
+ $('readerFolderPicker').hidden=false;
+ select.hidden=false;
 }
 async function init(){
  try{
@@ -577,6 +591,7 @@ async function init(){
    }catch{}
   }
   $('workspace').hidden=false;setText('status','');prefillMeasure();render();savePosition();void preloadSpeech();
+  if(cloud?.cutover) void setupCloudScoreChoice(requestedId).catch(()=>{});
  }catch(error){
   if(error.code==='sign-in-required'&&globalThis.CloudLibrary?.cutover){location.assign('bibliotheque.html');return;}
   setText('status','Impossible de charger le morceau. ' + error.message + '');tracePlayback('initialization-error',{message:error.message});

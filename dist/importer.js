@@ -13,7 +13,7 @@ async function start(file,chosenLanguage){
     by('cancelImport').hidden=true;
     by('importStatus').textContent='Sauvegarde dans ta bibliothèque en ligne…';
     by('importProgress').textContent='';
-    await CloudLibrary.transfer(record,{upload:true});
+    await CloudLibrary.transfer(record,{upload:true,restore:true});
     await PracticeLibrary.remove(id,record);
     destination='La partition est disponible dans ta bibliothèque en ligne.';
    }

@@ -6,10 +6,11 @@
 <title>Mes partitions — De vive voix</title>
 <link rel="stylesheet" href="lab.css?v=library-1">
 <script src="cloud-config.js?v=2" defer></script>
-<script src="cloud-library.js?v=3" defer></script>
+<script src="cloud-library.js?v=4" defer></script>
 <script src="practice-library.js?v=cloud-1" defer></script>
-<script src="score-navigation.js?v=1" defer></script>
-<script src="bibliotheque.js?v=2" defer></script>
+<script src="score-navigation.js?v=2" defer></script>
+<script src="migration-marie.js?v=1" defer></script>
+<script src="bibliotheque.js?v=3" defer></script>
 </head>
 <body><main>
 <header><h1 id="libraryTitle" tabindex="-1">Mes partitions</h1></header>
@@ -26,6 +27,8 @@
 </section>
 <section id="onlineLibrary" aria-labelledby="onlineTitle" hidden>
 <h2 id="onlineTitle" tabindex="-1">Bibliothèque partagée</h2>
+<label for="folderFilter">Dossier</label>
+<select id="folderFilter"></select>
 <p><a href="importer.html?library=1">Importer une partition</a></p>
 <form id="folderForm">
 <label for="folderName">Nom du nouveau dossier</label>
@@ -35,7 +38,7 @@
 <div id="folderList"></div>
 </section>
 <section id="localLibrary" aria-labelledby="localTitle" hidden>
-<h2 id="localTitle">Partitions sur cet appareil</h2>
+<h2 id="localTitle" tabindex="-1">Partitions sur cet appareil</h2>
 <ul id="localList"></ul>
 <button id="migrate" type="button" hidden>Copier les partitions locales en ligne</button>
 <button id="purge" type="button" hidden>Retirer les copies locales vérifiées</button>
@@ -44,8 +47,8 @@
 <button id="applyPurge" type="button" aria-describedby="purgeHint">Confirmer le retrait des copies locales</button>
 <button id="cancelPurge" type="button">Annuler</button>
 </div>
-<ul id="migrationErrors" hidden></ul>
 </section>
+<ul id="migrationErrors" hidden></ul>
 <footer>
 <p><a id="readerLink" href="index.html">Retour au lecteur</a></p>
 <button id="signOut" type="button" hidden>Se déconnecter</button>

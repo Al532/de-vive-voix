@@ -7,6 +7,7 @@
   const bucketName = 'dvv-library';
   const entriesTable = 'dvv_scores';
   const catalogueTable = 'dvv_catalogue';
+  const cacheName = 'de-vive-voix-cloud-v1';
   const keyPattern = /^[a-f0-9]{64}$/;
   const pilotId = 'belissen-pilote';
   let opening;
@@ -67,9 +68,27 @@
     return `${prefix}/${kind}/${checksum}`;
   }
 
-  async function readFile(bucket, prefix, kind, checksum) {
-    const data = result(await bucket.download(path(prefix, kind, checksum)), 'Le fichier sauvegardé est indisponible.');
+  async function readFile(bucket, prefix, kind, checksum, { cachePlayback = false } = {}) {
+    const file = path(prefix, kind, checksum);
+    let cache, cacheUrl;
+    if (cachePlayback && root.caches) {
+      try {
+        cacheUrl = new URL('_partition-cache/' + file, root.location.href).href;
+        cache = await root.caches.open(cacheName);
+        const response = await cache.match(cacheUrl);
+        if (response) {
+          const cached = await response.blob();
+          if (await hash(cached) === checksum) return cached;
+          await cache.delete(cacheUrl);
+        }
+      } catch { cache = null; }
+    }
+    const data = result(await bucket.download(file, {}, { cache: 'no-store' }), 'Le fichier sauvegardé est indisponible.');
     if (await hash(data) !== checksum) throw Error('La copie en ligne ne correspond pas au fichier attendu.');
+    if (cache) {
+      try { await cache.put(cacheUrl, new Response(data)); }
+      catch { /* Lecture possible lorsque le navigateur limite le stockage. */ }
+    }
     return data;
   }
 
@@ -81,27 +100,27 @@
   async function summary() {
     const { db } = await connection();
     const [personal, catalogue, folders, locations] = await Promise.all([
-      db.from(entriesTable).select('id,title,composer,checksum').order('title'),
-      db.from(catalogueTable).select('id,title,composer,checksum').order('title'),
+      db.from(entriesTable).select('id,title,composer,checksum,deleted_at').order('title'),
+      db.from(catalogueTable).select('id,title,composer,checksum,deleted_at').order('title'),
       db.from('dvv_folders').select('id,name').order('name'),
       db.from('dvv_locations').select('score_id,folder_id')
     ]);
     const scores = new Map();
     for (const entry of result(catalogue)) scores.set(entry.id, { ...entry, catalogue: true });
     for (const entry of result(personal)) scores.set(entry.id, entry);
-    return { scores: [...scores.values()], folders: result(folders), locations: result(locations) };
+    return { scores: [...scores.values()].filter(score => !score.deleted_at), folders: result(folders), locations: result(locations) };
   }
 
   async function getRecord(id) {
     const { db, bucket } = await connection();
-    const shared = result(await db.from(entriesTable).select('checksum').eq('id', id).maybeSingle());
-    const row = shared || result(await db.from(catalogueTable).select('checksum').eq('id', id).maybeSingle());
-    if (!row) return null;
+    const shared = result(await db.from(entriesTable).select('checksum,deleted_at').eq('id', id).maybeSingle());
+    const row = shared || result(await db.from(catalogueTable).select('checksum,deleted_at').eq('id', id).maybeSingle());
+    if (!row || row.deleted_at) return null;
     const prefix = shared ? sharedPrefix : cataloguePrefix;
-    const file = await readFile(bucket, prefix, 'bundles', row.checksum);
+    const file = await readFile(bucket, prefix, 'bundles', row.checksum, { cachePlayback: true });
     const record = JSON.parse(await file.text());
     if (record.id !== id) throw Error('La partition en ligne ne correspond pas à celle demandée.');
-    return { record, readAudio: checksum => readFile(bucket, prefix, 'audio', checksum) };
+    return { record, readAudio: checksum => readFile(bucket, prefix, 'audio', checksum, { cachePlayback: true }) };
   }
 
   async function snapshot(record) {
@@ -125,10 +144,10 @@
     return { file, checksum: await hash(file), audio, originalFile, sourceChecksum };
   }
 
-  async function transfer(record, { upload = false } = {}) {
+  async function transfer(record, { upload = false, restore = false } = {}) {
     const { db, bucket } = await connection();
     const copy = await snapshot(record);
-    const lookup = () => db.from(entriesTable).select('checksum').eq('id', record.id).maybeSingle();
+    const lookup = () => db.from(entriesTable).select('checksum,deleted_at').eq('id', record.id).maybeSingle();
     let existing = result(await lookup());
     if (!existing && upload) {
       for (const { checksum, blob } of copy.audio.values()) await writeFile(bucket, sharedPrefix, 'audio', checksum, blob, 'audio/wav');
@@ -142,9 +161,13 @@
     }
     if (!existing) throw Error('Cette partition est encore uniquement sur cet appareil.');
     if (existing.checksum !== copy.checksum) throw Error('Une autre version de cette partition existe en ligne. La copie locale a été conservée.');
+    if (existing.deleted_at && !restore) throw Error('Cette partition a été retirée de la bibliothèque partagée.');
     await readFile(bucket, sharedPrefix, 'bundles', copy.checksum);
     if (copy.sourceChecksum) await readFile(bucket, sharedPrefix, 'sources', copy.sourceChecksum);
     for (const checksum of new Set([...copy.audio.values()].map(file => file.checksum))) await readFile(bucket, sharedPrefix, 'audio', checksum);
+    if (existing.deleted_at) {
+      result(await db.from(entriesTable).update({ deleted_at: null }).eq('id', record.id).select('id').single(), 'Impossible de rétablir la partition dans la bibliothèque.');
+    }
   }
 
   async function signIn(email, password) {
@@ -155,6 +178,8 @@
   }
   async function signOut() {
     result(await (await client()).auth.signOut({ scope: 'local' }), 'Impossible de te déconnecter.');
+    try { await root.caches?.delete(cacheName); }
+    catch { /* La session est déjà fermée. */ }
   }
   async function saveFolder(name, id) {
     const { db } = await connection();
@@ -168,11 +193,19 @@
   async function move(scoreId, folderId) {
     const { db } = await connection();
     const table = db.from('dvv_locations');
-    result(await (folderId ? table.upsert({ score_id: scoreId, folder_id: folderId }, { onConflict: 'score_id' }) : table.delete().eq('score_id', scoreId)), 'Impossible de déplacer cette partition.');
+    result(await (folderId
+      ? table.upsert({ score_id: scoreId, folder_id: folderId }, { onConflict: 'score_id' }).select('score_id').single()
+      : table.delete().eq('score_id', scoreId)), 'Impossible de déplacer cette partition.');
+  }
+
+  async function removeScore({ id, catalogue }) {
+    const { db } = await connection();
+    const table = catalogue ? catalogueTable : entriesTable;
+    result(await db.from(table).update({ deleted_at: new Date().toISOString() }).eq('id', id).select('id').single(), 'Impossible de supprimer cette partition de la bibliothèque.');
   }
 
   root.CloudLibrary = {
     configured: Boolean(config?.url && config?.publicKey), cutover: config?.cutover === true, pilotId,
-    session, summary, getRecord, transfer, signIn, signOut, saveFolder, removeFolder, move
+    session, summary, getRecord, transfer, signIn, signOut, saveFolder, removeFolder, move, removeScore
   };
 })(globalThis);

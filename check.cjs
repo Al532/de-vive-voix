@@ -217,9 +217,17 @@ async function testPrivateCatalogue(){
  const bookmark=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud,loadBundle});
  assert.equal(new URL(bookmark.location.href).pathname,'/bibliotheque.html');
  assert.equal(bookmark.els.scoreChoice.children.length,0);
- const signedIn=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud,loadBundle:async()=>({score,assets})});
+ const scores=[{id:cloud.pilotId,title:'Gloria'},{id:'piece-a',title:'Premier morceau'},{id:'piece-b',title:'Morceau sans dossier'}];
+ const folders=[{id:'folder-a',name:'Dossier A'}];
+ const locations=[{score_id:cloud.pilotId,folder_id:'folder-a'},{score_id:'piece-a',folder_id:'folder-a'}];
+ const signedIn=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud:{...cloud,summary:async()=>({scores,folders,locations})},loadBundle:async()=>({score,assets})});
  assert.equal(signedIn.get().totalBlocs,44);
- assert(signedIn.els.scoreChoice.hidden);
+ assert.equal(signedIn.els.readerFolder.value,'folder-a');
+ assert.deepEqual(signedIn.els.scoreChoice.children.map(option=>option.value),[cloud.pilotId,'piece-a']);
+ signedIn.els.readerFolder.value='unfiled';signedIn.els.readerFolder.onchange();
+ assert.deepEqual(signedIn.els.scoreChoice.children.map(option=>option.value),['','piece-b']);
+ signedIn.els.scoreChoice.value='piece-b';signedIn.els.scoreChoice.onchange();
+ assert.equal(new URL(signedIn.location.href).searchParams.get('score'),'piece-b');
 }
 async function testPreloadSpeech(){
  for(const options of [{},{imported:true,language:'la'}]){
@@ -415,16 +423,7 @@ async function testPieceSettings(){
  const destination=new URL(a2.location.href);assert.equal(destination.search,'?score=piece-b','piece changes must not copy outgoing tempo/voice/size into the next piece');assert.equal(a2.spoken(),0);
  a2.els.scoreChoice.value='';a2.els.scoreChoice.onchange();assert.equal(new URL(a2.location.href).search,'');
  const noLibrary=await mount(new Map(),'',false,true,{libraryDenied:true});assert(noLibrary.els.storageNotice.textContent);assert.equal(noLibrary.els.scoreChoice.children.length,1);assert.equal(noLibrary.get().tempo,80);
- assert(pilot.els.deleteLocalScore.hidden);assert(a2.els.deleteLocalScore.hidden,'provided scores cannot be deleted');
- let removed=0,confirmation='';const localRecords=[{id:'local-piece',local:true,score:{title:'Partition locale'}}];
- const cancelled=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:localRecords,confirm:text=>{confirmation=text;return false;},remove:async()=>{removed++;}});
- assert(!cancelled.els.deleteLocalScore.hidden);await cancelled.click('deleteLocalScore');assert.equal(removed,0);assert(confirmation.includes('MusicXML'));assert.equal(new URL(cancelled.location.href).searchParams.get('score'),'local-piece');
- const deleting=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:localRecords,remove:async id=>{assert.equal(id,'local-piece');removed++;}});
- await deleting.click('fullPlay');await deleting.click('deleteLocalScore');assert.equal(removed,1);assert.equal(new URL(deleting.location.href).search,'');assert.equal(deleting.get().playback,'stopped');
- const failed=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:localRecords,remove:async()=>{throw Error('Suppression impossible');}});
- await failed.click('deleteLocalScore');assert.equal(failed.els.deleteLocalScore.disabled,false);assert.equal(new URL(failed.location.href).searchParams.get('score'),'local-piece');
- const duplicate=await mount(new Map(),'?score=local-piece',false,true,{imported:true,records:[{...localRecords[0],bundled:true}],confirm:text=>{assert(text.includes('catalogue en ligne'));return true;}});
- assert(duplicate.els.deleteLocalScore.textContent.includes('copie locale'));await duplicate.click('deleteLocalScore');assert.equal(new URL(duplicate.location.href).search,'?score=local-piece');
+ assert(!a2.els.deleteLocalScore,'local deletion belongs in the library management menu');
  console.log('Morceaux : pilote et deux imports de même titre, réglages distincts, réouverture et changement sans transfert des réglages vérifiés.');
 }
 
