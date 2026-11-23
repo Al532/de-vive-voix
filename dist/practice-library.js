@@ -32,20 +32,20 @@ async function remove(id,expectedRecord){
  return removed;
 }
 async function loadBundle(id,verse){
- const cloudEnabled=root.CloudLibrary?.cutover;
- const supplied=cloudEnabled?null:(await bundled().catch(()=>[])).find(record=>record.id===id);
+ const cloud=root.CloudLibrary;
+ const supplied=cloud?.cutover?null:(await bundled().catch(()=>[])).find(record=>record.id===id);
  let record;
  if(supplied){
   const response=await fetch(supplied.bundleUrl,{cache:'no-cache'});
   if(!response.ok)throw Error('Impossible de charger ce morceau fourni.');
   record=await response.json();
  }else{
-  record=await get('scores',id).catch(error=>{if(!cloudEnabled)throw error;return null;});
-  if(!record&&cloudEnabled){
-   const cloud=await root.CloudLibrary.getRecord(id);
-   if(!cloud)throw Error('Cette partition est absente de ta bibliothèque.');
-   if(cloud.record.pilot)return {record:cloud.record,score:cloud.record.score,assets:await playbackAssets(cloud.record.assets,cloud)};
-   return bundleFor(cloud.record,verse,cloud);
+  record=await get('scores',id).catch(error=>{if(!cloud?.configured)throw error;return null;});
+  if(!record&&cloud?.configured){
+   const online=await cloud.getRecord(id);
+   if(!online)throw Error('Cette partition est absente de ta bibliothèque.');
+   if(online.record.pilot)return {record:online.record,score:online.record.score,assets:await playbackAssets(online.record.assets,online)};
+   return bundleFor(online.record,verse,online);
   }
   if(!record)throw Error('Ce morceau n’est pas présent sur cet appareil. Réimportez son fichier.');
   if(record.audioRateWpm!==175){

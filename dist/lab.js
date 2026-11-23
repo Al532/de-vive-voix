@@ -475,7 +475,7 @@ async function setupScoreChoice(requestedId){
   const option=document.createElement('option');option.value=entry.id;option.textContent=entry.title;select.append(option);
  }
  if(requestedId&&!records.some(r=>r.id===requestedId)){
-  const option=document.createElement('option');option.value=requestedId;option.textContent='Morceau indisponible sur cet appareil';select.append(option);
+  const option=document.createElement('option');option.value=requestedId;option.textContent='Morceau sélectionné';select.append(option);
  }
  select.value=requestedId;
  const deleteButton=$('deleteLocalScore');
@@ -499,7 +499,7 @@ async function init(){
    $('scoreChoice').hidden=true;
    $('importLink').href=ScoreNavigation.importUrl(requestedId);
   }else await setupScoreChoice(requestedId);
-  if(cloud?.cutover&&requestedId===cloud.pilotId){
+  if(cloud?.configured&&requestedId===cloud.pilotId){
    const bundle=await PracticeLibrary.loadBundle(requestedId);
    score=bundle.score;speechAssets=bundle.assets;speechMap=BlocSpeech.createMap(score,LatinPhonetics);
   }else if(requestedId){
@@ -516,6 +516,10 @@ async function init(){
    if(responses.some(r=>!r.ok))throw Error('Chargement impossible.');
    [score,speechAssets]=await Promise.all(responses.map(r=>r.json()));
    speechMap=BlocSpeech.createMap(score,LatinPhonetics);
+  }
+  if(requestedId&&!cloud?.cutover){
+   const selected=$('scoreChoice').selectedOptions[0];
+   if(selected)selected.textContent=[score.title,score.composer].filter(Boolean).join(' - ');
   }
   notes=BlocModel.mergedNotes(score);
   storageKey='de-vive-voix:practice:v1:'+(importedId?importedId+':':'')+fingerprint({title:score.title,composer:score.composer,starts:score.starts,voices:score.parts.map(p=>p.name)});
