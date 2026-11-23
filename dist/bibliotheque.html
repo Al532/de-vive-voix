@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes partitions — De vive voix</title>
+<link rel="stylesheet" href="lab.css?v=library-1">
+<script src="cloud-config.js" defer></script>
+<script src="cloud-library.js?v=1" defer></script>
+<script src="practice-library.js?v=cloud-1" defer></script>
+<script src="score-navigation.js?v=1" defer></script>
+<script src="bibliotheque.js?v=1" defer></script>
+</head>
+<body><main>
+<header><h1 id="libraryTitle" tabindex="-1">Mes partitions</h1></header>
+<p id="libraryStatus" role="status" aria-atomic="true">Chargement de la bibliothèque…</p>
+<section id="account" aria-labelledby="accountTitle" hidden>
+<h2 id="accountTitle">Connexion</h2>
+<form id="emailForm">
+<label for="email">Adresse e-mail</label>
+<input id="email" type="email" name="email" autocomplete="email" required>
+<button type="submit" class="primary">Recevoir un code</button>
+</form>
+<form id="codeForm" hidden>
+<label for="code">Code reçu par e-mail</label>
+<input id="code" type="text" autocomplete="one-time-code" inputmode="numeric" required>
+<button type="submit" class="primary">Se connecter</button>
+<button id="anotherEmail" type="button">Changer d’adresse ou renvoyer le code</button>
+</form>
+</section>
+<section id="onlineLibrary" aria-labelledby="onlineTitle" hidden>
+<h2 id="onlineTitle" tabindex="-1">Bibliothèque en ligne</h2>
+<p><a href="importer.html?library=1">Importer une partition</a></p>
+<form id="folderForm">
+<label for="folderName">Nom du nouveau dossier</label>
+<input id="folderName" type="text" required maxlength="120">
+<button type="submit">Créer le dossier</button>
+</form>
+<div id="folderList"></div>
+</section>
+<section id="localLibrary" aria-labelledby="localTitle" hidden>
+<h2 id="localTitle">Partitions sur cet appareil</h2>
+<ul id="localList"></ul>
+<button id="migrate" type="button" hidden>Copier les partitions locales en ligne</button>
+<button id="purge" type="button" hidden>Retirer les copies locales vérifiées</button>
+<div id="confirmPurge" hidden>
+<p id="purgeHint">Chaque copie en ligne sera vérifiée avant de retirer la copie de ce navigateur.</p>
+<button id="applyPurge" type="button" aria-describedby="purgeHint">Confirmer le retrait des copies locales</button>
+<button id="cancelPurge" type="button">Annuler</button>
+</div>
+<ul id="migrationErrors" hidden></ul>
+</section>
+<footer>
+<p><a id="readerLink" href="index.html">Retour au lecteur</a></p>
+<button id="signOut" type="button" hidden>Se déconnecter</button>
+</footer>
+<noscript>JavaScript est nécessaire pour ouvrir la bibliothèque.</noscript>
+</main></body>
+</html>

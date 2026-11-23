@@ -5,16 +5,17 @@
 <title>Importer une partition — De vive voix</title>
 <link rel="stylesheet" href="lab.css?v=interface-simple-1">
 <script src="vendor/fflate.js" defer></script><script src="musicxml-import.js" defer></script>
-<script src="phonetics-engine.js" defer></script><script src="practice-library.js?v=local-delete-2" defer></script>
+<script src="cloud-config.js" defer></script><script src="cloud-library.js?v=1" defer></script>
+<script src="phonetics-engine.js" defer></script><script src="practice-library.js?v=cloud-1" defer></script>
 <script src="import-speech.js?v=catalogue-175-1" defer></script><script src="score-navigation.js?v=1" defer></script>
-<script src="importer.js?v=piece-menu-1" defer></script>
+<script src="importer.js?v=cloud-1" defer></script>
 </head>
 <body><main>
 <header><h1>Importer une partition</h1></header>
 <form id="importForm">
 <label for="scoreFile">Fichier MusicXML</label>
 <input id="scoreFile" type="file" accept=".musicxml,.xml,.mxl" required aria-describedby="fileHint">
-<p id="fileHint" class="hint">Formats .musicxml, .xml et .mxl. Le fichier reste sur cet appareil.</p>
+<p id="fileHint" class="hint">Formats .musicxml, .xml et .mxl. Si tu es connectée, la partition sera enregistrée dans ta bibliothèque en ligne.</p>
 <label for="importLanguage">Langue principale des paroles</label>
 <select id="importLanguage"><option value="auto">Reconnaissance automatique</option><option value="la">Latin italien et grec liturgique</option><option value="fr">Français</option><option value="it">Italien</option><option value="de">Allemand</option><option value="en-US">Anglais américain</option></select>
 <button id="importButton" class="primary wide" type="submit">Préparer le morceau</button>
@@ -24,3 +25,4 @@
 <button id="returnButton" type="button" class="wide">Retour</button>
 <noscript>JavaScript est nécessaire pour préparer une partition. <a href="index.html">Retour</a></noscript>
 </main></body></html>
+
