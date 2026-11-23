@@ -17,7 +17,7 @@ async function start(file,chosenLanguage){
     await PracticeLibrary.remove(id,record);
     destination='La partition est disponible dans ta bibliothèque en ligne.';
    }
-  }catch{destination='La partition est enregistrée sur cet appareil. La sauvegarde en ligne pourra être reprise dans Mes partitions.';}
+  }catch{destination='La partition est enregistrée sur cet appareil. La sauvegarde en ligne pourra être reprise via « Gérer mes partitions ».';}
   const result=by('importResult');result.replaceChildren();const detail=document.createElement('p');detail.textContent=score.title+' — '+score.parts.length+' parties conservées, '+score.parts.filter(p=>p.vocal).length+' voix avec paroles, '+(score.starts.length-1)+' mesures, '+score.verseNumbers.length+' couplet'+(score.verseNumbers.length>1?'s':'')+'. Langue : '+labels[language]+'.';result.append(detail);
   const stats=document.createElement('p');stats.textContent=prepared.stats.reused+' sons repris du catalogue ; '+prepared.stats.generated+' sons absents créés et '+prepared.stats.cached+' retrouvés sur cet appareil.';result.append(stats);
   for(const warning of score.warnings){const p=document.createElement('p');p.textContent=warning;result.append(p);}const link=document.createElement('a');link.className='primary';link.href=ScoreNavigation.readerUrl(id);link.textContent='Ouvrir le morceau';result.append(link);result.hidden=false;by('importStatus').textContent=destination;by('importProgress').textContent='';

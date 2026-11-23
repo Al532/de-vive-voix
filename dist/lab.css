@@ -29,3 +29,16 @@ details{border-top:1px solid #becfd3;margin-top:22px;padding-top:16px}summary{cu
 
 .playback-single>button{width:100%}
 #navigation,#completeNavigation{margin-top:12px}
+
+.library-page form > button,
+.library-page details > form,
+.library-page details > form + button,
+.library-page #folderList,
+.library-page #confirmPurge,
+.library-page #confirmPurge > button,
+.library-page #localLibrary > button {
+  margin-top: 12px;
+}
+.library-page li + li { margin-top: 12px; }
+.library-page details { margin-top: 12px; padding-top: 10px; }
+.library-page details > form + button { display: block; }

@@ -20,11 +20,13 @@
 <script src="import-speech.js?v=catalogue-175-1" defer></script>
 <script src="score-navigation.js?v=2" defer></script>
 <script src="speech-fit.js?v=1" defer></script>
-<script src="lab.js?v=cloud-library-3" defer></script>
+<script src="lab.js?v=cloud-library-4" defer></script>
 </head>
 <body>
 <main>
-<header><h1>De vive voix</h1><span id="readerFolderPicker" hidden><label for="readerFolder">Dossier</label> <select id="readerFolder"></select></span><label for="scoreChoice" class="sr">Morceau</label><select id="scoreChoice"></select><p><a href="bibliotheque.html">Mes partitions</a></p></header>
+<header><h1>De vive voix</h1><span id="readerFolderPicker" hidden><label for="readerFolder">Dossier</label> <select id="readerFolder"></select></span><label for="scoreChoice" class="sr">Morceau</label><select id="scoreChoice"></select><p><a href="bibliotheque.html">Gérer mes partitions</a></p>
+<div id="verseSettings" hidden><label for="verse">Couplet</label><select id="verse"></select></div>
+</header>
 <p id="status" role="status">Chargement…</p>
 <div id="workspace" hidden>
 <section aria-label="Reprendre le travail">
@@ -61,12 +63,10 @@
 <label class="checkbox"><input id="readBlockText" type="checkbox" checked>Lire le texte au début du bloc</label>
 </div>
 <label for="voice">Voix à travailler</label><select id="voice"></select>
-<div id="verseSettings" hidden><label for="verse">Couplet</label><select id="verse"></select></div>
 <p id="scoreImportInfo" class="hint"></p>
 <p id="storageNotice" role="status" class="hint"></p>
 <details id="playbackDebug" hidden><summary>Journal du test</summary><button id="copyPlaybackTrace" type="button">Copier le journal</button><p id="playbackCopyResult"></p><textarea id="playbackTrace" aria-label="Journal du test audio" readonly rows="12"></textarea></details>
 </div>
-<footer><p><a id="importLink" href="importer.html">Importer une partition</a></p></footer>
 <noscript>JavaScript est nécessaire pour écouter le morceau.</noscript>
 </main>
 <audio id="audioPrimer" src="audio-silence.wav" preload="auto" playsinline aria-hidden="true" hidden></audio>

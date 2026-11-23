@@ -46,7 +46,7 @@ function scoreRow(score, folders, location) {
     if (!window.confirm('Supprimer « ' + title + ' » de la bibliothèque partagée pour les deux comptes ?')) return;
     await CloudLibrary.removeScore(score);
     await refresh();
-    (byId('folder-' + (location || 'root')) || ui.onlineTitle).focus();
+    (byId('folder-' + (location || 'root')) || ui.folderFilter).focus();
     status('« ' + title + ' » a été retirée de la bibliothèque partagée.');
   });
   details.append(remove);
@@ -69,7 +69,7 @@ function moveForm(score, folders, location) {
     await CloudLibrary.move(score.id, folder);
     if (selectedFolder) selectedFolder = folder || ScoreNavigation.noFolder;
     await refresh();
-    (byId('folder-' + (folder || 'root')) || ui.onlineTitle).focus();
+    (byId('folder-' + (folder || 'root')) || ui.folderFilter).focus();
     status('« ' + title + ' » a été déplacée.');
   });
   return form;
@@ -91,7 +91,7 @@ function localRow(record) {
 }
 
 function folderSection(folder, scores, folders, assignments) {
-  const section = make('section'), heading = make('h3', folder?.name || 'Sans dossier');
+  const section = make('section'), heading = make('h2', folder?.name || 'Sans dossier');
   heading.id = 'folder-' + (folder?.id || 'root');
   heading.tabIndex = -1;
   section.setAttribute('aria-labelledby', heading.id);
@@ -122,7 +122,7 @@ function folderSection(folder, scores, folders, assignments) {
     if (!window.confirm('Supprimer le dossier « ' + folder.name + ' » ? Ses partitions reviendront dans « Sans dossier ».')) return;
     await CloudLibrary.removeFolder(folder.id);
     await refresh();
-    ui.onlineTitle.focus();
+    ui.folderFilter.focus();
     status('Dossier supprimé. Les partitions sont dans « Sans dossier ».');
   });
   details.append(make('summary', 'Gérer le dossier « ' + folder.name + ' »'), rename, remove);
@@ -167,18 +167,7 @@ function showMigrationErrors(errors) {
 
 async function openLibrary() {
   const account = await refresh();
-  if (!account) {
-    status(CloudLibrary.configured ? '' : 'La bibliothèque en ligne n’est pas encore configurée.');
-    return;
-  }
-  const migration = await globalThis.MarieMigration?.run({ account, folders: onlineModel.folders, records: localRecords }, status);
-  if (!migration) { status(''); return; }
-  if (migration.folder && migration.completed) selectedFolder = migration.folder.id;
-  await refresh();
-  showMigrationErrors(migration.errors);
-  status(migration.folder
-    ? `${migration.completed} partition(s) transférée(s) dans « ${migration.folder.name} » et retirée(s) de cet appareil.${migration.errors.length ? ' Les copies non transférées ont été conservées.' : ''}`
-    : 'Transfert reporté. Les copies locales ont été conservées.');
+  status(account || CloudLibrary.configured ? '' : 'La bibliothèque en ligne n’est pas encore configurée.');
 }
 
 async function transferLocal(upload) {
@@ -205,9 +194,13 @@ async function transferLocal(upload) {
 ui.loginForm.onsubmit = action(async () => {
   await CloudLibrary.signIn(ui.email.value.trim(), ui.password.value);
   ui.password.value = '';
+  await refresh();
+  if (onlineModel?.scores.length && new URLSearchParams(location.search).get('connexion') === 'lecture') {
+    location.replace('index.html');
+    return;
+  }
+  ui.folderFilter.focus();
   status('Connexion réussie.');
-  await openLibrary();
-  ui.onlineTitle.focus();
 });
 ui.signOut.onclick = action(async () => {
   await CloudLibrary.signOut();
@@ -232,7 +225,6 @@ ui.migrate.onclick = action(() => transferLocal(true));
 ui.purge.onclick = action(async () => { ui.confirmPurge.hidden = false; ui.applyPurge.focus(); });
 ui.cancelPurge.onclick = action(async () => { ui.confirmPurge.hidden = true; ui.purge.focus(); });
 ui.applyPurge.onclick = action(() => transferLocal(false));
-if (CloudLibrary.cutover) ui.readerLink.hidden = true;
 running = true;
 openLibrary().catch(error => status(error.message)).finally(() => { running = false; });
 window.addEventListener('pageshow', event => {

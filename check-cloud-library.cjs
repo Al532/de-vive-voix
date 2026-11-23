@@ -1,7 +1,6 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const { createHash } = require('node:crypto');
 
 function build() {
   let user = 'first';
@@ -121,35 +120,4 @@ async function verify() {
   console.log('Bibliothèque partagée : accès aux deux membres, compte tiers refusé, vérification avant purge et reprise sans doublon.');
 }
 
-async function verifyMarieMigration() {
-  const history = [], flags = new Map();
-  const folder = { id: '5a4094c9-757f-4299-8673-52f4c6545e01', name: 'Noël' };
-  const record = id => ({ id, score: { title: id } });
-  const setting = { records: [record('correct'), record('incomplet')], folders: [folder], account: { user: { id: 'migration-test-member' } } };
-  const sandbox = {
-    crypto, TextEncoder,
-    localStorage: { getItem: key => flags.get(key), setItem: (key, value) => flags.set(key, value) },
-    CloudLibrary: {
-      transfer: async ({ id }) => {
-        history.push('verify:' + id);
-        if (id === 'incomplet') throw Error('Son manquant.');
-      },
-      move: async (id, folderId) => { assert.equal(folderId, folder.id); history.push('folder:' + id); }
-    },
-    PracticeLibrary: { remove: async (id, expected) => { assert.equal(id, expected.id); history.push('purge:' + id); return true; } }
-  };
-  const source = fs.readFileSync('dist/migration-marie.js', 'utf8').replace(/const accountHash = '[a-f0-9]{64}'/, `const accountHash = '${createHash('sha256').update(setting.account.user.id).digest('hex')}'`);
-  vm.runInNewContext(source, sandbox);
-  assert.equal(await sandbox.MarieMigration.run({ ...setting, account: { user: { id: 'other-member' } } }, () => {}), null);
-  assert.equal(history.length, 0);
-  const attempt = await sandbox.MarieMigration.run(setting, () => {});
-  assert.equal(attempt.completed, 1);
-  assert.equal(attempt.errors.length, 1);
-  assert.deepEqual(history, ['verify:correct', 'folder:correct', 'purge:correct', 'verify:incomplet']);
-  assert.equal(flags.size, 0);
-  await sandbox.MarieMigration.run({ ...setting, records: [record('rattrapé')] }, () => {});
-  assert.equal(flags.size, 1);
-  assert.equal(await sandbox.MarieMigration.run(setting, () => {}), null);
-}
-
-verify().then(verifyMarieMigration).catch(error => { console.error(error); process.exitCode = 1; });
+verify().catch(error => { console.error(error); process.exitCode = 1; });

@@ -183,7 +183,7 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
    cancel(){cancelCount++;}},PlaybackDebug:{record:(event,data)=>traces.push({event,...data})}};
  const document={getElementById:id=>els[id],createElement:()=>element(),addEventListener:(k,f)=>handlers[k]=f,modelContext:{registerTool:t=>registry[t.name]=t}};
  let href='http://localhost/'+search;
- const location={get href(){return href;},get search(){return new URL(href).search;},assign(url){href=new URL(url,href).href;}};
+ const location={get href(){return href;},get search(){return new URL(href).search;},assign(url){href=new URL(url,href).href;},replace(url){href=new URL(url,href).href;}};
  const sandbox=vm.createContext({window,document,console,URL,URLSearchParams,location,performance:{now:()=>h.audio.currentTime*1000},
   history:{replaceState(a,b,url){href=url.href;}},localStorage:{getItem(k){if(unavailable)throw Error('denied');return store.get(k)||null;},setItem(k,v){if(unavailable)throw Error('denied');store.set(k,v);}},
   fetch:async url=>({ok:true,json:async()=>url==='score.json'?score:assets,arrayBuffer:async()=>{audioFetches.set(url,(audioFetches.get(url)||0)+1);return {duration:durations.get(url)};}}),
@@ -207,20 +207,27 @@ async function mount(store=new Map(),search='',unavailable=false,autoSpeech=true
  return {els,get,click,h,handlers,window,document,registry,store,location,spoken:()=>spoken,localTextReads:()=>localTextReads,utterances,cancelCount:()=>cancelCount,traces,audioFetches,audioContexts,mediaPlays:()=>mediaPlays};
 }
 async function testPrivateCatalogue(){
- const cloud={configured:true,cutover:true,pilotId:'belissen-pilote'};
- const home=await mount(new Map(),'',false,true,{cloud});
- assert.equal(new URL(home.location.href).pathname,'/bibliotheque.html');
- const loadBundle=async id=>{
-  assert.equal(id,cloud.pilotId);
-  throw Object.assign(new Error('Connecte-toi.'),{code:'sign-in-required'});
- };
+ const signInRequired=async()=>{throw Object.assign(new Error('Connecte-toi.'),{code:'sign-in-required'});};
+ const cloud={configured:true,cutover:true,pilotId:'belissen-pilote',summary:signInRequired};
+ const signedOut=await mount(new Map(),'',false,true,{cloud});
+ assert.equal(new URL(signedOut.location.href).search,'?connexion=lecture');
+ const empty=await mount(new Map(),'',false,true,{cloud:{...cloud,summary:async()=>({scores:[],folders:[],locations:[]})}});
+ assert.equal(new URL(empty.location.href).pathname,'/bibliotheque.html');
+ const loadBundle=async id=>{assert.equal(id,cloud.pilotId);return signInRequired();};
  const bookmark=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud,loadBundle});
  assert.equal(new URL(bookmark.location.href).pathname,'/bibliotheque.html');
  assert.equal(bookmark.els.scoreChoice.children.length,0);
  const scores=[{id:cloud.pilotId,title:'Gloria'},{id:'piece-a',title:'Premier morceau'},{id:'piece-b',title:'Morceau sans dossier'}];
  const folders=[{id:'folder-a',name:'Dossier A'}];
  const locations=[{score_id:cloud.pilotId,folder_id:'folder-a'},{score_id:'piece-a',folder_id:'folder-a'}];
- const signedIn=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud:{...cloud,summary:async()=>({scores,folders,locations})},loadBundle:async()=>({score,assets})});
+ const available={...cloud,summary:async()=>({scores,folders,locations})};
+ const home=await mount(new Map(),'',false,true,{cloud:available});
+ assert.equal(new URL(home.location.href).pathname,'/');
+ assert.equal(home.els.status.textContent,'');
+ assert.deepEqual(home.els.scoreChoice.children.map(option=>option.value),['',cloud.pilotId,'piece-b','piece-a']);
+ home.els.scoreChoice.value='piece-a';home.els.scoreChoice.onchange();
+ assert.equal(new URL(home.location.href).searchParams.get('score'),'piece-a');
+ const signedIn=await mount(new Map(),'?part=0&tempo=80',false,true,{cloud:available,loadBundle:async()=>({score,assets})});
  assert.equal(signedIn.get().totalBlocs,44);
  assert.equal(signedIn.els.readerFolder.value,'folder-a');
  assert.deepEqual(signedIn.els.scoreChoice.children.map(option=>option.value),[cloud.pilotId,'piece-a']);
@@ -418,7 +425,7 @@ async function testPieceSettings(){
  assert.equal(a2.get().part,1);assert.equal(a2.get().tempo,101);assert.equal(a2.get().measures,5);assert.equal(a2.get().leadIn,true);
  const b2=await mount(store,'?score=piece-b',false,true,{imported:true,records});
  assert.equal(b2.get().part,3);assert.equal(b2.get().tempo,67);assert.equal(b2.get().measures,3);assert.equal(b2.get().leadIn,false);
- assert.equal(a2.els.scoreChoice.children.length,3);assert.equal(a2.els.scoreChoice.value,'piece-a');assert.equal(a2.els.importLink.href,'importer.html?score=piece-a');
+ assert.equal(a2.els.scoreChoice.children.length,3);assert.equal(a2.els.scoreChoice.value,'piece-a');assert(!a2.els.importLink,'import belongs in the management page');
  a2.els.scoreChoice.value='piece-b';a2.els.scoreChoice.onchange();
  const destination=new URL(a2.location.href);assert.equal(destination.search,'?score=piece-b','piece changes must not copy outgoing tempo/voice/size into the next piece');assert.equal(a2.spoken(),0);
  a2.els.scoreChoice.value='';a2.els.scoreChoice.onchange();assert.equal(new URL(a2.location.href).search,'');
@@ -429,6 +436,7 @@ async function testPieceSettings(){
 
 async function testPlaybackModes(){
  const html=fs.readFileSync('dist/index.html','utf8');
+ assert(/Gérer mes partitions<\/a><\/p>\s*<div id="verseSettings" hidden>/.test(html));
  assert(html.indexOf('id="restart"')<html.indexOf('id="visual"'));
  assert(html.indexOf('id="visual"')<html.indexOf('id="navigation"'));
  assert(/<p id="visual"[^>]*aria-hidden="true"/.test(html));

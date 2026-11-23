@@ -469,7 +469,6 @@ function scoreOption(value,title){
 async function setupScoreChoice(requestedId){
  const select=$('scoreChoice');
  select.onchange=()=>openScore(select.value);
- $('importLink').href=ScoreNavigation.importUrl(requestedId);
  let records=[];
  try{records=await PracticeLibrary.list();}
  catch{setText('storageNotice','Les morceaux de cet appareil ne peuvent pas être chargés dans ce navigateur.');}
@@ -484,6 +483,7 @@ async function setupScoreChoice(requestedId){
 }
 async function setupCloudScoreChoice(requestedId){
  const {scores,folders,locations}=await globalThis.CloudLibrary.summary();
+ if(!requestedId&&!scores.length)return false;
  const folder=$('readerFolder'),select=$('scoreChoice');
  const assignments=ScoreNavigation.folderAssignments(locations);
  const ordered=[...scores].sort((a,b)=>a.title.localeCompare(b.title,'fr'));
@@ -503,15 +503,19 @@ async function setupCloudScoreChoice(requestedId){
  showFolder();
  $('readerFolderPicker').hidden=false;
  select.hidden=false;
+ return true;
 }
 async function init(){
  try{
   const queryAtEntry=new URLSearchParams(location.search),cloud=globalThis.CloudLibrary;
   const requestedId=queryAtEntry.get('score')||(cloud?.cutover&&queryAtEntry.has('part')?cloud.pilotId:'');
   if(cloud?.cutover){
-   if(!requestedId){location.assign('bibliotheque.html');return;}
    $('scoreChoice').hidden=true;
-   $('importLink').href=ScoreNavigation.importUrl(requestedId);
+   if(!requestedId){
+    if(!await setupCloudScoreChoice(''))location.replace('bibliotheque.html');
+    else setText('status','');
+    return;
+   }
   }else await setupScoreChoice(requestedId);
   if(cloud?.configured&&requestedId===cloud.pilotId){
    const bundle=await PracticeLibrary.loadBundle(requestedId);
@@ -521,7 +525,6 @@ async function init(){
    importedRecord=bundle.record;importedId=requestedId;score=bundle.score;
    MusicXMLImport.applyVerse(score,new URLSearchParams(location.search).get('verse')||score.verseNumbers[0]);
    speechAssets=bundle.assets;speechMap=bundle.map;score.continuationMap=bundle.continuations;score.language=bundle.language;
-   $('verseSettings').hidden=score.verseNumbers.length<2;
    for(const verse of score.verseNumbers){const option=document.createElement('option');option.value=verse;option.textContent='Couplet '+verse+(score.verseLanguages?' — '+({fr:'français',it:'italien',de:'allemand','en-US':'anglais américain',la:'latin italien et grec liturgique'}[score.verseLanguages[verse]]||''):'');$('verse').append(option);}$('verse').value=score.verse;
    $('verse').onchange=()=>void changeVerse();
    setText('scoreImportInfo',score.warnings.join(' '));
@@ -590,10 +593,11 @@ async function init(){
     }});
    }catch{}
   }
+  $('verseSettings').hidden=!importedId||score.verseNumbers.length<2;
   $('workspace').hidden=false;setText('status','');prefillMeasure();render();savePosition();void preloadSpeech();
   if(cloud?.cutover) void setupCloudScoreChoice(requestedId).catch(()=>{});
  }catch(error){
-  if(error.code==='sign-in-required'&&globalThis.CloudLibrary?.cutover){location.assign('bibliotheque.html');return;}
+  if(error.code==='sign-in-required'&&globalThis.CloudLibrary?.cutover){location.replace('bibliotheque.html?connexion=lecture');return;}
   setText('status','Impossible de charger le morceau. ' + error.message + '');tracePlayback('initialization-error',{message:error.message});
  }
 }
