@@ -518,7 +518,7 @@ async function init(){
    speechMap=BlocSpeech.createMap(score,LatinPhonetics);
   }
   if(requestedId&&!cloud?.cutover){
-   const selected=$('scoreChoice').selectedOptions[0];
+   const selected=$('scoreChoice').selectedOptions?.[0];
    if(selected)selected.textContent=[score.title,score.composer].filter(Boolean).join(' - ');
   }
   notes=BlocModel.mergedNotes(score);
@@ -580,4 +580,3 @@ async function init(){
  }catch(error){setText('status','Impossible de charger le morceau. ' + error.message + '');tracePlayback('initialization-error',{message:error.message});}
 }
 prepareVoices();init();
-
